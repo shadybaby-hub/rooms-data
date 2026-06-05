@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-05 (added UTF-8 console reconfigure to fix a Windows crash)_
+_Last updated: 2026-06-05 (UTF-8 console fix; workflow no longer commits gitignored timestamped CSVs + adds contents:write)_
 
 ---
 
@@ -150,7 +150,10 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
 - **Steps:** checkout → set up Python 3.11 → `pip install -r requirements.txt` →
   `python etl.py` (with `PSL_API_TOKEN` injected from repo secrets) → copy newest CSVs
   to `*_latest.csv` → commit & push the CSVs back to the repo (as `github-actions[bot]`).
-- The committed timestamped files act as an **audit trail / history** of past runs.
+- Only the `*_latest.csv` files are committed back. The timestamped run files are
+  gitignored, so they are **not** committed (an earlier version tried to and the run
+  failed because `git add` rejects ignored paths). The job declares
+  `permissions: contents: write` so it can push.
 
 If you ever need the token: GitHub repo → Settings → Secrets and variables → Actions →
 secret named `PSL_API_TOKEN`.

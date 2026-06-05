@@ -7,6 +7,9 @@ on:
   workflow_dispatch:
     # Also allows manual trigger from GitHub Actions tab
 
+permissions:
+  contents: write   # allow the workflow to commit & push the refreshed CSVs
+
 jobs:
   etl:
     runs-on: ubuntu-latest
@@ -40,16 +43,18 @@ jobs:
       - name: Promote outputs to latest
         run: |
           mkdir -p output
-          cp output/rooms_*.csv     output/rooms_latest.csv
-          cp output/contracts_*.csv output/contracts_latest.csv
+          # Pick the newest timestamped file (the 2* glob excludes *_latest.csv,
+          # which is checked out from a previous run).
+          cp "$(ls -t output/rooms_2*.csv     | head -1)" output/rooms_latest.csv
+          cp "$(ls -t output/contracts_2*.csv | head -1)" output/contracts_latest.csv
 
       # ── 6. Commit & push CSVs back to repo ──────────────────────
       - name: Commit updated CSVs
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+          # Only the *_latest.csv files are tracked; the timestamped run files
+          # are intentionally gitignored, so don't try to stage them.
           git add output/rooms_latest.csv output/contracts_latest.csv
-          # Also stage the timestamped files as an audit trail
-          git add output/rooms_*.csv output/contracts_*.csv
           git diff --cached --quiet || git commit -m "chore: update room data $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push
