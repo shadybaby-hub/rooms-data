@@ -1,0 +1,16 @@
+# Python
+__pycache__/
+*.py[cod]
+.env
+venv/
+.venv/
+
+# Keep latest CSVs but ignore timestamped ones from local runs
+output/rooms_2*.csv
+output/contracts_2*.csv
+
+# OS
+.DS_Store
+
+# Visual Studio
+.vs/

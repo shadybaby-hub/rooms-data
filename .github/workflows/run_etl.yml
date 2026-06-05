@@ -1,0 +1,55 @@
+name: Room Database ETL
+
+on:
+  schedule:
+    # Runs every day at 06:00 UTC
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+    # Also allows manual trigger from GitHub Actions tab
+
+jobs:
+  etl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      # ── 1. Checkout repo ────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── 2. Set up Python ─────────────────────────────────────────
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: "pip"
+
+      # ── 3. Install dependencies ──────────────────────────────────
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      # ── 4. Run ETL ───────────────────────────────────────────────
+      - name: Run ETL
+        env:
+          PSL_API_TOKEN: ${{ secrets.PSL_API_TOKEN }}
+        run: python etl.py
+
+      # ── 5. Rename outputs to fixed filenames (no timestamp) ──────
+      #    This keeps the CSV paths stable so consumers always know
+      #    exactly where to find the latest data.
+      - name: Promote outputs to latest
+        run: |
+          mkdir -p output
+          cp output/rooms_*.csv     output/rooms_latest.csv
+          cp output/contracts_*.csv output/contracts_latest.csv
+
+      # ── 6. Commit & push CSVs back to repo ──────────────────────
+      - name: Commit updated CSVs
+        run: |
+          git config user.name  "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add output/rooms_latest.csv output/contracts_latest.csv
+          # Also stage the timestamped files as an audit trail
+          git add output/rooms_*.csv output/contracts_*.csv
+          git diff --cached --quiet || git commit -m "chore: update room data $(date -u +'%Y-%m-%d %H:%M UTC')"
+          git push
