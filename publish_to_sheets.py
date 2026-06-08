@@ -1,87 +1,229 @@
 """
-publish_to_sheets.py — Push the latest CSVs into a Google Sheet
-===============================================================
-Writes the full latest data into a single Google Sheet on two named tabs:
+publish_to_sheets.py — Push latest data + rolling change log to Google Sheets
+=============================================================================
+Writes four tabs into one Google Sheet, via a service account.
 
-  • "Latest Room Data"      ← output/rooms_latest.csv
-  • "Latest Contracts Data" ← output/contracts_latest.csv
+LATEST TABS (cleared & rewritten every run — show only the current data):
+  • "Latest Room Data"      ← output/rooms_latest.csv      (+ a "Run Time" last column)
+  • "Latest Contracts Data" ← output/contracts_latest.csv  (+ a "Run Time" last column)
 
-(Step 2 will add "Room Data Changes Last 30 Days" / "Contracts Data Changes
-Last 30 Days" tabs here too.)
+CHANGE TABS (rolling 30-day log, kept INSIDE the Sheet — not committed to GitHub):
+  • "Room Data Changes Last 30 Days"
+  • "Contracts Data Changes Last 30 Days"
+Each run diffs the previous run's *_latest.csv (stashed to /tmp/prev by the
+workflow) against the new *_latest.csv, appends the day's change rows, and drops
+rows whose Run Date is older than 30 days. The Sheet is the only store for this
+log, so history persists across runs without any repo file.
 
-Auth is a Google **service account** with the Sheets API. The workflow provides
-two environment variables:
+ENV (provided by the workflow):
+  GCP_SA_KEY      — service-account JSON (file contents)
+  SHEET_ID        — target spreadsheet ID
+  PREV_ROOMS      — previous rooms_latest.csv     (default /tmp/prev/rooms_latest.csv)
+  PREV_CONTRACTS  — previous contracts_latest.csv (default /tmp/prev/contracts_latest.csv)
 
-  GCP_SA_KEY  — the full service-account JSON key (the file's contents)
-  SHEET_ID    — the target spreadsheet ID (the long string in the Sheet URL,
-                between /d/ and /edit)
-
-If either is missing the script prints a notice and exits 0, so the workflow
-step is a no-op until you've added the secrets (no failed runs in the meantime).
+If GCP_SA_KEY / SHEET_ID are missing the script is a no-op (exit 0).
 
 Run locally:
-    GCP_SA_KEY="$(cat key.json)" SHEET_ID="<id>" python publish_to_sheets.py
+    GCP_SA_KEY="$(cat key.json)" SHEET_ID="<id>" \
+    PREV_ROOMS=output/rooms_<old>.csv PREV_CONTRACTS=output/contracts_<old>.csv \
+    python publish_to_sheets.py
 """
 
 import csv
 import json
 import os
 import sys
+from datetime import datetime, timezone, timedelta
 
-# Each entry: (tab title, source CSV)
-TABS = [
+# ── Latest tabs ────────────────────────────────────────────────────────────────
+LATEST_TABS = [
     ("Latest Room Data",      "output/rooms_latest.csv"),
     ("Latest Contracts Data", "output/contracts_latest.csv"),
 ]
+RUN_TIME_HEADER = "Run Time"
 
+# ── Change tabs ─────────────────────────────────────────────────────────────────
+ROOM_CHANGE_TAB     = "Room Data Changes Last 30 Days"
+CONTRACT_CHANGE_TAB = "Contracts Data Changes Last 30 Days"
+ROOM_CHANGE_HEADER = [
+    "Run Date", "Brand", "Property", "City", "Room Type",
+    "Change Field", "Change Type", "Old Content", "New Content",
+]
+CONTRACT_CHANGE_HEADER = [
+    "Run Date", "Brand", "Property", "City", "Room Type",
+    "Academic Year", "Duration",
+    "Change Field", "Change Type", "Old Content", "New Content",
+]
+
+# Row identity (what makes "the same" room/contract across runs) + watched fields.
+ROOM_KEY     = ("brand_name", "property", "room_type")
+CONTRACT_KEY = ("brand_name", "property", "room_type", "contract_title")
+ROOM_WATCH     = [("quantity_available", "Quantity Available")]
+CONTRACT_WATCH = [("price_pw", "Price (pw)"), ("available", "Available")]
+
+WINDOW_DAYS = 30
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
-# Google Sheets hard limit is 50,000 chars per cell — truncate defensively.
-MAX_CELL = 49000
+MAX_CELL = 49000  # Sheets hard limit is 50,000 chars/cell
+
+_NOW = datetime.now(timezone.utc)
+RUN_TIME_STR = _NOW.strftime("%Y-%m-%d %H:%M UTC")
+RUN_DATE_STR = _NOW.strftime("%Y-%m-%d")
 
 
-def load_rows(path):
+# ── CSV helpers ─────────────────────────────────────────────────────────────────
+
+def _clip(v):
+    return v if len(v) <= MAX_CELL else v[:MAX_CELL] + "…"
+
+
+def load_grid(path):
+    """Raw CSV as list-of-lists, cells clipped."""
     with open(path, newline="", encoding="utf-8") as f:
-        rows = list(csv.reader(f))
-    return [[(c if len(c) <= MAX_CELL else c[:MAX_CELL] + "…") for c in row]
-            for row in rows]
+        return [[_clip(c) for c in row] for row in csv.reader(f)]
 
 
-def write_tab(spreadsheet, title, rows):
-    import gspread
+def load_index(path, key_fields):
+    """CSV as {key_tuple: row_dict}, or None if the file is absent."""
+    if not path or not os.path.exists(path):
+        return None
+    with open(path, newline="", encoding="utf-8") as f:
+        return {tuple(r.get(k, "") for k in key_fields): r for r in csv.DictReader(f)}
 
-    n_rows = max(len(rows), 1)
-    n_cols = max((len(r) for r in rows), default=1)
-    try:
-        ws = spreadsheet.worksheet(title)
-    except gspread.WorksheetNotFound:
-        ws = spreadsheet.add_worksheet(title=title, rows=n_rows + 10, cols=n_cols + 2)
+
+# ── Diffing ─────────────────────────────────────────────────────────────────────
+
+def diff_rooms(old, new):
+    rows = []
+    for k in sorted(set(old) | set(new)):
+        o, n = old.get(k), new.get(k)
+        brand, prop, rtype = k
+        if o and not n:
+            rows.append([RUN_DATE_STR, brand, prop, o.get("city", ""), rtype,
+                         "(removed)", "Removed", o.get("quantity_available", ""), ""])
+        elif n and not o:
+            rows.append([RUN_DATE_STR, brand, prop, n.get("city", ""), rtype,
+                         "(added)", "Added", "", n.get("quantity_available", "")])
+        else:
+            for field, label in ROOM_WATCH:
+                ov, nv = o.get(field, ""), n.get(field, "")
+                if ov != nv:
+                    rows.append([RUN_DATE_STR, brand, prop, n.get("city", ""), rtype,
+                                 label, "Changed", ov, nv])
+    return rows
+
+
+def diff_contracts(old, new):
+    rows = []
+    for k in sorted(set(old) | set(new)):
+        o, n = old.get(k), new.get(k)
+        brand, prop, rtype, _title = k
+        src = n or o
+        ay, dur, city = (src.get("academic_year", ""),
+                         src.get("contract_length_weeks", ""),
+                         src.get("city", ""))
+        if o and not n:
+            rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
+                         "(removed)", "Removed", o.get("price_pw", ""), ""])
+        elif n and not o:
+            rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
+                         "(added)", "Added", "", n.get("price_pw", "")])
+        else:
+            for field, label in CONTRACT_WATCH:
+                ov, nv = o.get(field, ""), n.get(field, "")
+                if ov != nv:
+                    rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
+                                 label, "Changed", ov, nv])
+    return rows
+
+
+# ── Sheet writers ───────────────────────────────────────────────────────────────
+
+def _write(ws, values, ncols):
+    import gspread  # noqa: F401  (ensures dep present)
     ws.clear()
-    ws.resize(rows=n_rows, cols=n_cols)
-    # RAW so values land exactly as in the CSV (no auto number/date coercion).
-    ws.update(values=rows, range_name="A1", value_input_option="RAW")
-    print(f"  wrote '{title}': {len(rows)} rows × {n_cols} cols")
+    ws.resize(rows=max(len(values), 1), cols=max(ncols, 1))
+    ws.update(values=values, range_name="A1", value_input_option="RAW")
 
+
+def _get_or_create(sh, title, ncols):
+    import gspread
+    try:
+        return sh.worksheet(title)
+    except gspread.WorksheetNotFound:
+        return sh.add_worksheet(title=title, rows=100, cols=ncols)
+
+
+def write_latest_tab(sh, title, path):
+    grid = load_grid(path)
+    if grid:  # append the Run Time column (header + one value per data row)
+        grid[0] = grid[0] + [RUN_TIME_HEADER]
+        for i in range(1, len(grid)):
+            grid[i] = grid[i] + [RUN_TIME_STR]
+    ws = _get_or_create(sh, title, len(grid[0]) if grid else 1)
+    _write(ws, grid, len(grid[0]) if grid else 1)
+    print(f"  '{title}': {max(len(grid) - 1, 0)} rows + Run Time column")
+
+
+def update_change_tab(sh, title, header, new_rows):
+    ws = _get_or_create(sh, title, len(header))
+    existing = ws.get_all_values()
+    body = existing[1:] if (existing and existing[0] == header) else \
+           ([] if not existing else existing)
+    cutoff = (_NOW.date() - timedelta(days=WINDOW_DAYS))
+
+    kept = []
+    for row in body + new_rows:
+        try:
+            d = datetime.strptime(row[0], "%Y-%m-%d").date()
+        except (ValueError, IndexError):
+            continue  # drop malformed / stray header rows
+        if d >= cutoff:
+            kept.append(row)
+    kept.sort(key=lambda r: r[0], reverse=True)  # newest first
+
+    _write(ws, [header] + kept, len(header))
+    print(f"  '{title}': +{len(new_rows)} new, {len(kept)} kept (last {WINDOW_DAYS}d)")
+
+
+# ── Main ────────────────────────────────────────────────────────────────────────
 
 def main():
     sa_key = os.getenv("GCP_SA_KEY", "").strip()
     sheet_id = os.getenv("SHEET_ID", "").strip()
     if not sa_key or not sheet_id:
         print("GCP_SA_KEY / SHEET_ID not set — skipping Google Sheets publish.")
-        return  # exit 0: no-op until secrets are configured
+        return
 
     import gspread
     from google.oauth2.service_account import Credentials
 
     creds = Credentials.from_service_account_info(json.loads(sa_key), scopes=SCOPES)
-    gc = gspread.authorize(creds)
-    sh = gc.open_by_key(sheet_id)
+    sh = gspread.authorize(creds).open_by_key(sheet_id)
     print(f"Publishing to spreadsheet: {sh.title}")
 
-    for title, path in TABS:
-        if not os.path.exists(path):
+    # 1. Latest tabs (only current data + Run Time column)
+    for title, path in LATEST_TABS:
+        if os.path.exists(path):
+            write_latest_tab(sh, title, path)
+        else:
             print(f"  !! {path} missing — skipping '{title}'")
-            continue
-        write_tab(sh, title, load_rows(path))
+
+    # 2. Change tabs (rolling 30-day log stored in the Sheet)
+    prev_rooms = os.getenv("PREV_ROOMS", "/tmp/prev/rooms_latest.csv")
+    prev_contracts = os.getenv("PREV_CONTRACTS", "/tmp/prev/contracts_latest.csv")
+
+    old_rooms = load_index(prev_rooms, ROOM_KEY)
+    new_rooms = load_index("output/rooms_latest.csv", ROOM_KEY) or {}
+    old_contracts = load_index(prev_contracts, CONTRACT_KEY)
+    new_contracts = load_index("output/contracts_latest.csv", CONTRACT_KEY) or {}
+
+    room_changes = diff_rooms(old_rooms, new_rooms) if old_rooms is not None else []
+    contract_changes = diff_contracts(old_contracts, new_contracts) if old_contracts is not None else []
+    if old_rooms is None or old_contracts is None:
+        print("  (no previous run found — change tabs pruned only, no new rows)")
+
+    update_change_tab(sh, ROOM_CHANGE_TAB, ROOM_CHANGE_HEADER, room_changes)
+    update_change_tab(sh, CONTRACT_CHANGE_TAB, CONTRACT_CHANGE_HEADER, contract_changes)
 
     print("Done.")
 
@@ -89,6 +231,6 @@ def main():
 if __name__ == "__main__":
     try:
         main()
-    except Exception as e:  # surface a clear error in the Actions log
+    except Exception as e:
         print(f"ERROR publishing to Google Sheets: {e}", file=sys.stderr)
         raise

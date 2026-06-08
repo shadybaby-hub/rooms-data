@@ -179,11 +179,17 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
   **`python make_report.py …`** (writes `reports/<date>/`) → **`python publish_to_sheets.py`**
   (pushes the latest data to Google Sheets) → commit & push `output/` and `reports/` back
   to the repo (as `github-actions[bot]`).
-- **Google Sheets publish:** `publish_to_sheets.py` writes the full latest CSVs to a Google
-  Sheet on tabs `Latest Room Data` / `Latest Contracts Data`, using a **service account**.
-  It needs two secrets — `GCP_SA_KEY` (the service-account JSON) and `SHEET_ID` (the target
-  spreadsheet ID). If either is unset the step is a harmless no-op. (Step 2 will add the
-  "…Changes Last 30 Days" tabs to the same script.)
+- **Google Sheets publish:** `publish_to_sheets.py` (service account) writes four tabs:
+  - `Latest Room Data` / `Latest Contracts Data` — the full current CSVs, **cleared &
+    rewritten each run**, with a `Run Time` column appended as the last column.
+  - `Room Data Changes Last 30 Days` / `Contracts Data Changes Last 30 Days` — a **rolling
+    30-day change log kept *inside the Sheet*** (not committed to GitHub). Each run diffs the
+    previous run's `*_latest.csv` (stashed to `/tmp/prev`) vs the new one, appends the day's
+    change rows, and prunes rows older than 30 days. Columns: Run Date · Brand · Property ·
+    City · Room Type · (contracts also: Academic Year · Duration) · Change Field · Change
+    Type · Old Content · New Content. Watched fields: rooms `quantity_available`; contracts
+    `price_pw`, `available`; plus row Added/Removed.
+  - Needs secrets `GCP_SA_KEY` (service-account JSON) + `SHEET_ID`. No secrets → no-op.
 - **What gets committed:** everything under `output/` (every dated run **and** the two
   `*_latest.csv`) plus everything under `reports/`. The job declares
   `permissions: contents: write` so it can push.

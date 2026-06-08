@@ -68,12 +68,16 @@ jobs:
             output/rooms_latest.csv    output/contracts_latest.csv \
             reports
 
-      # ── 7. Publish the latest data to Google Sheets ──────────────
-      #    No-op until the GCP_SA_KEY + SHEET_ID secrets are configured.
+      # ── 7. Publish to Google Sheets ──────────────────────────────
+      #    Latest tabs (current data + Run Time col) and the rolling 30-day
+      #    change tabs (stored in the Sheet, diffed vs /tmp/prev). No-op until
+      #    the GCP_SA_KEY + SHEET_ID secrets are configured.
       - name: Publish to Google Sheets
         env:
-          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
-          SHEET_ID:   ${{ secrets.SHEET_ID }}
+          GCP_SA_KEY:     ${{ secrets.GCP_SA_KEY }}
+          SHEET_ID:       ${{ secrets.SHEET_ID }}
+          PREV_ROOMS:     /tmp/prev/rooms_latest.csv
+          PREV_CONTRACTS: /tmp/prev/contracts_latest.csv
         run: python publish_to_sheets.py
 
       # ── 8. Commit & push everything back to repo ─────────────────
