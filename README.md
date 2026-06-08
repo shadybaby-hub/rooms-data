@@ -56,7 +56,7 @@ Go to your repo → **Settings → Secrets and variables → Actions → New rep
 ### 3. Enable GitHub Actions
 
 Actions are enabled by default. The workflow runs:
-- **Every weekday (Mon–Fri) at 06:00 UTC** automatically
+- **Every weekday (Mon–Fri) at 6:28 PM UK time** automatically (17:28 UTC in BST, 18:28 UTC in GMT)
 - **On demand** via the Actions tab → `Room Database ETL` → `Run workflow`
 
 > The push-back step needs write access: **Settings → Actions → General → Workflow permissions → "Read and write permissions"**.
@@ -75,7 +75,7 @@ Outputs land in `output/rooms_<timestamp>.csv` and `output/contracts_<timestamp>
 ## How it works
 
 ```
-GitHub Actions (weekday cron, Mon–Fri 06:00 UTC)
+GitHub Actions (weekday cron, Mon–Fri 6:28pm UK)
         │
         ▼
    etl.py runs

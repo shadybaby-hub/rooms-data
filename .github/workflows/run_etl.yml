@@ -2,8 +2,14 @@ name: Room Database ETL
 
 on:
   schedule:
-    # Runs every weekday (Mon–Fri) at 06:00 UTC
-    - cron: "0 6 * * 1-5"
+    # 6:28pm UK time, weekdays, year-round. GitHub cron is UTC and has no DST,
+    # so two entries scoped by month:
+    #   BST (~Apr–Oct, UTC+1) → 17:28 UTC
+    #   GMT (~Nov–Mar, UTC+0) → 18:28 UTC
+    # Month boundaries don't line up exactly with the late-Mar/late-Oct DST
+    # switch, so it can be ~1hr off for a few days around each switch.
+    - cron: "28 17 * 4-10 1-5"
+    - cron: "28 18 * 11,12,1,2,3 1-5"
   workflow_dispatch:
     # Also allows manual trigger from GitHub Actions tab
 

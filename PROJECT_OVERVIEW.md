@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-08 (weekday schedule; output keeps every dated run; reports/ + make_report.py; Google Sheets publish via publish_to_sheets.py)_
+_Last updated: 2026-06-08 (schedule moved to 6:28pm UK weekdays; output keeps every dated run; reports/ + make_report.py; Google Sheets publish incl. 30-day change tabs)_
 
 ---
 
@@ -171,8 +171,10 @@ if you change what counts as "the same" row.
 
 Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
 
-- **Trigger:** weekday cron `0 6 * * 1-5` (**Mon–Fri at 06:00 UTC**), plus manual
-  `workflow_dispatch` from the Actions tab. No weekend runs.
+- **Trigger:** weekday cron at **6:28 PM UK time** (Mon–Fri), plus manual
+  `workflow_dispatch` from the Actions tab. No weekend runs. GitHub cron is UTC with no
+  DST, so it's two entries scoped by month: `28 17 * 4-10 1-5` (BST) and
+  `28 18 * 11,12,1,2,3 1-5` (GMT); expect ~1hr drift for a few days around each DST switch.
 - **Steps:** checkout → **stash previous `*_latest.csv`** (to `/tmp/prev`, for the diff) →
   set up Python 3.11 → `pip install -r requirements.txt` → `python etl.py` (with
   `PSL_API_TOKEN` injected from repo secrets) → copy newest CSVs to `*_latest.csv` →
