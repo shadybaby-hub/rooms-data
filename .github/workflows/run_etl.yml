@@ -2,8 +2,8 @@ name: Room Database ETL
 
 on:
   schedule:
-    # Runs every day at 06:00 UTC
-    - cron: "0 6 * * *"
+    # Runs every weekday (Mon–Fri) at 06:00 UTC
+    - cron: "0 6 * * 1-5"
   workflow_dispatch:
     # Also allows manual trigger from GitHub Actions tab
 
@@ -19,6 +19,15 @@ jobs:
       # ── 1. Checkout repo ────────────────────────────────────────
       - name: Checkout repository
         uses: actions/checkout@v4
+
+      # ── 1b. Stash the previous run's latest CSVs ─────────────────
+      #    Saved before the ETL/promote overwrites them, so the report
+      #    step can diff "before vs after". Missing on the first run.
+      - name: Stash previous latest
+        run: |
+          mkdir -p /tmp/prev
+          cp output/rooms_latest.csv     /tmp/prev/rooms_latest.csv     || true
+          cp output/contracts_latest.csv /tmp/prev/contracts_latest.csv || true
 
       # ── 2. Set up Python ─────────────────────────────────────────
       - name: Set up Python
@@ -48,13 +57,24 @@ jobs:
           cp "$(ls -t output/rooms_2*.csv     | head -1)" output/rooms_latest.csv
           cp "$(ls -t output/contracts_2*.csv | head -1)" output/contracts_latest.csv
 
-      # ── 6. Commit & push CSVs back to repo ──────────────────────
-      - name: Commit updated CSVs
+      # ── 6. Build the weekday change report ───────────────────────
+      #    reports/<date>/  gets a dated snapshot copy of both CSVs plus a
+      #    changes.md changelog (added/removed/price changes vs the prior run).
+      - name: Generate change report
+        run: |
+          DATE=$(date -u +'%Y-%m-%d')
+          python make_report.py "$DATE" \
+            /tmp/prev/rooms_latest.csv /tmp/prev/contracts_latest.csv \
+            output/rooms_latest.csv    output/contracts_latest.csv \
+            reports
+
+      # ── 7. Commit & push everything back to repo ─────────────────
+      #    output/ keeps every dated run plus *_latest.csv; reports/ keeps
+      #    the weekday snapshots + changelogs.
+      - name: Commit updated data and reports
         run: |
           git config user.name  "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
-          # Only the *_latest.csv files are tracked; the timestamped run files
-          # are intentionally gitignored, so don't try to stage them.
-          git add output/rooms_latest.csv output/contracts_latest.csv
+          git add output reports
           git diff --cached --quiet || git commit -m "chore: update room data $(date -u +'%Y-%m-%d %H:%M UTC')"
           git push

@@ -1,6 +1,6 @@
 # Student Room Database — ETL
 
-Fetches room types and contracts from 6 student accommodation brand APIs and exports two combined, sorted CSVs updated automatically every day via GitHub Actions.
+Fetches room types and contracts from 6 student accommodation brand APIs and exports two combined, sorted CSVs updated automatically every **weekday (Mon–Fri)** via GitHub Actions. Each weekday run also writes a dated change report (snapshot + changelog) into `reports/`.
 
 ## Brands covered
 
@@ -19,6 +19,9 @@ Fetches room types and contracts from 6 student accommodation brand APIs and exp
 |---|---|
 | `output/rooms_latest.csv` | One row per room type — sorted A–Z by property |
 | `output/contracts_latest.csv` | One row per contract / pricing option — sorted A–Z by property |
+| `output/rooms_<timestamp>.csv` etc. | Every dated run is kept (full history of raw runs) |
+| `reports/<date>/rooms.csv`, `contracts.csv` | Dated snapshot copy of each weekday's data |
+| `reports/<date>/changes.md` | Changelog vs the previous run: price changes, contracts/rooms added/removed |
 
 ### rooms_latest.csv columns
 
@@ -53,8 +56,10 @@ Go to your repo → **Settings → Secrets and variables → Actions → New rep
 ### 3. Enable GitHub Actions
 
 Actions are enabled by default. The workflow runs:
-- **Daily at 06:00 UTC** automatically
+- **Every weekday (Mon–Fri) at 06:00 UTC** automatically
 - **On demand** via the Actions tab → `Room Database ETL` → `Run workflow`
+
+> The push-back step needs write access: **Settings → Actions → General → Workflow permissions → "Read and write permissions"**.
 
 ### 4. Run locally
 
@@ -70,7 +75,7 @@ Outputs land in `output/rooms_<timestamp>.csv` and `output/contracts_<timestamp>
 ## How it works
 
 ```
-GitHub Actions (daily cron 06:00 UTC)
+GitHub Actions (weekday cron, Mon–Fri 06:00 UTC)
         │
         ▼
    etl.py runs
@@ -87,11 +92,17 @@ GitHub Actions (daily cron 06:00 UTC)
         Sort A–Z by property
                  │
                  ▼
-        output/rooms_latest.csv
-        output/contracts_latest.csv
+        output/rooms_<timestamp>.csv  (every run kept)
+        output/rooms_latest.csv       (newest, stable name)
+        output/contracts_<timestamp>.csv + contracts_latest.csv
                  │
                  ▼
-        git commit & push to repo
+        make_report.py  → reports/<date>/
+              ├── rooms.csv / contracts.csv  (dated snapshot)
+              └── changes.md  (diff vs previous run)
+                 │
+                 ▼
+        git commit & push (output/ + reports/) to repo
 ```
 
 ## Adding a new brand

@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-05 (UTF-8 console fix; workflow no longer commits gitignored timestamped CSVs + adds contents:write)_
+_Last updated: 2026-06-08 (weekday schedule; output now keeps every dated run; new reports/ folder + make_report.py for weekday change reports)_
 
 ---
 
@@ -16,13 +16,15 @@ This is a small **ETL pipeline** (Extract, Transform, Load) that scrapes **stude
 accommodation room and pricing data** from the public WordPress REST APIs of **6
 student-living brands**, flattens it into a clean tabular shape, and writes out **two
 combined CSV files** — one listing every room type, one listing every contract/pricing
-option. It runs **automatically once a day via GitHub Actions** and commits the fresh
-CSVs back into the repo, so there is always an up-to-date snapshot of room availability
-and prices across all brands in one place.
+option. It runs **automatically every weekday (Mon–Fri) via GitHub Actions** and commits
+the fresh CSVs back into the repo, so there is always an up-to-date snapshot of room
+availability and prices across all brands in one place. Each weekday run also writes a
+dated **change report** (snapshot + changelog) into `reports/`.
 
-The whole thing is **one Python script** (`etl.py`, ~350 lines) with **one dependency**
-(`requests`). There is no database, no web server, no framework — just "hit APIs → parse
-JSON → write CSV."
+It is **two Python scripts** — `etl.py` (~360 lines, the scraper) and `make_report.py`
+(the weekday diff/report generator) — with **one dependency** (`requests`; `make_report.py`
+is pure stdlib). There is no database, no web server, no framework — just "hit APIs →
+parse JSON → write CSV → diff against yesterday."
 
 ---
 
@@ -118,26 +120,50 @@ The flow is all in `etl.py`. Top to bottom:
      using `csv.DictWriter` (with `extrasaction="ignore"` so extra dict keys don't break).
    - Prints a summary (brand count, room count, contract count, properties, cities).
 
+6. **`make_report.py` (separate script, run by CI after `etl.py`)**
+   - Compares the previous run's `*_latest.csv` (stashed by the workflow before they're
+     overwritten) against the new `*_latest.csv`.
+   - Writes `reports/<date>/rooms.csv` + `contracts.csv` (dated snapshot copies) and
+     `reports/<date>/changes.md` (the changelog). See §5 for the report contents.
+   - Pure stdlib (`csv`), no dependencies. Handles a missing "previous" (first run) by
+     emitting a snapshot-only report. Usage:
+     `python make_report.py <date> <prev_rooms> <prev_contracts> <new_rooms> <new_contracts> <reports_root>`.
+
 ---
 
 ## 5. Output files & their columns
 
-Written into `output/`, named with a run timestamp. The GitHub Action additionally
+`etl.py` writes into `output/`, named with a run timestamp. The GitHub Action additionally
 copies the newest of each into stable names `rooms_latest.csv` / `contracts_latest.csv`
-so downstream consumers always know where to look.
+so downstream consumers always know where to look. **`output/` keeps every dated run** —
+the timestamped CSVs are committed too (they are no longer gitignored), so `output/`
+accumulates the full history of raw runs alongside the two `*_latest.csv` pointers.
 
-**`rooms_<timestamp>.csv`** — one row per room type:
+**`rooms_<timestamp>.csv`** (and `rooms_latest.csv`) — one row per room type:
 `brand_name` · `property` · `city` · `room_type` · `quantity_available` ·
 `description` · `thumbnail_url` · `image_urls`
 
-**`contracts_<timestamp>.csv`** — one row per contract / pricing option:
+**`contracts_<timestamp>.csv`** (and `contracts_latest.csv`) — one row per contract / pricing option:
 `brand_name` · `property` · `city` · `room_type` · `contract_title` · `academic_year` ·
 `price_pw` · `currency_symbol` · `available` · `start_date` · `end_date` ·
 `contract_length_weeks` · `base_hub_url`
 
-> Sense of scale (last observed run, 2026-06-05): ~1,500 room rows and ~3,170 contract
-> rows across the 6 brands. `image_urls` is a single `|`-separated string. `price_pw` is
-> the price **per person per week**.
+> Sense of scale (run of 2026-06-05): ~1,540 room rows and ~4,480 contract rows across
+> the 6 brands. `image_urls` is a single `|`-separated string. `price_pw` is the price
+> **per person per week**.
+
+### The `reports/` folder (weekday change reports)
+
+Each weekday run produces `reports/<YYYY-MM-DD>/` containing:
+- **`rooms.csv` / `contracts.csv`** — a dated snapshot copy of that day's data.
+- **`changes.md`** — a human-readable changelog vs the **previous run's** `*_latest.csv`:
+  a summary plus sections for price changes (`£old → £new`), contracts added/removed,
+  rooms added/removed, and availability changes.
+
+This is produced by `make_report.py` (see §4), not `etl.py`. Row identity for the diff:
+rooms are keyed on `(brand_name, property, room_type)`; contracts on
+`(brand_name, property, room_type, contract_title)` — change those keys in `make_report.py`
+if you change what counts as "the same" row.
 
 ---
 
@@ -145,15 +171,19 @@ so downstream consumers always know where to look.
 
 Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
 
-- **Trigger:** daily cron at **06:00 UTC**, plus manual `workflow_dispatch` from the
-  Actions tab.
-- **Steps:** checkout → set up Python 3.11 → `pip install -r requirements.txt` →
-  `python etl.py` (with `PSL_API_TOKEN` injected from repo secrets) → copy newest CSVs
-  to `*_latest.csv` → commit & push the CSVs back to the repo (as `github-actions[bot]`).
-- Only the `*_latest.csv` files are committed back. The timestamped run files are
-  gitignored, so they are **not** committed (an earlier version tried to and the run
-  failed because `git add` rejects ignored paths). The job declares
+- **Trigger:** weekday cron `0 6 * * 1-5` (**Mon–Fri at 06:00 UTC**), plus manual
+  `workflow_dispatch` from the Actions tab. No weekend runs.
+- **Steps:** checkout → **stash previous `*_latest.csv`** (to `/tmp/prev`, for the diff) →
+  set up Python 3.11 → `pip install -r requirements.txt` → `python etl.py` (with
+  `PSL_API_TOKEN` injected from repo secrets) → copy newest CSVs to `*_latest.csv` →
+  **`python make_report.py …`** (writes `reports/<date>/`) → commit & push `output/` and
+  `reports/` back to the repo (as `github-actions[bot]`).
+- **What gets committed:** everything under `output/` (every dated run **and** the two
+  `*_latest.csv`) plus everything under `reports/`. The job declares
   `permissions: contents: write` so it can push.
+- History note: an earlier version only kept `*_latest.csv` and gitignored the timestamped
+  files; it also tried to `git add` those ignored files and failed. Both are fixed —
+  timestamped files are now tracked and kept.
 
 If you ever need the token: GitHub repo → Settings → Secrets and variables → Actions →
 secret named `PSL_API_TOKEN`.
@@ -164,12 +194,14 @@ secret named `PSL_API_TOKEN`.
 
 | Path | What it is |
 |---|---|
-| `etl.py` | **The whole pipeline.** Everything happens here. |
-| `requirements.txt` | One line: `requests==2.32.3`. The only dependency. |
+| `etl.py` | **The scraper.** Fetches all brands and writes the CSVs. |
+| `make_report.py` | **The weekday report generator.** Diffs runs → `reports/<date>/`. |
+| `requirements.txt` | One line: `requests==2.32.3`. The only dependency (etl.py only). |
 | `README.md` | Public-facing setup/usage doc (git init, secrets, how to run). |
-| `.github/workflows/run_etl.yml` | The daily GitHub Actions automation. |
-| `.gitignore` | Ignores Python cruft AND the local timestamped CSVs (keeps `*_latest`). |
-| `output/` | Generated CSVs (rooms + contracts, timestamped). |
+| `.github/workflows/run_etl.yml` | The weekday GitHub Actions automation. |
+| `.gitignore` | Ignores Python cruft + `.vs/`. (No longer ignores output CSVs.) |
+| `output/` | Generated CSVs — every dated run **plus** `*_latest.csv`. |
+| `reports/` | Per-weekday `<date>/` folders: dated snapshot CSVs + `changes.md`. |
 | `ROOMS data.pyproj` | Visual Studio Python project file (just for opening in VS). |
 | `PROJECT_OVERVIEW.md` | **This file.** Your future-self memory. |
 
@@ -192,6 +224,19 @@ No token is needed unless the APIs start requiring auth — then set it first:
 $env:PSL_API_TOKEN = "Bearer <your_token>"
 python etl.py
 ```
+
+To build a change report locally (CI does this automatically each weekday), point it at a
+previous and a new pair of CSVs:
+
+```powershell
+python make_report.py 2026-06-08 `
+  output/rooms_<old>.csv output/contracts_<old>.csv `
+  output/rooms_latest.csv output/contracts_latest.csv `
+  reports
+```
+
+> On this Windows machine the interpreter is the **`py`** launcher (plain `python` isn't on
+> the Git Bash PATH), so run `py etl.py` / `py make_report.py …`.
 
 ---
 
@@ -216,6 +261,7 @@ Before you `git commit`, if you touched any of these, update the matching sectio
 - [ ] Changed `BRANDS` → update **§3** and the brand table.
 - [ ] Changed `ROOM_FIELDS` / `CONTRACT_FIELDS` or parser output → update **§5**.
 - [ ] Changed the fetch/parse logic or constants → update **§4**.
+- [ ] Changed `make_report.py` (diff keys, report sections) → update **§4** + **§5**.
 - [ ] Changed the GitHub workflow (schedule, steps, secrets) → update **§6**.
 - [ ] Added/removed files → update **§7**.
 - [ ] Bump the **_Last updated_** date at the top.
