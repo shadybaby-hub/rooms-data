@@ -1,11 +1,11 @@
 # Change report — 2026-06-08
 
-_Generated 2026-06-08 08:05 UTC_
+_Generated 2026-06-08 09:13 UTC_
 
 ## Summary
 
 - Rooms: **+0** added, **−0** removed
-- Contracts: **+1** added, **−2** removed
+- Contracts: **+1** added, **−0** removed
 - Price changes: **0**
 - Availability changes: **0**
 
@@ -15,12 +15,11 @@ _None_
 
 ## Contracts added (1)
 
-- Homes for Students | Calthorpe Court | Standard Ensuite | Calthorpe Court - Standard Ensuite - 26/27 - 12/09 - 51wk 2026
+- Homes for Students | Orbital | Premium Studio | Orbital - Premium Studio - 26/27 - 12/09 - 42wk 2026
 
-## Contracts removed (2)
+## Contracts removed (0)
 
-- Homes for Students | Iron Bridge Studios | Top Floor Classic Studio | Iron Bridge Studios - Top Floor Classic Studio - 26/27 - 12/09 - 45wk 2026
-- Universal Student Living | Mercury House | Standard Studio | Mercury House - Standard Studio - 26/27 - 12/09 - 44wk 2026
+_None_
 
 ## Rooms added (0)
 
