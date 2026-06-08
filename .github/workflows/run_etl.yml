@@ -68,7 +68,15 @@ jobs:
             output/rooms_latest.csv    output/contracts_latest.csv \
             reports
 
-      # ── 7. Commit & push everything back to repo ─────────────────
+      # ── 7. Publish the latest data to Google Sheets ──────────────
+      #    No-op until the GCP_SA_KEY + SHEET_ID secrets are configured.
+      - name: Publish to Google Sheets
+        env:
+          GCP_SA_KEY: ${{ secrets.GCP_SA_KEY }}
+          SHEET_ID:   ${{ secrets.SHEET_ID }}
+        run: python publish_to_sheets.py
+
+      # ── 8. Commit & push everything back to repo ─────────────────
       #    output/ keeps every dated run plus *_latest.csv; reports/ keeps
       #    the weekday snapshots + changelogs.
       - name: Commit updated data and reports

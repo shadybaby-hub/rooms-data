@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-08 (weekday schedule; output now keeps every dated run; new reports/ folder + make_report.py for weekday change reports)_
+_Last updated: 2026-06-08 (weekday schedule; output keeps every dated run; reports/ + make_report.py; Google Sheets publish via publish_to_sheets.py)_
 
 ---
 
@@ -176,8 +176,14 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
 - **Steps:** checkout → **stash previous `*_latest.csv`** (to `/tmp/prev`, for the diff) →
   set up Python 3.11 → `pip install -r requirements.txt` → `python etl.py` (with
   `PSL_API_TOKEN` injected from repo secrets) → copy newest CSVs to `*_latest.csv` →
-  **`python make_report.py …`** (writes `reports/<date>/`) → commit & push `output/` and
-  `reports/` back to the repo (as `github-actions[bot]`).
+  **`python make_report.py …`** (writes `reports/<date>/`) → **`python publish_to_sheets.py`**
+  (pushes the latest data to Google Sheets) → commit & push `output/` and `reports/` back
+  to the repo (as `github-actions[bot]`).
+- **Google Sheets publish:** `publish_to_sheets.py` writes the full latest CSVs to a Google
+  Sheet on tabs `Latest Room Data` / `Latest Contracts Data`, using a **service account**.
+  It needs two secrets — `GCP_SA_KEY` (the service-account JSON) and `SHEET_ID` (the target
+  spreadsheet ID). If either is unset the step is a harmless no-op. (Step 2 will add the
+  "…Changes Last 30 Days" tabs to the same script.)
 - **What gets committed:** everything under `output/` (every dated run **and** the two
   `*_latest.csv`) plus everything under `reports/`. The job declares
   `permissions: contents: write` so it can push.
@@ -196,7 +202,8 @@ secret named `PSL_API_TOKEN`.
 |---|---|
 | `etl.py` | **The scraper.** Fetches all brands and writes the CSVs. |
 | `make_report.py` | **The weekday report generator.** Diffs runs → `reports/<date>/`. |
-| `requirements.txt` | One line: `requests==2.32.3`. The only dependency (etl.py only). |
+| `publish_to_sheets.py` | **Pushes latest CSVs to Google Sheets** (service account). |
+| `requirements.txt` | `requests` (etl.py) + `gspread`, `google-auth` (publish step). |
 | `README.md` | Public-facing setup/usage doc (git init, secrets, how to run). |
 | `.github/workflows/run_etl.yml` | The weekday GitHub Actions automation. |
 | `.gitignore` | Ignores Python cruft + `.vs/`. (No longer ignores output CSVs.) |
