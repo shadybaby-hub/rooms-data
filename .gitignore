@@ -10,3 +10,11 @@ venv/
 
 # Visual Studio
 .vs/
+
+# Google service-account key — NEVER commit (repo is public)
+rooms-data-*.json
+*service-account*.json
+gcp-*.json
+
+# Local backfill scratch
+_bf/
