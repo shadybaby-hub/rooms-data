@@ -12,6 +12,11 @@ on:
     - cron: "28 18 * 11,12,1,2,3 1-5"
   workflow_dispatch:
     # Also allows manual trigger from GitHub Actions tab
+    inputs:
+      reset_change_tabs:
+        description: "Clear the 30-day change tabs (headers only) on this run"
+        type: boolean
+        default: false
 
 permissions:
   contents: write   # allow the workflow to commit & push the refreshed CSVs
@@ -80,10 +85,11 @@ jobs:
       #    the GCP_SA_KEY + SHEET_ID secrets are configured.
       - name: Publish to Google Sheets
         env:
-          GCP_SA_KEY:     ${{ secrets.GCP_SA_KEY }}
-          SHEET_ID:       ${{ secrets.SHEET_ID }}
-          PREV_ROOMS:     /tmp/prev/rooms_latest.csv
-          PREV_CONTRACTS: /tmp/prev/contracts_latest.csv
+          GCP_SA_KEY:        ${{ secrets.GCP_SA_KEY }}
+          SHEET_ID:          ${{ secrets.SHEET_ID }}
+          PREV_ROOMS:        /tmp/prev/rooms_latest.csv
+          PREV_CONTRACTS:    /tmp/prev/contracts_latest.csv
+          RESET_CHANGE_TABS: ${{ github.event.inputs.reset_change_tabs }}
         run: python publish_to_sheets.py
 
       # ── 8. Commit & push everything back to repo ─────────────────

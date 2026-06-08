@@ -92,10 +92,18 @@ def main():
     old_contracts = index(prev_contracts_rows, CONTRACT_KEY)
     new_contracts = index(load(new_contracts_p), CONTRACT_KEY)
 
+    # Brands present in the new run. If a whole brand is gone, that's almost
+    # certainly a fetch failure (API timeout) rather than real removals, so we
+    # don't report those rows as "removed".
+    new_room_brands     = {k[0] for k in new_rooms}
+    new_contract_brands = {k[0] for k in new_contracts}
+
     rooms_added     = sorted(k for k in new_rooms     if k not in old_rooms)
-    rooms_removed   = sorted(k for k in old_rooms     if k not in new_rooms)
+    rooms_removed   = sorted(k for k in old_rooms
+                            if k not in new_rooms and k[0] in new_room_brands)
     contracts_added = sorted(k for k in new_contracts if k not in old_contracts)
-    contracts_removed = sorted(k for k in old_contracts if k not in new_contracts)
+    contracts_removed = sorted(k for k in old_contracts
+                              if k not in new_contracts and k[0] in new_contract_brands)
 
     price_changes, avail_changes = [], []
     for k in sorted(new_contracts):

@@ -94,10 +94,13 @@ def load_index(path, key_fields):
 
 def diff_rooms(old, new):
     rows = []
+    new_brands = {k[0] for k in new}  # brands present this run
     for k in sorted(set(old) | set(new)):
         o, n = old.get(k), new.get(k)
         brand, prop, rtype = k
         if o and not n:
+            if brand not in new_brands:
+                continue  # whole brand missing — likely a fetch failure, not a removal
             rows.append([RUN_DATE_STR, brand, prop, o.get("city", ""), rtype,
                          "(removed)", "Removed", o.get("quantity_available", ""), ""])
         elif n and not o:
@@ -114,6 +117,7 @@ def diff_rooms(old, new):
 
 def diff_contracts(old, new):
     rows = []
+    new_brands = {k[0] for k in new}  # brands present this run
     for k in sorted(set(old) | set(new)):
         o, n = old.get(k), new.get(k)
         brand, prop, rtype, _title = k
@@ -122,6 +126,8 @@ def diff_contracts(old, new):
                          src.get("contract_length_weeks", ""),
                          src.get("city", ""))
         if o and not n:
+            if brand not in new_brands:
+                continue  # whole brand missing — likely a fetch failure, not a removal
             rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
                          "(removed)", "Removed", o.get("price_pw", ""), ""])
         elif n and not o:
@@ -164,8 +170,12 @@ def write_latest_tab(sh, title, path):
     print(f"  '{title}': {max(len(grid) - 1, 0)} rows + Run Time column")
 
 
-def update_change_tab(sh, title, header, new_rows):
+def update_change_tab(sh, title, header, new_rows, reset=False):
     ws = _get_or_create(sh, title, len(header))
+    if reset:  # wipe the rolling log back to just the header row
+        _write(ws, [header], len(header))
+        print(f"  '{title}': reset to header only")
+        return
     existing = ws.get_all_values()
     body = existing[1:] if (existing and existing[0] == header) else \
            ([] if not existing else existing)
@@ -209,6 +219,14 @@ def main():
             print(f"  !! {path} missing — skipping '{title}'")
 
     # 2. Change tabs (rolling 30-day log stored in the Sheet)
+    reset = os.getenv("RESET_CHANGE_TABS", "").strip().lower() in ("1", "true", "yes")
+    if reset:
+        print("  RESET_CHANGE_TABS set — clearing both change tabs to headers only.")
+        update_change_tab(sh, ROOM_CHANGE_TAB, ROOM_CHANGE_HEADER, [], reset=True)
+        update_change_tab(sh, CONTRACT_CHANGE_TAB, CONTRACT_CHANGE_HEADER, [], reset=True)
+        print("Done.")
+        return
+
     prev_rooms = os.getenv("PREV_ROOMS", "/tmp/prev/rooms_latest.csv")
     prev_contracts = os.getenv("PREV_CONTRACTS", "/tmp/prev/contracts_latest.csv")
 

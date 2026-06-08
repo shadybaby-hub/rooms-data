@@ -82,6 +82,9 @@ SLEEP_S   = 0.25
 TIMEOUT   = 30
 OUT_DIR   = "output"
 
+MAX_RETRIES   = 3     # attempts per request before giving up
+RETRY_BACKOFF = 3.0   # seconds, multiplied by the attempt number
+
 API_TOKEN = os.getenv("PSL_API_TOKEN", "")
 ID_RANGE  = os.getenv("PSL_ID_RANGE", "")
 
@@ -143,17 +146,40 @@ def make_session() -> requests.Session:
 
 # ── Fetchers ───────────────────────────────────────────────────────────────────
 
+def get_with_retry(session, url, params=None):
+    """GET with retry/backoff on transient errors (timeouts, conn drops, 5xx, 429).
+
+    A single timed-out request used to make us drop an entire brand, which then
+    looked like a mass "removed" event in the change log. Retrying first avoids
+    that. 4xx (other than 429) are not retried — they won't fix themselves.
+    """
+    last_exc = None
+    for attempt in range(1, MAX_RETRIES + 1):
+        try:
+            r = session.get(url, params=params, timeout=TIMEOUT)
+            r.raise_for_status()
+            return r
+        except requests.RequestException as e:
+            resp = getattr(e, "response", None)
+            if resp is not None and 400 <= resp.status_code < 500 and resp.status_code != 429:
+                raise  # client error — retrying won't help
+            last_exc = e
+            if attempt < MAX_RETRIES:
+                wait = RETRY_BACKOFF * attempt
+                print(f"      retry {attempt}/{MAX_RETRIES - 1} after: {e} (waiting {wait:g}s)")
+                time.sleep(wait)
+    raise last_exc
+
+
 def fetch_all_pages(session, endpoint_url, label):
-    r = session.get(endpoint_url, params={"per_page": PER_PAGE, "page": 1}, timeout=TIMEOUT)
-    r.raise_for_status()
+    r = get_with_retry(session, endpoint_url, {"per_page": PER_PAGE, "page": 1})
     total_pages = int(r.headers.get("X-WP-TotalPages", 1))
     total_items = int(r.headers.get("X-WP-Total", 0))
     print(f"    {total_items} items across {total_pages} pages")
     items = r.json()
     for page in range(2, total_pages + 1):
         time.sleep(SLEEP_S)
-        r = session.get(endpoint_url, params={"per_page": PER_PAGE, "page": page}, timeout=TIMEOUT)
-        r.raise_for_status()
+        r = get_with_retry(session, endpoint_url, {"per_page": PER_PAGE, "page": page})
         items.extend(r.json())
         print(f"      page {page}/{total_pages} — {len(items)} fetched")
     return items

@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-08 (schedule moved to 6:28pm UK weekdays; output keeps every dated run; reports/ + make_report.py; Google Sheets publish incl. 30-day change tabs)_
+_Last updated: 2026-06-08 (6:28pm UK weekday schedule; ETL retry/backoff; brand-vanish guard in diffs; change-tab reset switch; 30-day change tabs in Google Sheets)_
 
 ---
 
@@ -97,6 +97,9 @@ The flow is all in `etl.py`. Top to bottom:
      (`X-WP-TotalPages`, `X-WP-Total`) and loops through every page, accumulating items.
    - `fetch_by_id_range()` — the `PSL_ID_RANGE` fallback path; hits `/endpoint/<id>` for
      each id in the range and keeps the 200s.
+   - `get_with_retry()` — wraps every page GET with retry/backoff (`MAX_RETRIES`,
+     `RETRY_BACKOFF`) on transient errors (timeouts, conn drops, 5xx, 429). Added because a
+     single timeout used to drop a whole brand, which then showed up as mass "removed" rows.
 
 4. **The parser — `parse_room()` (lines ~173–266)** — this is the heart of the
    "Transform" step and the messiest part. For each raw API item it:
@@ -191,6 +194,11 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     City · Room Type · (contracts also: Academic Year · Duration) · Change Field · Change
     Type · Old Content · New Content. Watched fields: rooms `quantity_available`; contracts
     `price_pw`, `available`; plus row Added/Removed.
+  - **Brand-vanish guard:** if a whole brand is absent from the new run (probable API
+    timeout), its rows are NOT logged as "removed" (same guard in `make_report.py`).
+  - **Reset switch:** trigger the workflow with the `reset_change_tabs` input = true (env
+    `RESET_CHANGE_TABS`) to wipe both change tabs back to headers — used to clear out bad
+    entries.
   - Needs secrets `GCP_SA_KEY` (service-account JSON) + `SHEET_ID`. No secrets → no-op.
 - **What gets committed:** everything under `output/` (every dated run **and** the two
   `*_latest.csv`) plus everything under `reports/`. The job declares
