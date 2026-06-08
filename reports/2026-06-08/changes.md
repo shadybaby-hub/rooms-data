@@ -1,28 +1,19 @@
 # Change report — 2026-06-08
 
-_Generated 2026-06-08 12:21 UTC_
+_Generated 2026-06-08 13:03 UTC_
 
 ## Summary
 
-- Rooms: **+0** added, **−49** removed
-- Contracts: **+0** added, **−141** removed
-- Price changes: **6**
+- Rooms: **+49** added, **−0** removed
+- Contracts: **+141** added, **−0** removed
+- Price changes: **0**
 - Availability changes: **0**
 
-## Price changes (6)
-
-- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 25/26 - 28/02 - 15wk 2026: £135 → £209
-- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 25/26 - 28/02 - 20wk 2026: £135 → £209
-- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 25/26 - 28/02 - 25wk 2026: £135 → £209
-- Prestige Student Living | Innovo House | Premium Ensuite | Innovo House - Premium Ensuite - 25/26 - 28/02 - 15wk 2026: £209 → £135
-- Prestige Student Living | Innovo House | Premium Ensuite | Innovo House - Premium Ensuite - 25/26 - 28/02 - 20wk 2026: £209 → £135
-- Prestige Student Living | Innovo House | Premium Ensuite | Innovo House - Premium Ensuite - 25/26 - 28/02 - 25wk 2026: £209 → £135
-
-## Contracts added (0)
+## Price changes (0)
 
 _None_
 
-## Contracts removed (141)
+## Contracts added (141)
 
 - Urban Student Life | Aire | Bronze Studio | Aire - Bronze Studio - 25/26 - 06/09 - 44wk 2025
 - Urban Student Life | Aire | Bronze Studio | Aire Bronze Stu - 25/26 - 06/09 - 51wk 2025
@@ -166,11 +157,11 @@ _None_
 - Urban Student Life | The Print House | Classic Studio | The Print House - Classic Studio - 26/27 - 12/09 - 44wk 2026
 - Urban Student Life | The Print House | Classic Studio | The Print House - Classic Studio £164 - 26/27 - 12/09 - 44wk 2026
 
-## Rooms added (0)
+## Contracts removed (0)
 
 _None_
 
-## Rooms removed (49)
+## Rooms added (49)
 
 - Urban Student Life | Aire | Bronze Studio
 - Urban Student Life | Aire | Gold Plus Studio
@@ -221,6 +212,10 @@ _None_
 - Urban Student Life | Sizer Court | Premium Studio
 - Urban Student Life | The Print House | Classic Ensuite
 - Urban Student Life | The Print House | Classic Studio
+
+## Rooms removed (0)
+
+_None_
 
 ## Availability changes (0)
 
