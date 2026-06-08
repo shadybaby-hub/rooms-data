@@ -1,221 +1,158 @@
 # Change report — 2026-06-08
 
-_Generated 2026-06-08 13:03 UTC_
+_Generated 2026-06-08 16:01 UTC_
 
 ## Summary
 
-- Rooms: **+49** added, **−0** removed
-- Contracts: **+141** added, **−0** removed
-- Price changes: **0**
+- Rooms: **+4** added, **−9** removed
+- Contracts: **+24** added, **−46** removed
+- Price changes: **47**
 - Availability changes: **0**
 
-## Price changes (0)
+## Price changes (47)
 
-_None_
+- Homes for Students | Glassworks | Standard Ensuite | Glassworks - Standard Ensuite - 26/27 - 05/09 - 51wk 2026: £150 → £153
+- Homes for Students | Russell View | Ensuite 5-6 Bed Cluster | Russell View - Ensuite 5/6 Bed Cluster - 26/27 - 12/09 - 44wk 2026: £135 → £120
+- Homes for Students | Russell View | Ensuite 5-6 Bed Cluster | Russell View - Ensuite 5/6 Bed Cluster - 26/27 - 12/09 - 51wk 2026: £130 → £115
+- Homes for Students | The Bridge | Premium Plus Ensuite | The Bridge - Premium Plus Ensuite - 26/27 - 29/08 - 51wk 2026: £255 → £260
+- Prestige Student Living | ARK Canning Town | Premium Plus Studio | Ark Canning Town - Premium Plus Studio - 26/27 - 12/09 - 51wk 2026: £445 → £465
+- Prestige Student Living | Cosmos | Classic Studio | Cosmos - Classic Studio V1 - 26/27 - 05/09 - 51wk 2026: £150 → £155
+- Prestige Student Living | Icon House | Silver Studio | Icon House - Silver Studio - 26/27 - 05/09 - 51wk 2026: £170 → £175
+- Prestige Student Living | Icon House | Silver Studio | Icon House - Silver Studio - 26/27 - 12/09 - 51wk 2026: £170 → £175
+- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 25/26 - 28/02 - 15wk 2026: £209 → £135
+- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 25/26 - 28/02 - 20wk 2026: £209 → £135
+- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 25/26 - 28/02 - 25wk 2026: £209 → £135
+- Prestige Student Living | Innovo House | Premium Ensuite | Innovo House - Premium Ensuite - 25/26 - 28/02 - 15wk 2026: £135 → £209
+- Prestige Student Living | Innovo House | Premium Ensuite | Innovo House - Premium Ensuite - 25/26 - 28/02 - 20wk 2026: £135 → £209
+- Prestige Student Living | Innovo House | Premium Ensuite | Innovo House - Premium Ensuite - 25/26 - 28/02 - 25wk 2026: £135 → £209
+- Prestige Student Living | Parklands | Classic En-Suite | Parklands - Classic En-Suite - 25/26 - 28/02 - 18wk 2026: £185 → £190
+- Prestige Student Living | Parklands | Classic En-Suite | Parklands - Classic En-Suite - 25/26 - 28/02 - 20wk 2026: £185 → £190
+- Prestige Student Living | Parklands | Classic En-Suite | Parklands - Classic En-Suite - 25/26 - 28/02 - 25wk 2026: £185 → £190
+- Prestige Student Living | Parklands | Classic Studio | Parklands - Classic Studio - 25/26 - 28/02 - 20wk 2026: £245 → £240
+- Prestige Student Living | Parklands | Classic Studio | Parklands - Classic Studio - 25/26 - 28/02 - 25wk 2026: £245 → £240
+- Prestige Student Living | Parklands | Standard Studio | Parklands - Standard Studio - 26/27 - 05/09 - 44wk 2026: £240 → £235
+- Prestige Student Living | Parklands | Standard Studio | Parklands - Standard Studio - 26/27 - 05/09 - 51wk 2026: £235 → £230
+- Prestige Student Living | Parklands | Standard Studio | Parklands - Standard Studio - 26/27 - 29/08 - 44wk 2026: £240 → £235
+- Prestige Student Living | Parklands | Standard Studio | Parklands - Standard Studio - 26/27 - 29/08 - 51wk 2026: £235 → £230
+- Prestige Student Living | Stanley Studios | Standard Plus Studio | STANLEY STUDIOS - Standard Plus Studio. - 26/27 - 12/09 - 51wk 2026: £310 → £320
+- Prestige Student Living | Straits Mile | Classic Plus Studio | Straits Mile - Classic Plus Studio - 26/27 - 05/09 - 39wk 2026: £350 → £309
+- Prestige Student Living | Straits Mile | Classic Plus Studio | Straits Mile - Classic Plus Studio - 26/27 - 05/09 - 44wk 2026: £340 → £299
+- Prestige Student Living | Straits Mile | Classic Plus Studio | Straits Mile - Classic Plus Studio - 26/27 - 05/09 - 51wk 2026: £325 → £299
+- Prestige Student Living | The Malt Works | Bronze Plus Studio | The Malt Works - Bronze Plus Studio - 26/27 - 05/09 - 51wk 2026: £260 → £270
+- Prestige Student Living | The Propeller Quarter | Bronze Plus Studio | The Propeller Quarter - Bronze Plus Studio - 26/27 - 12/09 - 40wk 2026: £324 → £300
+- Prestige Student Living | The Propeller Quarter | Bronze Plus Studio | The Propeller Quarter - Bronze Plus Studio - 26/27 - 12/09 - 44wk 2026: £314 → £290
+- Prestige Student Living | The Propeller Quarter | Bronze Studio | The Propeller Quarter - Bronze Studio - 26/27 - 12/09 - 40wk 2026: £314 → £290
+- Prestige Student Living | The Propeller Quarter | Bronze Studio | The Propeller Quarter - Bronze Studio - 26/27 - 12/09 - 44wk 2026: £304 → £280
+- Prestige Student Living | The Propeller Quarter | Classic 3 Bed Ensuite | The Propeller Quarter - Classic 3 Bed Ensuite - 26/27 - 12/09 - 40wk 2026: £239 → £185
+- Prestige Student Living | The Propeller Quarter | Classic 3 Bed Ensuite | The Propeller Quarter - Classic 3 Bed Ensuite - 26/27 - 12/09 - 44wk 2026: £229 → £185
+- Prestige Student Living | The Propeller Quarter | Classic 4 Bed Ensuite | The Propeller Quarter - Classic 4 Bed Ensuite - 26/27 - 12/09 - 44wk 2026: £180 → £185
+- Prestige Student Living | The Propeller Quarter | Classic 4 Bed Ensuite | The Propeller Quarter - Classic 4 Bed Ensuite - 26/27 - 12/09 - 51wk 2026: £170 → £175
+- Prestige Student Living | The Propeller Quarter | Classic 5 Bed Ensuite | The Propeller Quarter - Classic 5 Bed Ensuite - 26/27 - 12/09 - 44wk 2026: £170 → £175
+- Prestige Student Living | The Propeller Quarter | Classic 5 Bed Ensuite | The Propeller Quarter - Classic 5 Bed Ensuite - 26/27 - 12/09 - 51wk 2026: £160 → £165
+- Prestige Student Living | The Propeller Quarter | Silver Plus Studio | The Propeller Quarter - Silver Plus Studio - 26/27 - 12/09 - 40wk 2026: £344 → £320
+- Prestige Student Living | The Propeller Quarter | Silver Plus Studio | The Propeller Quarter - Silver Plus Studio - 26/27 - 12/09 - 44wk 2026: £334 → £310
+- Prestige Student Living | The Propeller Quarter | Silver Studio | The Propeller Quarter - Silver Studio - 26/27 - 12/09 - 40wk 2026: £334 → £310
+- Prestige Student Living | The Propeller Quarter | Silver Studio | The Propeller Quarter - Silver Studio - 26/27 - 12/09 - 44wk 2026: £324 → £300
+- Prestige Student Living | The Quarter House | Premium Plus Ensuite | The Quarter House - Premium Plus Ensuite - 26/27 - 12/09 - 51wk 2026: £288 → £289
+- Prestige Student Living | Tribeka | Classic Ensuite | Tribeka - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £169 → £189
+- Prestige Student Living | Tribu Kingston | Awesome | Tribu Kingston - Awesome - 26/27 - 19/09 - 51wk 2026: £380 → £445
+- Universal Student Living | Mercury House | Classic Studio | Mercury House - Classic Studio - 26/27 - 12/09 - 44wk 2026: £212 → £215
+- Universal Student Living | Mercury House | Classic Studio | Mercury House - Classic Studio - 26/27 - 12/09 - 51wk 2026: £199 → £200
 
-## Contracts added (141)
+## Contracts added (24)
 
-- Urban Student Life | Aire | Bronze Studio | Aire - Bronze Studio - 25/26 - 06/09 - 44wk 2025
-- Urban Student Life | Aire | Bronze Studio | Aire Bronze Stu - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Bronze Studio | Bronze Studio Aire 44 - 26/27 - 05/09 - 44wk 2026
-- Urban Student Life | Aire | Bronze Studio | Bronze Studio Aire 51 - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Aire | Gold Plus Studio | Aire - Gold Plus Studio - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Gold Plus Studio | DUAL Gold Plus Studio - 124.50 - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Aire | Gold Plus Studio | DUAL OCC DW - AIRE - GPS - - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Gold Studio | Aire - Gold Studio - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Gold Studio | Aire - Gold Studio - 51wk - £165 - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Gold Studio | Gold Studio Aire 51 - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Aire | Silver Studio | 51wk £162 - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Silver Studio | Aire - Silver Studio - 44wk - £140 - 25/26 - 06/09 - 44wk 2025
-- Urban Student Life | Aire | Silver Studio | Aire - Silver Studio - 51wk - £135 - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Silver Studio | DT RM 145 - 25/26 - 30/09 - 50wk RuM request 2025 - 2026
-- Urban Student Life | Aire | Silver Studio | DW - DT - 130 - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Silver Studio | DW - DT - 140 - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Silver Studio | DW DT 140 - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Silver Studio | RM - DT - 140 - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Silver Studio | RM - DT - AIRE - SS - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Silver Studio | Silver Studio Aire 44 - 26/27 - 05/09 - 44wk 2026
-- Urban Student Life | Aire | Silver Studio | Silver Studio Aire 51 - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Aire | Standard Studio | Aire - Standard Studio - 25/26 - 06/09 - 44wk 2025
-- Urban Student Life | Aire | Standard Studio | Aire - Standard Studio - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Standard Studio | Bronze Studio Aire 44 - 26/27 - 05/09 - 44wk 2026
-- Urban Student Life | Aire | Standard Studio | Bronze Studio Aire 51 - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Aire | Standard Studio | Standard Studio Aire - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Aire | Twodio | Aire - Twodio - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Aire | Twodio | Twodio Aire - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Aire | Twodio | Twodio £145 - 25/26 - 06/09 - 44wk 2025
-- Urban Student Life | Axiom | Classic Studio | Axiom - Classic Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Axiom | Large Classic Studio | Axiom - Large Classic Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Axiom | Large Premium Studio | Axiom - Large Premium Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Axiom | Large Standard Studio | Axiom - Large Standard Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Axiom | Large Studio | Axiom - Large Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Axiom | Premium Studio | Axiom - Premium Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Axiom | Standard Studio | Axiom - Standard Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Hassells Bridge Apartments | 1 Bed Apartment | 1 Bed Apartment - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Hassells Bridge Apartments | 1 Bed Apartment | Hassell's Bridge - 1 Bed Apartment. - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Hassells Bridge Apartments | 2 Bed Apartment | 2 Bed Apartment - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Hassells Bridge Apartments | 2 Bed Apartment | Hassell's Bridge - 2 Bed Apartment - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Hassells Bridge Apartments | 2 Bed Apartment Ensuite Room | 2 Bed Apartment Ensuite Room - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Hassells Bridge Apartments | 2 Bed Apartment Ensuite Room | Hassell's Bridge - 2 Bed Apartment Ensuite Room - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment | 4 Bed Apartment - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment | 4 Bed Apartments - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment | 4 Bed apartment - 03/01 - 33wk 2026
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment | 4 Bed apartment - 25/26 - 30/08 - 44wk 2025
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment | Hassles Bridge - 4 Bed Apartment - 44wk - 119 - Hassell's Bridge - 30/08 - 44wk 2025
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment | Hassles Bridge - 4 Bed Apartment - 51wk - £115 - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment Ensuite Room | 4 Bed Apartment Ensuite Room - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment Ensuite Room | Hassell's Bridge - 4 Bed Apartment Ensuite Room - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Hilbre Gardens | Gold | Danny Test NEW - 25/26 - 05/09 - 51wk 2025
+- Evo Student | Centre Court | Premium Ensuite | Centre Court - Premium Ensuite - 26/27 - 12/09 - 45wk 2026
+- Homes for Students | King Square Studios | Twodio | King Square Studios - Twodio - 25/26 - 28/02 - 26wk 2026
+- Homes for Students | Polhill Park | Premium One Bedroom Flat | Polhill Park - Premium One Bedroom Flat - 26/27 - 12/09 - 51wk 2026
+- Homes for Students | Russell View | Ensuite 4 Bed Cluster | Russell View - Ensuite 4 Bed Cluster - 26/27 - 12/09 - 44wk 2026
+- Prestige Student Living | Aster House | Classic Ensuite | Aster House - Classic Ensuite - V2 - 26/27 - 05/09 - 44wk 2026
+- Prestige Student Living | Fabric | Classic Plus Ensuite | Fabric - Classic Plus Ensuite - 26/27 - 12/09 - 51wk 2026
+- Prestige Student Living | Foundry Courtyard | Bronze Plus Ensuite | Foundry Courtyard - Bronze Plus Ensuite BB - 26/27 - 05/09 - 44wk 2026
+- Prestige Student Living | Griffon Studios | Standard Studio Gold | Griffon Studios - Standard Studio Gold - 26/27 - 29/08 - 51wk 2026
+- Prestige Student Living | Stanley Studios | 2 Bed Apartment | Stanley Studios - 2 Bed Apartment - 26/27 - 12/09 - 45wk 2026
+- Prestige Student Living | Straits Village | Classic Studio | STRAITS VILLAGE - Classic Studio - 26/27 - 12/09 - 51wk 2026
+- Prestige Student Living | Straits Village | Standard Ensuite | STRAITS VILLAGE - Standard Ensuite - 26/27 - 12/09 - 44wk 2026
+- Prestige Student Living | The Edge | Premier Studio | The Edge - Premier Studio - 26/27 - 12/09 - 51wk 2026
+- Prestige Student Living | The Fabric Works | Premium Terrace Studio | The Fabric Works - Premium Terrace Studio - 26/27 - 12/09 - 44wk 2026
+- Prestige Student Living | The Pepper Mill | Classic Studio | The Pepper Mill - Classic Studio - 26/27 - 05/09 - 39wk 2026
+- Prestige Student Living | The Pepper Mill | Premium Studio | The Pepper Mill - Premium Studio - 26/27 - 05/09 - 39wk 2026
+- Prestige Student Living | The Place | Premium Ensuite | The Place - Premium Ensuite - 26/27 - 12/09 - 45wk 2026
+- Prestige Student Living | The Propeller Quarter | Gold Plus Studio | The Propeller Quarter - Gold Plus Studio - 26/27 - 12/09 - 40wk 2026
+- Prestige Student Living | The Propeller Quarter | Gold Plus Studio | The Propeller Quarter - Gold Plus Studio - 26/27 - 12/09 - 44wk 2026
+- Prestige Student Living | The Propeller Quarter | Gold Studio | The Propeller Quarter - Gold Studio - 26/27 - 12/09 - 40wk 2026
+- Prestige Student Living | The Propeller Quarter | Gold Studio | The Propeller Quarter - Gold Studio - 26/27 - 12/09 - 44wk 2026
+- Prestige Student Living | The Propeller Quarter | Premium 4 Bed Ensuite | The Propeller Quarter - Premium 4 Bed Ensuite - 26/27 - 12/09 - 16wk 2026
+- Prestige Student Living | The Valentine | 8 Bed Ensuite | The Valentine - 8 Bed Ensuite - 26/27 - 05/09 - 39wk 2026
+- Prestige Student Living | Tribu Kingston | Awesome Plus | Tribu Kingston - Awesome Plus - 26/27 - 19/09 - 51wk 2026
+- Prestige Student Living | Tribu Kingston | Extraordinary | Tribu Kingston - Extraordinary - 26/27 - 19/09 - 51wk 2026
+
+## Contracts removed (46)
+
+- Homes for Students | Calthorpe Court | Standard Ensuite | Calthorpe Court - Standard Ensuite - 26/27 - 12/09 - 51wk 2026
+- Homes for Students | Paddington Park House | Standard Ensuite | Paddington Park House - Standard Ensuite - 26/27 - 05/09 - 44wk 2026
+- Homes for Students | Plymouth Cross House | Gold Ensuite | Plymouth Cross House - Gold Ensuite - 26/27 - 12/09 - 51wk 2026
+- Homes for Students | Polhill Park | Premium Ensuite | Polhill Park - Premium Ensuite - 26/27 - 12/09 - 42wk 2026
+- Homes for Students | Russell View | Ensuite 4 Bed Cluster | Russell View - Ensuite 4 Bed Cluster - 26/27 - 12/09 - 51wk 2026
+- Homes for Students | The Anvil | Classic 3 Bed Ensuite | THE ANVIL - Classic 3 Bed Ensuite - 26/27 - 12/09 - 51wk 2026
+- Homes for Students | The Anvil | Classic Ensuite | THE ANVIL - Classic Ensuite - 26/27 - 12/09 - 44wk 2026
+- Homes for Students | The Anvil | Classic Ensuite | The Anvil - Classic Ensuite - 26/27 - 12/09 - 51wk 2026
+- Homes for Students | The Anvil | Premium Ensuite | THE ANVIL - Premium Ensuite - 26/27 - 12/09 - 44wk 2026
+- Homes for Students | The Anvil | Premium Ensuite | The Anvil - Premium Ensuite - 26/27 - 12/09 - 51wk 2026
+- Homes for Students | The Croft | Classic Ensuite | The Croft - Classic Ensuite - 26/27 - 12/09 - 43wk 2026
+- Prestige Student Living | 800 Bristol Road | Classic Studio | 800 Bristol Road -Classic Studio - 26/27 - 05/09 - 51wk 2026
+- Prestige Student Living | Flora Building – Hoxton | Premium Studio | Flora Building  - Premium Studio - 26/27 - 19/09 - 51wk 2026
+- Prestige Student Living | Griffon Studios | Standard Ground Floor | Griffon Studios - Standard Ground Floor - 26/27 - 26/09 - 51wk 2026
+- Prestige Student Living | Griffon Studios | Standard Studio Silver | Griffon Studios - Standard Studio Silver - 26/27 - 29/08 - 51wk 2026
+- Prestige Student Living | Parklands | Classic Studio Plus | Parklands - Classic Studio Plus - 25/26 - 28/02 - 20wk 2026
+- Prestige Student Living | Parklands | Classic Studio Plus | Parklands - Classic Studio Plus - 25/26 - 28/02 - 25wk 2026
+- Prestige Student Living | Parklands | Premium Studio | Parklands - Premium Studio - 25/26 - 28/02 - 20wk 2026
+- Prestige Student Living | Parklands | Premium Studio | Parklands - Premium Studio - 25/26 - 28/02 - 25wk 2026
+- Prestige Student Living | Straits Mile | Classic Studio | Straits Mile - Classic Studio - 26/27 - 05/09 - 44wk 2026
+- Prestige Student Living | Straits Mile | Classic Studio | Straits Mile - Classic Studio - 26/27 - 05/09 - 51wk 2026
+- Prestige Student Living | The Pepper Mill | Premium Studio | The Pepper Mill - Classic Plus Studio - 25/26 - 28/02 - 20wk 2026
+- Prestige Student Living | The Pepper Mill | Premium Studio | The Pepper Mill - Classic Plus Studio - 25/26 - 28/02 - 26wk 2026
+- Prestige Student Living | The Propeller Quarter | Bronze Plus Studio | The Propeller Quarter - Bronze Plus Studio - 26/27 - 12/09 - 42wk 2026
+- Prestige Student Living | The Propeller Quarter | Bronze Studio | The Propeller Quarter - Bronze Studio - 26/27 - 12/09 - 42wk 2026
+- Prestige Student Living | The Propeller Quarter | Classic 3 Bed Ensuite | The Propeller Quarter - Classic 3 Bed Ensuite - 26/27 - 12/09 - 42wk 2026
+- Prestige Student Living | The Propeller Quarter | Classic 4 Bed Ensuite | The Propeller Quarter - Classic 4 Bed Ensuite V1 - 26/27 - 12/09 - 40wk 2026
+- Prestige Student Living | The Propeller Quarter | Classic 4 Bed Ensuite | The Propeller Quarter - Classic 4 Bed Ensuite V1 - 26/27 - 12/09 - 42wk 2026
+- Prestige Student Living | The Propeller Quarter | Classic 5 Bed Ensuite | The Propeller Quarter	Classic 5 Bed Ensuite V1 - 26/27 - 12/09 - 42wk 2026
+- Prestige Student Living | The Propeller Quarter | Classic 5 Bed Ensuite | The Propeller Quarter - Classic 5 Bed Ensuite V1 - 26/27 - 12/09 - 40wk 2026
+- Prestige Student Living | The Propeller Quarter | Premium 4 Bed Ensuite | The Propeller Quarter	- Premium 4 Bed Ensuite V1 - 26/27 - 12/09 - 42wk 2026
+- Prestige Student Living | The Propeller Quarter | Premium 5 Bed Ensuite | The Propeller Quarter - Premium 5 Bed Ensuite V1 - 26/27 - 12/09 - 42wk 2026
+- Prestige Student Living | The Propeller Quarter | Silver Plus Studio | The Propeller Quarter - Silver Plus Studio - 26/27 - 12/09 - 42wk 2026
+- Prestige Student Living | The Propeller Quarter | Silver Studio | The Propeller Quarter - Silver Studio - 26/27 - 12/09 - 42wk 2026
+- Prestige Student Living | The Sail Works | Classic Plus Studio Floor 5-7 | The Sail Works - Classic Plus Studio Floor 5-7 - 25/26 - 28/02 - 13wk 2026
+- Prestige Student Living | The Sail Works | Classic Plus Studio Floor 5-7 | The Sail Works - Classic Plus Studio Floor 5-7 - 25/26 - 28/02 - 27wk 2026
+- Prestige Student Living | The Sail Works | Classic Studio Floor 1-4 | The Sail Works - Classic Studio Floor 1-4 - 25/26 - 28/02 - 13wk 2026
+- Prestige Student Living | The Sail Works | Classic Studio Floor 1-4 | The Sail Works - Classic Studio Floor 1-4 - 25/26 - 28/02 - 27wk 2026
+- Prestige Student Living | The Sail Works | Deluxe Studio | The Sail Works - Deluxe Studio - 25/26 - 28/02 - 13wk 2026
+- Prestige Student Living | The Sail Works | Deluxe Studio | The Sail Works - Deluxe Studio - 25/26 - 28/02 - 27wk 2026
+- Universal Student Living | St Augustine’s House | 2 Bed Apartment Ensuite Room | St Augustine's House - 2 Bed Apartment Ensuite Room - 26/27 - 12/09 - 51wk 2026
+- Universal Student Living | St Augustine’s House | Classic Studio | St Augustine's House - Classic Studio - 26/27 - 12/09 - 51wk 2026
+- Universal Student Living | St Augustine’s House | Classic Studio with Balcony | St Augustine's House - Classic Studio with Balcony - 26/27 - 12/09 - 51wk 2026
+- Universal Student Living | St Augustine’s House | Terraced 1 Bed Apartment | St Augustine's House - Terraced 1 Bed Apartment - 26/27 - 12/09 - 51wk 2026
 - Urban Student Life | Hilbre Gardens | Silver | Hilbre Gardens - Silver - 26/27 - 06/09 - 44wk 2026
-- Urban Student Life | Hilbre Gardens | Silver | Hilbre Gardens - Silver - 26/27 - 12/09 - 51wk 2026
-- Urban Student Life | Keele House | Classic Studio | Classic Studio - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Keele House | Classic Studio | Keele House - Classic Studio - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Keele House | Deluxe Studio | Deluxe Studio - 25/26 - 30/08 - 44wk 2025
-- Urban Student Life | Keele House | Deluxe Studio | Deluxe Studio - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Keele House | Deluxe Studio | Keele House - Deluxe Studio - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Keele House | Lower Floor Deluxe Studio | Keele House - Lower Floor Deluxe Studio - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Keele House | Lower Floor Deluxe Studio | Lower Floor Deluxe Studio - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Keele House | Lower Floor Premier Studio | Keele House - Lower Floor Premier Studio - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Keele House | Lower Floor Premier Studio | Lower Floor Premier Studio - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Keele House | Lower Floor Studio | Keele House - Lower Floor Studio - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Keele House | Lower Floor Studio | Lower Floor Studio - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Keele House | Premier Studio | Keele House - Premier Studio - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Keele House | Premier Studio | Premier Studio - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Keele House | Top Floor Deluxe Studio | Keele House - Penthouse Deluxe Studio - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Keele House | Top Floor Deluxe Studio | Penthouse Deluxe Studio - 25/26 - 30/08 - 44wk 2025
-- Urban Student Life | Keele House | Top Floor Deluxe Studio | Top Floor Deluxe Studio - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Keele House | Top Floor Premier Studio | Keele House - Penthouse Premier Studio - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Keele House | Top Floor Premier Studio | Top Floor Premier Studio - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Keele House | Top Floor Studio | Keele House - Penthouse Studio - 25/26 - 30/08 - 51wk 2025
-- Urban Student Life | Keele House | Top Floor Studio | Penthouse Studio - 25/26 - 30/08 - 44wk 2025
-- Urban Student Life | Keele House | Top Floor Studio | Top Floor Studio - 26/27 - 29/08 - 51wk 2026
-- Urban Student Life | Leighton Hall | Ensuite | Ensuite Leighton Hall - 26/27 - 12/09 - 44wk 2026
-- Urban Student Life | Leighton Hall | Ensuite | Ensuite Leighton Hall - 26/27 - 12/09 - 51wk 2026
-- Urban Student Life | Leighton Hall | Ensuite | Leighton Hall - Ensuite - 25/26 - 16/01 - 26wk 2026
-- Urban Student Life | Leighton Hall | Ensuite | Leighton Hall - Ensuite - 25/26 - 17/01 - 15wk 2026
-- Urban Student Life | Leighton Hall | Ensuite | Leighton Hall - Ensuite - 25/26 - 17/01 - 20wk 2026
-- Urban Student Life | Leighton Hall | Ensuite | Noms - 25/26 - 13/09 - 39wk 2025
-- Urban Student Life | Leighton Hall | Ensuite | £95 - 17/01 - 33wk 2026
-- Urban Student Life | Leighton Hall | Studio | Leighton Hall - Studio - 17/01 - 33wk 2026
-- Urban Student Life | Leighton Hall | Studio | Leighton Hall - Studio - 25/26 - 17/01 - 20wk 2026
 - Urban Student Life | Leighton Hall | Studio | Studio Leighton Hall - 26/27 - 12/09 - 51wk 2026
-- Urban Student Life | One London Road | Classic Plus Studio | Classic Plus Studio - 26/27 - 05/09 - 45wk 2026
-- Urban Student Life | One London Road | Classic Plus Studio | Classic Plus Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | One London Road | Classic Plus Studio | One london road -classic plus studio - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | One London Road | Classic Studio | CL - One London Road - Classic Studio - 25/26 - 06/09 - 45wk 2025
-- Urban Student Life | One London Road | Classic Studio | Classic Studio - 26/27 - 05/09 - 45wk 2026
-- Urban Student Life | One London Road | Classic Studio | Classic Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | One London Road | Classic Studio | One London Road - Classic Studio - 25/26 - 06/09 - 45wk 2025
-- Urban Student Life | One London Road | Classic Studio | One London Road - Classic Studio. - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | One London Road | Deluxe Plus Studio | Deluxe Plus Studio - 26/27 - 05/09 - 45wk 2026
-- Urban Student Life | One London Road | Deluxe Plus Studio | Deluxe Plus Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | One London Road | Deluxe Plus Studio | One London Road - Deluxe Plus Studio - 25/26 - 06/09 - 45wk 2025
-- Urban Student Life | One London Road | Deluxe Plus Studio | One London Road - Deluxe Plus Studio - £180 - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | One London Road | Deluxe Studio | Deluxe Studio OLR - 26/27 - 05/09 - 45wk 2026
-- Urban Student Life | One London Road | Deluxe Studio | Deluxe Studio OLR - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | One London Road | Deluxe Studio | One London Road - Deluxe Studio - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | One London Road | Premium Balcony Studio | One London Road - Premium Balcony Studio - 25/26 - 23/02 - 26.85wk 2026
-- Urban Student Life | One London Road | Premium Balcony Studio | One London Road - Premium Balcony Studio. - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | One London Road | Premium Balcony Studio | Premium Balcony Studio OLR - 26/27 - 05/09 - 45wk 2026
-- Urban Student Life | One London Road | Premium Balcony Studio | Premium Balcony Studio OLR - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | One London Road | Premium Plus Studio | Premium Plus Studio OLR - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | One London Road | Premium Studio | One London Road - Premium Studio - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | One London Road | Premium Studio | Premium Studio OLR - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Orme House | 2 Bed Apartment Double Room | 2 Bed Apartment Double Room - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Orme House | 2 Bed Apartment Double Room | Orme House - 2 Bed Apartment Double Room - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Orme House | 2 Bed Apartment Double Room | Orme House - 2 Bed Apartment Double Room - 25/26 - 28/02 - 26wk 2026
-- Urban Student Life | Orme House | 2 Bed Apartment Single Room | 2 Bed Apartment Single Room - 26/27 - 05/09 - 44wk 2026
-- Urban Student Life | Orme House | 2 Bed Apartment Single Room | 2 Bed Apartment Single Room - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Orme House | 2 Bed Apartment Single Room | Orme House - 2 Bed Apartment Single Room - 25/26 - 06/09 - 44wk 2025
-- Urban Student Life | Orme House | 2 Bed Apartment Single Room | Orme House - 2 Bed Apartment Single Room - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Orme House | 2 Bed Apartment Single Room | Orme House - 2 Bed Apartment Single Room - 25/26 - 28/02 - 19wk 2026
-- Urban Student Life | Orme House | 2 Bed Apartment Single Room | Orme House - 2 Bed Apartment Single Room - 25/26 - 28/02 - 26wk 2026
-- Urban Student Life | Orme House | 2 Bed Apartment Single Room | Orme House - 2 Bed Apartment Single Room - Sem 1 - 26/27 - 05/09 - 15wk 2026
-- Urban Student Life | Orme House | 2 Bed Apartment Single Room | Orme House - 2 Bed Apartment Single Room - Sem2 - 26/27 - 09/01 - 33wk 2026
-- Urban Student Life | Orme House | Deluxe Studio | Deluxe Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Orme House | Deluxe Studio | Orme House - Deluxe Studio - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Orme House | Studio | Orme House - Studio - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Orme House | Studio | Studio - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Orme House | Studio (Single Bed) | Orme House - Studio (Single Bed) - 25/26 - 06/09 - 51wk 2025
-- Urban Student Life | Orme House | Studio (Single Bed) | Studio (Single Bed) - 26/27 - 05/09 - 51wk 2026
-- Urban Student Life | Sizer Court | Classic Plus Studio | Sizer Court - Classic Plus Studio - 26/27 - 12/09 - 44wk 2026
-- Urban Student Life | Sizer Court | Classic Plus Studio | Sizer Court - Classic Plus Studio - 26/27 - 12/09 - 51wk 2026
-- Urban Student Life | Sizer Court | Classic Studio | Sizer Court - Classic Studio - 25/26 - 09/03 - 25wk 2026
-- Urban Student Life | Sizer Court | Classic Studio | Sizer Court - Classic Studio - 26/27 - 12/09 - 44wk 2026
-- Urban Student Life | Sizer Court | Classic Studio | Sizer Court - Classic Studio - 26/27 - 12/09 - 51wk 2026
-- Urban Student Life | Sizer Court | Premium Plus Studio | Sizer Court - Premium Plus Studio - 26/27 - 12/09 - 51wk 2026
-- Urban Student Life | Sizer Court | Premium Studio | Sizer Court - Premium Studio - 25/26 - 09/03 - 25wk 2026
-- Urban Student Life | Sizer Court | Premium Studio | Sizer Court - Premium Studio - 26/27 - 12/09 - 44wk 2026
-- Urban Student Life | Sizer Court | Premium Studio | Sizer Court - Premium Studio - 26/27 - 12/09 - 51wk 2026
-- Urban Student Life | The Print House | Classic Ensuite | The Print House - Classic Ensuite - 25/26 - 13/09 - 48wk 2025
-- Urban Student Life | The Print House | Classic Ensuite | The Print House - Classic Ensuite - 25/26 - 28/02 - 20wk 2026
-- Urban Student Life | The Print House | Classic Ensuite | The Print House - Classic Ensuite - 25/26 - 28/02 - 26wk 2026
-- Urban Student Life | The Print House | Classic Ensuite | The Print House - Classic Ensuite - 26/27 - 12/09 - 44wk 2026
-- Urban Student Life | The Print House | Classic Ensuite | The Print House - Classic Ensuite - 26/27 - 12/09 - 51wk 2026
-- Urban Student Life | The Print House | Classic Studio | The Print House - 25/26 - 13/09 - 48wk 2025
-- Urban Student Life | The Print House | Classic Studio | The Print House - Classic Studio - 25/26 - 13/09 - 51wk 2025
-- Urban Student Life | The Print House | Classic Studio | The Print House - Classic Studio - 26/27 - 12/09 - 44wk 2026
-- Urban Student Life | The Print House | Classic Studio | The Print House - Classic Studio £164 - 26/27 - 12/09 - 44wk 2026
 
-## Contracts removed (0)
+## Rooms added (4)
 
-_None_
+- Homes for Students | King Square Studios | Twodio
+- Homes for Students | Polhill Park | Premium One Bedroom Flat
+- Prestige Student Living | Tribu Kingston | Awesome Plus
+- Prestige Student Living | Tribu Kingston | Extraordinary
 
-## Rooms added (49)
+## Rooms removed (9)
 
-- Urban Student Life | Aire | Bronze Studio
-- Urban Student Life | Aire | Gold Plus Studio
-- Urban Student Life | Aire | Gold Studio
-- Urban Student Life | Aire | Silver Studio
-- Urban Student Life | Aire | Standard Studio
-- Urban Student Life | Aire | Twodio
-- Urban Student Life | Axiom | Classic Studio
-- Urban Student Life | Axiom | Large Classic Studio
-- Urban Student Life | Axiom | Large Premium Studio
-- Urban Student Life | Axiom | Large Standard Studio
-- Urban Student Life | Axiom | Large Studio
-- Urban Student Life | Axiom | Premium Studio
-- Urban Student Life | Axiom | Standard Studio
-- Urban Student Life | Hassells Bridge Apartments | 1 Bed Apartment
-- Urban Student Life | Hassells Bridge Apartments | 2 Bed Apartment
-- Urban Student Life | Hassells Bridge Apartments | 2 Bed Apartment Ensuite Room
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment
-- Urban Student Life | Hassells Bridge Apartments | 4 Bed Apartment Ensuite Room
-- Urban Student Life | Hilbre Gardens | Gold
-- Urban Student Life | Hilbre Gardens | Silver
-- Urban Student Life | Keele House | Classic Studio
-- Urban Student Life | Keele House | Deluxe Studio
-- Urban Student Life | Keele House | Lower Floor Deluxe Studio
-- Urban Student Life | Keele House | Lower Floor Premier Studio
-- Urban Student Life | Keele House | Lower Floor Studio
-- Urban Student Life | Keele House | Premier Studio
-- Urban Student Life | Keele House | Top Floor Deluxe Studio
-- Urban Student Life | Keele House | Top Floor Premier Studio
-- Urban Student Life | Keele House | Top Floor Studio
-- Urban Student Life | Leighton Hall | Ensuite
-- Urban Student Life | Leighton Hall | Studio
-- Urban Student Life | One London Road | Classic Plus Studio
-- Urban Student Life | One London Road | Classic Studio
-- Urban Student Life | One London Road | Deluxe Plus Studio
-- Urban Student Life | One London Road | Deluxe Studio
-- Urban Student Life | One London Road | Premium Balcony Studio
-- Urban Student Life | One London Road | Premium Plus Studio
-- Urban Student Life | One London Road | Premium Studio
-- Urban Student Life | Orme House | 2 Bed Apartment Double Room
-- Urban Student Life | Orme House | 2 Bed Apartment Single Room
-- Urban Student Life | Orme House | Deluxe Studio
-- Urban Student Life | Orme House | Studio
-- Urban Student Life | Orme House | Studio (Single Bed)
-- Urban Student Life | Sizer Court | Classic Plus Studio
-- Urban Student Life | Sizer Court | Classic Studio
-- Urban Student Life | Sizer Court | Premium Plus Studio
-- Urban Student Life | Sizer Court | Premium Studio
-- Urban Student Life | The Print House | Classic Ensuite
-- Urban Student Life | The Print House | Classic Studio
-
-## Rooms removed (0)
-
-_None_
+- Homes for Students | The Anvil | Classic Ensuite
+- Homes for Students | The Anvil | Premium Ensuite
+- Prestige Student Living | 800 Bristol Road | Classic Studio
+- Prestige Student Living | Flora Building – Hoxton | Premium Studio
+- Prestige Student Living | Straits Mile | Classic Studio
+- Universal Student Living | St Augustine’s House | 2 Bed Apartment Ensuite Room
+- Universal Student Living | St Augustine’s House | Classic Studio
+- Universal Student Living | St Augustine’s House | Classic Studio with Balcony
+- Universal Student Living | St Augustine’s House | Terraced 1 Bed Apartment
 
 ## Availability changes (0)
 
