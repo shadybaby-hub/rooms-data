@@ -15,6 +15,7 @@ venv/
 rooms-data-*.json
 *service-account*.json
 gcp-*.json
+*.iam.gs*.txt
 
 # Local backfill scratch
 _bf/
