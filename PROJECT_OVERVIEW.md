@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-08 (6:28pm UK weekday schedule; ETL retry/backoff; brand-vanish guard in diffs; change-tab reset switch; 30-day change tabs in Google Sheets)_
+_Last updated: 2026-06-09 (service-account key now gitignored + security note; documented rebuilding the change log from output/ history)_
 
 ---
 
@@ -200,6 +200,11 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     `RESET_CHANGE_TABS`) to wipe both change tabs back to headers — used to clear out bad
     entries.
   - Needs secrets `GCP_SA_KEY` (service-account JSON) + `SHEET_ID`. No secrets → no-op.
+  - 🔐 **The service-account key is a secret.** It lives only as the `GCP_SA_KEY` GitHub
+    secret. Any local copy of the JSON key must **never** be committed — `.gitignore`
+    blocks `rooms-data-*.json`, `*service-account*.json`, `gcp-*.json`, `*.iam.gs*.txt`.
+    The Sheet ID is `1ZFftk46uMQTG0259qlOGwoUAKMoECdSj-LK59mOtatU` (`SHEET_ID` secret); the
+    Sheet is shared with the service account's email as Editor.
 - **What gets committed:** everything under `output/` (every dated run **and** the two
   `*_latest.csv`) plus everything under `reports/`. The job declares
   `permissions: contents: write` so it can push.
@@ -222,7 +227,7 @@ secret named `PSL_API_TOKEN`.
 | `requirements.txt` | `requests` (etl.py) + `gspread`, `google-auth` (publish step). |
 | `README.md` | Public-facing setup/usage doc (git init, secrets, how to run). |
 | `.github/workflows/run_etl.yml` | The weekday GitHub Actions automation. |
-| `.gitignore` | Ignores Python cruft + `.vs/`. (No longer ignores output CSVs.) |
+| `.gitignore` | Python cruft + `.vs/` + **service-account key files** (`rooms-data-*.json` etc.) + `_bf/`. Does NOT ignore output CSVs (those are kept). |
 | `output/` | Generated CSVs — every dated run **plus** `*_latest.csv`. |
 | `reports/` | Per-weekday `<date>/` folders: dated snapshot CSVs + `changes.md`. |
 | `ROOMS data.pyproj` | Visual Studio Python project file (just for opening in VS). |
@@ -274,6 +279,14 @@ python make_report.py 2026-06-08 `
 - **A brand's data looks wrong/empty** → its JSON shape probably differs; look at the
   fallback `or` chains in `parse_room()` and add the new field name there.
 - **Be gentler / faster on the APIs** → adjust `SLEEP_S` and `PER_PAGE` constants.
+- **Clear bad rows from the Sheet change tabs** → run the workflow with the
+  `reset_change_tabs` input ticked (wipes both change tabs to headers).
+- **Rebuild the change log from scratch** → the per-day full snapshots live in `output/`
+  (timestamped runs) and in git history (`*_latest.csv` at each `chore: update room data`
+  commit). Diff consecutive days with the same logic as `publish_to_sheets.py`
+  (`diff_rooms` / `diff_contracts`, stamping each change with the later day's date), then
+  write the rows into the two change tabs. This was done once on 2026-06-09 to repair tabs
+  after an API-timeout polluted them; the script was a throwaway in `_bf/` (gitignored).
 
 ---
 
