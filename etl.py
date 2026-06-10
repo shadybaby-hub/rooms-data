@@ -126,6 +126,16 @@ def safe(d, *keys, default=""):
     return d if d is not None else default
 
 
+def pence_to_pounds(p):
+    """basepms publishes contract 'price' in minor units (pence) — convert to
+    £/week. Values that don't parse are passed through untouched."""
+    try:
+        v = float(p) / 100
+    except (TypeError, ValueError):
+        return p
+    return f"{v:.2f}".rstrip("0").rstrip(".")
+
+
 def city_from_url(url: str) -> str:
     if not url:
         return ""
@@ -277,8 +287,10 @@ def parse_room(item: dict, brand_name: str) -> tuple[dict, list[dict]]:
 
     contract_rows = []
     for c in raw_contracts:
-        prices   = c.get("prices") or [{}]
-        price_pw = c.get("price") or safe(prices, 0, "pricePerPersonPerWeek")
+        prices    = c.get("prices") or [{}]
+        raw_price = c.get("price")  # minor units; pricePerPersonPerWeek is already £
+        price_pw  = pence_to_pounds(raw_price) if raw_price else \
+                    safe(prices, 0, "pricePerPersonPerWeek")
         hub_url  = c.get("base_hub_url", "")
         contract_city = city or city_from_url(hub_url)
 

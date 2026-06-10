@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types)_
+_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
 
 ---
 
@@ -153,7 +153,9 @@ accumulates the full history of raw runs alongside the two `*_latest.csv` pointe
 
 > Sense of scale (run of 2026-06-05): ~1,540 room rows and ~4,480 contract rows across
 > the 6 brands. `image_urls` is a single `|`-separated string. `price_pw` is the price
-> **per person per week**.
+> **per person per week in pounds** (`etl.pence_to_pounds` converts the API's minor-unit
+> `price`; runs between ~2026-06-08 and 2026-06-10 published it ×100 in pence — both
+> change logs carry a `units_artifact` guard so the switch doesn't log as price changes).
 
 ### The `reports/` folder (weekday change reports)
 

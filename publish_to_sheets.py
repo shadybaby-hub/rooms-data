@@ -139,6 +139,17 @@ def diff_rooms(old, new):
     return rows
 
 
+def _units_artifact(ov, nv):
+    """True when two prices differ only by the pence→pounds unit switch
+    (price_pw was ×100 before etl.py started converting on 2026-06-10).
+    A genuine 100x price change is implausible, so this is safe to keep."""
+    try:
+        a, b = float(ov), float(nv)
+    except (TypeError, ValueError):
+        return False
+    return a == b * 100 or b == a * 100
+
+
 def _match_contracts(olds, news):
     """Pair up old/new contracts within one identity group: by contract_title
     first, then start_date, then whatever is left in stable order. Returns
@@ -183,6 +194,8 @@ def diff_contracts(old, new):
             for field, label in CONTRACT_WATCH:
                 ov, nv = o.get(field, ""), n.get(field, "")
                 if ov != nv:
+                    if field == "price_pw" and _units_artifact(ov, nv):
+                        continue
                     rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
                                  label, "Changed", ov, nv])
     return rows

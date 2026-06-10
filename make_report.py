@@ -53,6 +53,16 @@ def label(key):
     return " | ".join(p for p in key if p)
 
 
+def units_artifact(ov, nv):
+    """True when two prices differ only by the pence→pounds unit switch
+    (price_pw was ×100 before etl.py started converting on 2026-06-10)."""
+    try:
+        a, b = float(ov), float(nv)
+    except (TypeError, ValueError):
+        return False
+    return a == b * 100 or b == a * 100
+
+
 def section(lines, title, items, render):
     lines.append(f"## {title} ({len(items)})")
     lines.append("")
@@ -109,11 +119,9 @@ def main():
     for k in sorted(new_contracts):
         if k in old_contracts:
             o, n = old_contracts[k], new_contracts[k]
-            if o.get("price_pw", "") != n.get("price_pw", ""):
-                price_changes.append(
-                    (k, o.get("price_pw", ""), n.get("price_pw", ""),
-                     n.get("currency_symbol", ""))
-                )
+            op, np_ = o.get("price_pw", ""), n.get("price_pw", "")
+            if op != np_ and not units_artifact(op, np_):
+                price_changes.append((k, op, np_, n.get("currency_symbol", "")))
             if o.get("available", "") != n.get("available", ""):
                 avail_changes.append((k, o.get("available", ""), n.get("available", "")))
 
