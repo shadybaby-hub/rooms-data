@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match, stale `practice python` reference removed. Post-rename verification: no stale name/path references, key files untracked, scripts compile, all 13 Actions runs green; full commit→pull→push→workflow_dispatch round trip tested OK)_
+_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`)_
 
 ---
 
@@ -192,8 +192,9 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     previous run's `*_latest.csv` (stashed to `/tmp/prev`) vs the new one, appends the day's
     change rows, and prunes rows older than 30 days. Columns: Run Date · Brand · Property ·
     City · Room Type · (contracts also: Academic Year · Duration) · Change Field · Change
-    Type · Old Content · New Content. Watched fields: rooms `quantity_available`; contracts
-    `price_pw`, `available`; plus row Added/Removed.
+    Type · Old Content · New Content. Watched fields: rooms `quantity_available`,
+    `description`, `thumbnail_url`, `image_urls` (long values clipped to the ~49K cell
+    limit); contracts `price_pw`, `available`; plus row Added/Removed.
   - **Brand-vanish guard:** if a whole brand is absent from the new run (probable API
     timeout), its rows are NOT logged as "removed" (same guard in `make_report.py`).
   - **Reset switch:** trigger the workflow with the `reset_change_tabs` input = true (env

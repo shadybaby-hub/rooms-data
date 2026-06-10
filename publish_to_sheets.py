@@ -58,7 +58,12 @@ CONTRACT_CHANGE_HEADER = [
 # Row identity (what makes "the same" room/contract across runs) + watched fields.
 ROOM_KEY     = ("brand_name", "property", "room_type")
 CONTRACT_KEY = ("brand_name", "property", "room_type", "contract_title")
-ROOM_WATCH     = [("quantity_available", "Quantity Available")]
+ROOM_WATCH     = [
+    ("quantity_available", "Quantity Available"),
+    ("description",        "Description"),
+    ("thumbnail_url",      "Thumbnail URL"),
+    ("image_urls",         "Image URLs"),
+]
 CONTRACT_WATCH = [("price_pw", "Price (pw)"), ("available", "Available")]
 
 WINDOW_DAYS = 30
@@ -111,7 +116,7 @@ def diff_rooms(old, new):
                 ov, nv = o.get(field, ""), n.get(field, "")
                 if ov != nv:
                     rows.append([RUN_DATE_STR, brand, prop, n.get("city", ""), rtype,
-                                 label, "Changed", ov, nv])
+                                 label, "Changed", _clip(ov), _clip(nv)])
     return rows
 
 
