@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match, stale `practice python` reference removed)_
+_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match, stale `practice python` reference removed. Post-rename verification: no stale name/path references, key files untracked, scripts compile, all 13 Actions runs green; full commit→pull→push→workflow_dispatch round trip tested OK)_
 
 ---
 
