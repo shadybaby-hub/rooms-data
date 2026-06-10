@@ -57,14 +57,22 @@ CONTRACT_CHANGE_HEADER = [
 
 # Row identity (what makes "the same" room/contract across runs) + watched fields.
 ROOM_KEY     = ("brand_name", "property", "room_type")
-CONTRACT_KEY = ("brand_name", "property", "room_type", "contract_title")
+# Contracts are grouped (not uniquely keyed) — the same room/year/duration can
+# offer several contracts (e.g. Sept + Jan intakes), matched up in diff_contracts.
+CONTRACT_KEY = ("brand_name", "property", "city", "room_type", "academic_year",
+                "contract_length_weeks")
 ROOM_WATCH     = [
     ("quantity_available", "Quantity Available"),
     ("description",        "Description"),
     ("thumbnail_url",      "Thumbnail URL"),
     ("image_urls",         "Image URLs"),
 ]
-CONTRACT_WATCH = [("price_pw", "Price (pw)"), ("available", "Available")]
+CONTRACT_WATCH = [
+    ("price_pw",   "Price (pw)"),
+    ("available",  "Available"),
+    ("start_date", "Start Date"),
+    ("end_date",   "End Date"),
+]
 
 WINDOW_DAYS = 30
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
@@ -95,6 +103,17 @@ def load_index(path, key_fields):
         return {tuple(r.get(k, "") for k in key_fields): r for r in csv.DictReader(f)}
 
 
+def load_groups(path, key_fields):
+    """CSV as {key_tuple: [row_dicts]}, or None if the file is absent."""
+    if not path or not os.path.exists(path):
+        return None
+    out = {}
+    with open(path, newline="", encoding="utf-8") as f:
+        for r in csv.DictReader(f):
+            out.setdefault(tuple(r.get(k, "") for k in key_fields), []).append(r)
+    return out
+
+
 # ── Diffing ─────────────────────────────────────────────────────────────────────
 
 def diff_rooms(old, new):
@@ -120,25 +139,47 @@ def diff_rooms(old, new):
     return rows
 
 
+def _match_contracts(olds, news):
+    """Pair up old/new contracts within one identity group: by contract_title
+    first, then start_date, then whatever is left in stable order. Returns
+    (pairs, unmatched_old, unmatched_new)."""
+    pairs, olds, news = [], list(olds), list(news)
+    for keyf in (lambda r: r.get("contract_title", ""),
+                 lambda r: r.get("start_date", "")):
+        lookup = {}
+        for o in olds:
+            lookup.setdefault(keyf(o), []).append(o)
+        remaining = []
+        for n in news:
+            candidates = lookup.get(keyf(n))
+            if candidates:
+                pairs.append((candidates.pop(0), n))
+            else:
+                remaining.append(n)
+        olds = [o for lst in lookup.values() for o in lst]
+        news = remaining
+    order = lambda r: (r.get("start_date", ""), r.get("contract_title", ""))
+    olds.sort(key=order)
+    news.sort(key=order)
+    while olds and news:
+        pairs.append((olds.pop(0), news.pop(0)))
+    return pairs, olds, news
+
+
 def diff_contracts(old, new):
     rows = []
     new_brands = {k[0] for k in new}  # brands present this run
     for k in sorted(set(old) | set(new)):
-        o, n = old.get(k), new.get(k)
-        brand, prop, rtype, _title = k
-        src = n or o
-        ay, dur, city = (src.get("academic_year", ""),
-                         src.get("contract_length_weeks", ""),
-                         src.get("city", ""))
-        if o and not n:
-            if brand not in new_brands:
-                continue  # whole brand missing — likely a fetch failure, not a removal
+        brand, prop, city, rtype, ay, dur = k
+        pairs, gone, added = _match_contracts(old.get(k, []), new.get(k, []))
+        if brand in new_brands:  # else whole brand missing — likely a fetch failure
+            for o in gone:
+                rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
+                             "(sold out)", "Sold Out", o.get("price_pw", ""), ""])
+        for n in added:
             rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
-                         "(removed)", "Removed", o.get("price_pw", ""), ""])
-        elif n and not o:
-            rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
-                         "(added)", "Added", "", n.get("price_pw", "")])
-        else:
+                         "(new contract)", "New Contract", "", n.get("price_pw", "")])
+        for o, n in pairs:
             for field, label in CONTRACT_WATCH:
                 ov, nv = o.get(field, ""), n.get(field, "")
                 if ov != nv:
@@ -237,8 +278,8 @@ def main():
 
     old_rooms = load_index(prev_rooms, ROOM_KEY)
     new_rooms = load_index("output/rooms_latest.csv", ROOM_KEY) or {}
-    old_contracts = load_index(prev_contracts, CONTRACT_KEY)
-    new_contracts = load_index("output/contracts_latest.csv", CONTRACT_KEY) or {}
+    old_contracts = load_groups(prev_contracts, CONTRACT_KEY)
+    new_contracts = load_groups("output/contracts_latest.csv", CONTRACT_KEY) or {}
 
     room_changes = diff_rooms(old_rooms, new_rooms) if old_rooms is not None else []
     contract_changes = diff_contracts(old_contracts, new_contracts) if old_contracts is not None else []

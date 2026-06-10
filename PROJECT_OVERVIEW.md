@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`)_
+_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types)_
 
 ---
 
@@ -194,7 +194,11 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     City · Room Type · (contracts also: Academic Year · Duration) · Change Field · Change
     Type · Old Content · New Content. Watched fields: rooms `quantity_available`,
     `description`, `thumbnail_url`, `image_urls` (long values clipped to the ~49K cell
-    limit); contracts `price_pw`, `available`; plus row Added/Removed.
+    limit); contracts `price_pw`, `available`, `start_date`, `end_date`. Contract identity
+    is brand + property + city + room_type + academic_year + duration; multiple contracts
+    under one identity (e.g. Sept + Jan intakes) are paired by title, then start date,
+    then order (`_match_contracts`). Unmatched new contracts log Change Type
+    **"New Contract"**, vanished ones **"Sold Out"**; rooms still use Added/Removed.
   - **Brand-vanish guard:** if a whole brand is absent from the new run (probable API
     timeout), its rows are NOT logged as "removed" (same guard in `make_report.py`).
   - **Reset switch:** trigger the workflow with the `reset_change_tabs` input = true (env
