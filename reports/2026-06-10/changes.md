@@ -1,19 +1,20 @@
 # Change report — 2026-06-10
 
-_Generated 2026-06-10 14:48 UTC_
+_Generated 2026-06-10 15:28 UTC_
 
 ## Summary
 
 - Rooms: **+0** added, **−0** removed
 - Contracts: **+0** added, **−0** removed
-- Price changes: **3**
+- Price changes: **4**
 - Availability changes: **0**
 
-## Price changes (3)
+## Price changes (4)
 
-- Homes for Students | ABeleven | Ensuite Accessible | Abeleven - Ensuite Accessible - 26/27 - 05/09 - 44wk 2026: £15700 → £0
-- Homes for Students | Russell View | Ensuite 4 Bed Cluster | Russell View - Ensuite 4 Bed Cluster - 26/27 - 12/09 - 51wk 2026: £0 → £12000
-- Prestige Student Living | Willen House | Silver Studio | Willen House - Silver Studio - 26/27 - 12/09 - 51wk 2026: £48400 → £0
+- Homes for Students | ABeleven | Ensuite Accessible | Abeleven - Ensuite Accessible - 26/27 - 05/09 - 44wk 2026: £0 → £15700
+- Prestige Student Living | Crown House | Luxury Studio | Crown House Brighton - Luxury Studio - 26/27 - 12/09 - 51wk 2026: £28000 → £0
+- Prestige Student Living | Straits Mile | Classic Studio | Straits Mile - Classic Studio - 26/27 - 05/09 - 51wk 2026: £0 → £29900
+- Prestige Student Living | The Place | Platinum Ensuite | The Place - Platinum Ensuite - 26/27 - 12/09 - 51wk 2026: £18000 → £0
 
 ## Contracts added (0)
 
