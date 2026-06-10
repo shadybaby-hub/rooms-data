@@ -1,4 +1,4 @@
-# PROJECT OVERVIEW — ROOMS data
+# PROJECT OVERVIEW — rooms-data
 
 > ⚠️ **KEEP THIS FILE UPDATED.** This document is your memory. Every time you change
 > `etl.py`, the GitHub Actions workflow, the brand list, the CSV columns, or anything
@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-09 (service-account key now gitignored + security note; documented rebuilding the change log from output/ history)_
+_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match, stale `practice python` reference removed)_
 
 ---
 
@@ -230,11 +230,8 @@ secret named `PSL_API_TOKEN`.
 | `.gitignore` | Python cruft + `.vs/` + **service-account key files** (`rooms-data-*.json` etc.) + `_bf/`. Does NOT ignore output CSVs (those are kept). |
 | `output/` | Generated CSVs — every dated run **plus** `*_latest.csv`. |
 | `reports/` | Per-weekday `<date>/` folders: dated snapshot CSVs + `changes.md`. |
-| `ROOMS data.pyproj` | Visual Studio Python project file (just for opening in VS). |
+| `rooms-data.pyproj` / `rooms-data.sln` | Visual Studio Python project/solution files (just for opening in VS). |
 | `PROJECT_OVERVIEW.md` | **This file.** Your future-self memory. |
-
-Note: the `.pyproj` references a `practice python\rooms-data.py` file that isn't present
-in the folder — ignore it, it's a leftover VS reference, not part of the pipeline.
 
 ---
 

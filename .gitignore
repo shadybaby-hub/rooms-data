@@ -10,6 +10,7 @@ venv/
 
 # Visual Studio
 .vs/
+*.pyproj.user
 
 # Google service-account key — NEVER commit (repo is public)
 rooms-data-*.json
