@@ -1,0 +1,368 @@
+# Change report — 2026-06-15
+
+_Generated 2026-06-15 10:59 UTC_
+
+## Summary
+
+- Rooms: **+0** added, **−0** removed
+- Contracts: **+0** added, **−1** removed
+- Price changes: **34**
+- Availability changes: **1175**
+
+## Price changes (34)
+
+- Homes for Students | ABODE | Classic Ensuite | Abode - Classic Ensuite - 26/27 - 05/09 - 44wk 2026: £235 → £0
+- Homes for Students | Beaverbank Place | Silver Studio | Beaverbank Place - Silver Studio - 26/27 - 05/09 - 51wk 2026: £240 → £0
+- Homes for Students | Green Wood Court | Studio | Green Wood Court - Studio - 26/27 - 12/09 - 45wk 2026: £265 → £0
+- Homes for Students | Green Wood Court | Studio | Green Wood Court - Studio - 51wk - 26/27 - 12/09 - 51wk 2026: £250 → £0
+- Prestige Student Living | 800 Bristol Road | Classic Studio | 800 Bristol Road -Classic Studio - 26/27 - 05/09 - 51wk 2026: £0 → £285
+- Prestige Student Living | ARK Canning Town | Deluxe Ensuite | Ark Canning Town - Deluxe Ensuite - 26/27 - 12/09 - 51wk 2026: £360 → £384
+- Prestige Student Living | Fontenoy Apartments | Luxury Studio | Fontenoy Apartments - Luxury Studio - 26/27 - 12/09 - 51wk 2026: £218 → £226
+- Prestige Student Living | St Andrew Street | Silver Plus Studio | St Andrew Street - Silver Plus Studio - 26/27 - 03/09 - 44wk 2026: £199 → £209
+- Prestige Student Living | Straits Village | Standard Ensuite | STRAITS VILLAGE - Standard Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £155
+- Prestige Student Living | Symons House | Club Studio | SYMONS HOUSE - Club Studio - 26/27 - 12/09 - 51wk 2026: £249 → £265
+- Prestige Student Living | The Fabric Works | Classic Studio Floors 1-5 | The Fabric Works - Classic Studio Floors 1-5 - 26/27 - 12/09 - 39wk 2026: £0 → £215
+- Prestige Student Living | The Fabric Works | Classic Studio Floors 1-5 | The Fabric Works - Classic Studio Floors 1-5 - 26/27 - 12/09 - 44wk 2026: £209 → £215
+- Prestige Student Living | The Fabric Works | Classic Studio Floors 1-5 | The Fabric Works - Classic Studio Floors 1-5 - 26/27 - 12/09 - 51wk 2026: £239 → £209
+- Prestige Student Living | The Fabric Works | Classic Studio Floors 6-10 | The Fabric Works - Classic Studio Floors 6-10 - 26/27 - 12/09 - 44wk 2026: £245 → £229
+- Prestige Student Living | The Fabric Works | Classic Studio Floors 6-10 | The Fabric Works - Classic Studio Floors 6-10 - 26/27 - 12/09 - 51wk 2026: £231 → £219
+- Prestige Student Living | The Fabric Works | Superior Studio Floors 1-5 | The Fabric Works - Superior Studio Floors 1-5 - 26/27 - 12/09 - 51wk 2026: £285 → £245
+- Prestige Student Living | The Fabric Works | Superior Studio Floors 6-10 | The Fabric Works - Superior Studio Floors 6-10 - 26/27 - 12/09 - 51wk 2026: £309 → £298
+- Prestige Student Living | The Place | Platinum Ensuite | The Place - Platinum Ensuite - 26/27 - 12/09 - 51wk 2026: £180 → £0
+- Prestige Student Living | The Quarter House | Premium Ensuite | The Quarter House - Premium Ensuite - 26/27 - 12/09 - 51wk 2026: £278 → £288
+- Prestige Student Living | The Quarter House | Silver Studio | The Quarter House - Silver Studio - 26/27 - 12/09 - 51wk 2026: £360 → £365
+- Prestige Student Living | The Sail Works | Classic Studio Floor 1-4 | The Sail Works - Classic Studio Floor 1-4 - 26/27 - 12/09 - 44wk 2026: £0 → £210
+- Prestige Student Living | Willen House | Gold Studio | Willen House - Gold Studio - 26/27 - 12/09 - 51wk 2026: £584 → £619
+- Prestige Student Living | Wood Lane Studios | Standard Studio Bronze | Wood Lane Studios - Standard Studio Bronze - 26/27 - 12/09 - 51wk 2026: £442 → £452
+- Prestige Student Living | Wood Lane Studios | Standard Studio Bronze | Wood Lane Studios - Standard Studio Bronze - 26/27 - 26/09 - 51wk 2026: £442 → £0
+- Prestige Student Living | Wood Lane Studios | Standard Studio Bronze | Wood Lane Studios - Standard Studio Bronze - 26/27 - 29/08 - 51wk 2026: £442 → £452
+- Prestige Student Living | Wood Lane Studios | Standard Studio Bronze | Wood Lane Studios - Standard Studio Bronze V1 - 26/27 - 22/08 - 51wk 2026: £442 → £452
+- Prestige Student Living | Wood Lane Studios | Standard Studio Gold | Wood Lane Studios - Standard Studio Gold - 26/27 - 12/09 - 51wk 2026: £477 → £487
+- Prestige Student Living | Wood Lane Studios | Standard Studio Gold | Wood Lane Studios - Standard Studio Gold - 26/27 - 29/08 - 51wk 2026: £477 → £487
+- Prestige Student Living | Wood Lane Studios | Standard Studio Gold | Wood Lane Studios - Standard Studio Gold V3 - 26/27 - 22/08 - 51wk 2026: £477 → £487
+- Prestige Student Living | Wood Lane Studios | Standard Studio Silver | Wood Lane Studios - Standard Studio Silver - 26/27 - 12/09 - 51wk 2026: £447 → £457
+- Prestige Student Living | Wood Lane Studios | Standard Studio Silver | Wood Lane Studios - Standard Studio Silver - 26/27 - 29/08 - 51wk 2026: £447 → £457
+- Prestige Student Living | Wood Lane Studios | Standard Studio Silver | Wood Lane Studios - Standard Studio Silver V1 - 26/27 - 22/08 - 51wk 2026: £447 → £457
+- Prestige Student Living | Zenith | 5 Bed Apartment | Zenith - 5 Bed Apartment V1 - 26/27 - 05/09 - 44wk 2026: £193 → £0
+- Universal Student Living | Llys Y Deon | Bronze Plus Ensuite | Llys Y Deon - Bronze Plus Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £153
+
+## Contracts added (0)
+
+_None_
+
+## Contracts removed (1)
+
+- Prestige Student Living | Press House | Classic Studio River View | Press House - Classic Studio River View - 26/27 - 12/09 - 44wk 2026
+
+## Rooms added (0)
+
+_None_
+
+## Rooms removed (0)
+
+_None_
+
+## Availability changes (1175)
+
+- Essential Student Living | Ashton House | Classic Ensuite | Ashton House - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: False → True
+- Essential Student Living | Ashton House | Standard Ensuite | Ashton House - Standard Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Essential Student Living | Brooke Hall | Large Studio | Brooke Hall - Large Studio - 25/26 - 28/02 - 17wk 2026: False → True
+- Essential Student Living | Brooke Hall | Standard Studio | Brooke Hall - Standard Studio - 25/26 - 28/02 - 17wk 2026: False → True
+- Essential Student Living | Dean House | Classic Ensuite Wet Room | Dean House - Classic Ensuite Wet Room - 26/27 - 12/09 - 51wk 2026: False → True
+- Essential Student Living | Mary Morris House | Bronze Room | Mary Morris House - Bronze Room - 25/26 - 28/02 - 20wk 2026: False → True
+- Essential Student Living | Mary Morris House | Bronze Room | Mary Morris House - Bronze Room - 25/26 - 28/02 - 27wk 2026: False → True
+- Essential Student Living | Mary Morris House | Standard Room | Mary Morris House - Standard Room - 26/27 - 12/09 - 46wk 2026: False → True
+- Evo Student | Arcadian | Platinum Ensuite | Arcadian - Platinum Ensuite - 25/26 - 28/02 - 14wk 2026: False → True
+- Evo Student | Arcadian | Platinum Ensuite | Arcadian - Platinum Ensuite - 25/26 - 28/02 - 16wk 2026: False → True
+- Evo Student | Arcadian | Platinum Ensuite | Arcadian - Platinum Ensuite - 25/26 - 28/02 - 21wk 2026: False → True
+- Evo Student | Arcadian | Platinum Ensuite | Arcadian - Platinum Ensuite - 25/26 - 28/02 - 23wk 2026: False → True
+- Evo Student | Arcadian | Platinum Plus Studio | Arcadian - Platinum Plus Studio - 25/26 - 28/02 - 14wk 2026: False → True
+- Evo Student | Arcadian | Platinum Plus Studio | Arcadian - Platinum Plus Studio - 25/26 - 28/02 - 16wk 2026: False → True
+- Evo Student | Arcadian | Platinum Plus Studio | Arcadian - Platinum Plus Studio - 25/26 - 28/02 - 21wk 2026: False → True
+- Evo Student | Arcadian | Platinum Plus Studio | Arcadian - Platinum Plus Studio - 25/26 - 28/02 - 23wk 2026: False → True
+- Evo Student | Arcadian | Platinum Studio | Arcadian - Platinum Studio - 25/26 - 28/02 - 14wk 2026: False → True
+- Evo Student | Arcadian | Platinum Studio | Arcadian - Platinum Studio - 25/26 - 28/02 - 16wk 2026: False → True
+- Evo Student | Arcadian | Platinum Studio | Arcadian - Platinum Studio - 25/26 - 28/02 - 21wk 2026: False → True
+- Evo Student | Arcadian | Platinum Studio | Arcadian - Platinum Studio - 25/26 - 28/02 - 23wk 2026: False → True
+- Evo Student | Arcadian | Premium Plus Studio | Arcadian - Premium Plus Studio - 25/26 - 28/02 - 14wk 2026: False → True
+- Evo Student | Arcadian | Premium Plus Studio | Arcadian - Premium Plus Studio - 25/26 - 28/02 - 16wk 2026: False → True
+- Evo Student | Arcadian | Premium Plus Studio | Arcadian - Premium Plus Studio - 25/26 - 28/02 - 18wk 2026: False → True
+- Evo Student | Arcadian | Premium Plus Studio | Arcadian - Premium Plus Studio - 25/26 - 28/02 - 21wk 2026: False → True
+- Evo Student | Arcadian | Premium Plus Studio | Arcadian - Premium Plus Studio - 25/26 - 28/02 - 23wk 2026: False → True
+- Evo Student | Centre Court | Classic Ensuite | Centre Court - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Evo Student | Centre Court | Classic Ensuite with Terrace | Centre Court - Classic Ensuite with Terrace - 26/27 - 12/09 - 51wk 2026: False → True
+- Evo Student | Centre Court | Diamond Studio | Centre Court - Diamond Studio - 25/26 - 28/02 - 20wk 2026: False → True
+- Evo Student | Centre Court | Gold Townhouse | Centre Court - Gold Townhouse - 26/27 - 12/09 - 51wk 2026: False → True
+- Evo Student | Centre Court | Platinum Plus Ensuite | Centre Court - Platinum Plus Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Evo Student | Centre Court | Platinum Plus with Terrace | Centre Court - Platinum Plus with Terrace - 26/27 - 12/09 - 51wk 2026: False → True
+- Evo Student | Centre Court | Platinum Studio | Centre Court - Platinum Studio - 25/26 - 28/02 - 26wk 2026: False → True
+- Evo Student | Centre Court | Platinum Studio | Centre Court - Platinum Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Evo Student | Centre Court | Premium Ensuite | Centre Court - Premium Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Evo Student | Centre Court | Premium Plus Ensuite | Centre Court - Premium Plus Ensuite - 26/27 - 12/09 - 45wk 2026: False → True
+- Homes for Students | ABODE | Classic Studio | Abode - Classic Studio - 25/26 - 28/02 - 22wk 2026: False → True
+- Homes for Students | ABODE | Classic Studio | Abode - Classic Studio - 25/26 - 28/02 - 25wk 2026: False → True
+- Homes for Students | ABODE | Deluxe Ensuite | Abode - Deluxe Ensuite - 25/26 - 28/02 - 22wk 2026: False → True
+- Homes for Students | ABODE | Deluxe Ensuite | Abode - Deluxe Ensuite - 25/26 - 28/02 - 25wk 2026: False → True
+- Homes for Students | ABODE | Premium Studio | Abode - Premium Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | ABODE | Twin Studio | Abode - Twin Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Abbeygate | Bronze Ensuite | Abbeygate - Bronze Ensuite - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Abbeygate | Bronze Studio | Abbeygate - Bronze Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Abbeygate | Silver Ensuite | Abbeygate - Silver Ensuite - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Abbeygate | Silver Studio | Abbeygate - Silver Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Allen Court | 1 Bed Apartment | Allen Court - 1 Bed Apartment - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Allen Court | Luxury Studio | Allen Court - Luxury Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Allen Court | Luxury Studio | Allen Court - Luxury Studio - AK request - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Atlas House | Bronze Studio | Atlas House - Bronze Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Atlas House | Gold Studio | Atlas House - Gold Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Atlas House | Platinum Studio | Atlas House - Platinum Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Atlas House | Platinum Studio with Wet Room | Atlas House - Platinum Studio with Wet Room - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Bankside Student Living | Deluxe Studio | Bankside - Deluxe Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Bankside Student Living | Premium Studio Riverview | Bankside - Premium Studio Riverview - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Bankside Student Living | Standard Ensuite | Bankside - Standard Ensuite - 26/27 - 12/09 - 45wk 2026: False → True
+- Homes for Students | Bankside Student Living | Standard Ensuite | Bankside - Standard Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Bankside Student Living | Standard Ensuite Riverview | Bankside - Standard Ensuite Riverside - 26/27 - 12/09 - 45wk 2026: False → True
+- Homes for Students | Bankside Student Living | Standard Studio | Bankside - Standard Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Barker House | Classic Ensuite Plus | Barker House - Classic Ensuite Plus - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Barker House | Premium Ensuite | Barker House - Premium Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Beaverbank Place | Gold Studio | Beaverbank Place - Gold Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Berkshire House | Standard Studio | Berkshire House - Standard Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Brayford Quay | Ground Floor Ensuite | Brayford Quay - Ground Floor Ensuite - 26/27 - 12/09 - 46wk Brayford 2026: False → True
+- Homes for Students | Brayford Quay | Ground Floor Ensuite | Brayford Quay - Ground Floor Ensuite - 26/27 - 19/09 - 46wk Brayford 2026: False → True
+- Homes for Students | Brayford Quay | Studio | Brayford Quay - Studio - 26/27 - 19/09 - 50wk Brayford 2026: False → True
+- Homes for Students | Bright House | Classic Room | Bright House - Classic Room - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Bright House | Classic Room | Bright House - Classic Room - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Bright House | Premium Room | Bright House - Premium Room - 25/26 - 28/02 - 20wk 2026: False → True
+- Homes for Students | Calthorpe Court | Classic 2 Bed Flat | Calthorpe Court - Classic 2 Bed Flat - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Calthorpe Court | Premium Ensuite | Premium Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Calthorpe Court | Standard Ensuite | Calthorpe Court - Standard Ensuite - 25/26 - 28/02 - 21wk 2026: False → True
+- Homes for Students | Calthorpe Court | Standard Ensuite | Calthorpe Court - Standard Ensuite - 25/26 - 28/02 - 27wk 2026: False → True
+- Homes for Students | Calthorpe Court | Standard Ensuite | Calthorpe Court - Standard Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Centre Gate | Deluxe 2 Bed Apartment | Centre Gate - Deluxe 2 Bed Apartment - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Clarence Dock Village | Classic Ensuite | Clarence Dock Village - Premium Ensuite - 25/26 - 28/02 - 20wk 2026: False → True
+- Homes for Students | Clarence Dock Village | Classic Ensuite | Clarence Dock Village - Premium Ensuite - 25/26 - 28/02 - 27wk 2026: False → True
+- Homes for Students | College Court | Classic Ensuite | College Court - Classic Ensuite - 26/27 - 05/09 - 39wk 2026: False → True
+- Homes for Students | College Court | Classic Ensuite | College Court - Classic Ensuite - 26/27 - 05/09 - 43wk 2026: False → True
+- Homes for Students | College Court | Classic Ensuite | College Court - Classic Ensuite - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | College Court | Premium Ensuite | College Court - Premium Ensuite - 26/27 - 05/09 - 39wk 2026: False → True
+- Homes for Students | College Court | Premium Ensuite | College Court - Premium Ensuite - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Crown House | 2 Bed Flat | Crown House Reading - 2 Bed Flat - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Crown House | Classic Ensuite | Crown House Reading - Classic Ensuite - 25/26 - 28/02 - 20wk 2026: False → True
+- Homes for Students | Crown House | Classic Ensuite | Crown House Reading - Classic Ensuite - 25/26 - 28/02 - 27wk 2026: False → True
+- Homes for Students | Crown House | Classic Ensuite | Crown House Reading - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Crown House | Classic Ensuite | Crown House Reading - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Crown House | Classic Ensuite Plus | Crown House Reading - Classic Ensuite Plus - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Crown House | Classic Studio | Crown House Reading - Classic Studio - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Crown House | Classic Studio | Crown House Reading - Classic Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Crown House | One Bed Flat | Crown House Reading - One Bed Flat - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Crown House | Premium Studio | Crown House Reading - Premium Studio - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Crown House | Premium Studio | Crown House Reading - Premium Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Plus Studio | The Cube Ealing - Premium Plus Studio - 25/26 - 01/05 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Plus Studio | The Cube Ealing - Premium Plus Studio - 25/26 - 01/05 - 17wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Plus Studio | The Cube Ealing - Premium Plus Studio - 25/26 - 01/05 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Plus Studio | The Cube Ealing - Premium Plus Studio - 25/26 - 23/03 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Plus Studio | The Cube Ealing - Premium Plus Studio - 25/26 - 23/03 - 20wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Plus Studio | The Cube Ealing - Premium Plus Studio - 25/26 - 23/03 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Studio | The Cube Ealing - Premium Studio - 25/26 - 01/05 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Studio | The Cube Ealing - Premium Studio - 25/26 - 01/05 - 17wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Studio | The Cube Ealing - Premium Studio - 25/26 - 01/05 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Studio | The Cube Ealing - Premium Studio - 25/26 - 23/03 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Studio | The Cube Ealing - Premium Studio - 25/26 - 23/03 - 20wk 2026: False → True
+- Homes for Students | Cube Ealing | Premium Studio | The Cube Ealing - Premium Studio - 25/26 - 23/03 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Accessible Studio | The Cube Ealing - Standard Accessible Studio - 25/26 - 01/05 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Accessible Studio | The Cube Ealing - Standard Accessible Studio - 25/26 - 01/05 - 17wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Accessible Studio | The Cube Ealing - Standard Accessible Studio - 25/26 - 01/05 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Plus Studio | The Cube Ealing - Standard Plus Studio - 25/26 - 01/05 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Plus Studio | The Cube Ealing - Standard Plus Studio - 25/26 - 01/05 - 17wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Plus Studio | The Cube Ealing - Standard Plus Studio - 25/26 - 01/05 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Plus Studio | The Cube Ealing - Standard Plus Studio V1 - 25/26 - 23/03 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Plus Studio | The Cube Ealing - Standard Plus Studio V1 - 25/26 - 23/03 - 20wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Plus Studio | The Cube Ealing - Standard Plus Studio V1 - 25/26 - 23/03 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Studio | The Cube Ealing - Standard Studio - 25/26 - 01/05 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Studio | The Cube Ealing - Standard Studio - 25/26 - 01/05 - 17wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Studio | The Cube Ealing - Standard Studio - 25/26 - 01/05 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Studio | The Cube Ealing - Standard Studio - 25/26 - 23/03 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Studio | The Cube Ealing - Standard Studio - 25/26 - 23/03 - 20wk 2026: False → True
+- Homes for Students | Cube Ealing | Standard Studio | The Cube Ealing - Standard Studio - 25/26 - 23/03 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Twin Studio | The Cube Ealing - 25/26 - 23/03 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Twin Studio | The Cube Ealing - Twin Studio - 25/26 - 01/05 - 12wk 2026: False → True
+- Homes for Students | Cube Ealing | Twin Studio | The Cube Ealing - Twin Studio - 25/26 - 01/05 - 17wk 2026: False → True
+- Homes for Students | Cube Ealing | Twin Studio | The Cube Ealing - Twin Studio - 25/26 - 01/05 - 8wk 2026: False → True
+- Homes for Students | Cube Ealing | Twin Studio | The Cube Ealing - Twin Studio - 25/26 - 23/03 - 20wk 2026: False → True
+- Homes for Students | Cube Ealing | Twin Studio | The Cube Ealing - Twin Studio - 25/26 - 23/03 - 8wk 2026: False → True
+- Homes for Students | Cube Greenwich | Standard Studio | The Cube Greenwich - Standard Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Curzon House | 2 Bed Ensuite | Curzon House - 2 Bed Ensuite - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Curzon House | Classic Plus Ensuite | Curzon House - Classic Plus Ensuite - 25/26 - 28/02 - 20wk 2026: False → True
+- Homes for Students | Devonshire Courtyard | Classic Ensuite | Devonshire Courtyard - Classic Ensuite - 25/26 - 28/02 - 15wk 2026: False → True
+- Homes for Students | Devonshire Courtyard | Classic Ensuite | Devonshire Courtyard - Classic Ensuite - 25/26 - 28/02 - 20wk 2026: False → True
+- Homes for Students | Devonshire Courtyard | Classic Ensuite | Devonshire Courtyard - Classic Ensuite - 25/26 - 28/02 - 27wk 2026: False → True
+- Homes for Students | Devonshire Courtyard | Classic Ensuite | Devonshire Courtyard - Classic Ensuite - 26/27 - 16/01 - 33wk 2026: False → True
+- Homes for Students | Devonshire Courtyard | Premium Plus Ensuite | Devonshire Courtyard - Premium Plus Ensuite - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Devonshire Courtyard | Premium Plus Ensuite | Devonshire Courtyard - Premium Plus Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Devonshire Courtyard | Single Ensuite (8 Bed Flat) | Devonshire Courtyard - Classic Ensuite - 25/26 - 28/02 - 15wk 2026: False → True
+- Homes for Students | Devonshire Courtyard | Single Ensuite (8 Bed Flat) | Devonshire Courtyard - Classic Ensuite - 25/26 - 28/02 - 20wk 2026: False → True
+- Homes for Students | Devonshire Courtyard | Single Ensuite (8 Bed Flat) | Devonshire Courtyard - Classic Ensuite - 25/26 - 28/02 - 27wk 2026: False → True
+- Homes for Students | Emily Davies | 3 Bed Apartment | Emily Davies - 3 Bed Apartment - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | Emily Davies | 4 Bed Apartment | Emily Davies - 4 Bed Apartment - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Filbert Village | Classic Ensuite | Filbert Village - Classic Ensuite - 25/26 - 28/02 - 19wk 2026: False → True
+- Homes for Students | Filbert Village | Classic Ensuite | Filbert Village - Classic Ensuite - 25/26 - 28/02 - 28wk 2026: False → True
+- Homes for Students | Filbert Village | Premium Ensuite | Filbert Village - Premium Ensuite - 25/26 - 28/02 - 19wk 2026: False → True
+- Homes for Students | Filbert Village | Premium Ensuite | Filbert Village - Premium Ensuite - 25/26 - 28/02 - 28wk 2026: False → True
+- Homes for Students | Foundry Court | Platinum Ensuite | Foundry Court - Platinum Ensuite - 25/26 - 28/02 - 13wk 2026: False → True
+- Homes for Students | Foundry Court | Platinum Ensuite | Foundry Court - Platinum Ensuite - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | Frobisher House | Deluxe Studio | Frobisher House - Deluxe Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Frobisher House | Premium Ensuite | Frobisher House - Premium Ensuite - 25/26 - 28/02 - 27wk 2026: False → True
+- Homes for Students | Frobisher House | Premium Studio | Frobisher House - Premium Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Frobisher House | Standard Ensuite | Frobisher House - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Frobisher House | Standard Ensuite | Frobisher House - Standard Ensuite - 25/26 - 28/02 - 27wk 2026: False → True
+- Homes for Students | Frobisher House | Standard Ensuite | Frobisher House - Standard Ensuite - 25/26 - 28/02 - 29wk 2026: False → True
+- Homes for Students | Gallery Apartments | 2 Bedroom Apartment | Gallery Apartments - 2 Bedroom Apartment - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Gallery Apartments | Classic Studio | Gallery Apartments - Classic Studio - 25/26 - 28/02 - 13wk 2026: False → True
+- Homes for Students | Gallery Apartments | Classic Studio | Gallery Apartments - Classic Studio - 25/26 - 28/02 - 23wk 2026: False → True
+- Homes for Students | Gallery Apartments | Deluxe Plus Studio | Gallery Apartments - Deluxe Plus Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Gillows | Deluxe Plus Studio | Gillows - Deluxe Plus Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Gillows | Deluxe Single Ensuite | Gillows - Deluxe Single Ensuite - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Gillows | Deluxe Single Ensuite | Gillows - Deluxe Single Ensuite - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Gillows | Deluxe Studio | Gillows - Deluxe Studio - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Gillows | Deluxe Studio | Gillows - Deluxe Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Gillows | Studio Apartment Plus | Gillows - Studio Apartment Plus - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Gillows | Two Bed Loft Apartment | Gillows - Two Bed Loft Apartment - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Glassworks | Premium Plus Ensuite | Glassworks - Premium Plus Ensuite - 25/26 - 09/03 - 25wk 2026: False → True
+- Homes for Students | Glassworks | Premium Studio | Glassworks - Premium Studio - 25/26 - 09/03 - 25wk 2026: False → True
+- Homes for Students | Glassworks | Premium Studio | Glassworks - Premium Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Glassworks | Standard Ensuite | Glassworks - Standard Ensuite - 25/26 - 09/03 - 25wk 2026: False → True
+- Homes for Students | Grange Lane Apartments | 2 Bed Flat | Grange Lane Apartments - 2 Bed Flat - 26/27 - 18/09 - 51wk 2026: False → True
+- Homes for Students | Grange Lane Apartments | 3 Bed Flat | Grange Lane Apartments - 3 Bed Flat - 25/26 - 20/04 - 21wk 2026: False → True
+- Homes for Students | Green Wood Court | Silver Room | Green Wood Court - Silver Room - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | Haddington Place | 5-6 Bed Standard Ensuite | Haddington Place - 5/6 Bed Standard Ensuite - 25/26 - 28/02 - 23wk 2026: False → True
+- Homes for Students | Haddington Place | 5-6 Bed Superior Ensuite | Haddington Place - 5/6 Bed Superior Ensuite - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Haddington Place | Lower Ground Floor studio | Haddington Place - Lower Ground Floor Studio - 25/26 - 28/02 - 23wk 2026: False → True
+- Homes for Students | Halsmere Studios | Bronze Studio | Halsmere Studios - Bronze Studio - 26/27 - 29/08 - 51wk 2026: False → True
+- Homes for Students | Halsmere Studios | Diamond Studio | Halsmere Studios - Diamond Studio - 26/27 - 29/08 - 51wk 2026: False → True
+- Homes for Students | Halsmere Studios | Diamond Studio Plus | Halsmere Studios - Diamond Studio Plus - 26/27 - 12/09 - 49wk 2026: False → True
+- Homes for Students | Halsmere Studios | Gold Studio | Halsmere Studios - Gold Studio - 26/27 - 29/08 - 51wk 2026: False → True
+- Homes for Students | Halsmere Studios | Silver Studio | Halsmere Studios - Silver Studio - 26/27 - 29/08 - 51wk 2026: False → True
+- Homes for Students | Halsmere Studios | Silver Studio Plus | Halsmere Studios - Silver Studio Plus - 26/27 - 12/09 - 49wk 2026: False → True
+- Homes for Students | Hamwic Hall | Classic Ensuite | Hamwic Hall - Classic Ensuite - 25/26 - 28/02 - 16wk 2026: False → True
+- Homes for Students | Hamwic Hall | Classic Ensuite | Hamwic Hall - Classic Ensuite - 25/26 - 28/02 - 20wk 2026: False → True
+- Homes for Students | Hamwic Hall | Classic Ensuite | Hamwic Hall - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Hamwic Hall | Classic Ensuite | Hamwic Hall - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Hamwic Hall | Classic Plus Ensuite | Hamwic Hall - Classic Plus Ensuite - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Hamwic Hall | Classic Plus Ensuite | Hamwic Hall - Classic Plus Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Hamwic Hall | Premium Studio | Hamwic Hall - Premium Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Harbour Court | Standard Ensuite | Harbour Court - Standard Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Harbour Court | Standard Studio | Harbour Court - Standard Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Hollingbury House | Premium One Bed Flat | Hollingbury House - Premium One Bed Flat - 26/27 - 12/09 - 45wk 2026: False → True
+- Homes for Students | Hollingbury House | Premium One Bed Flat | Hollingbury House - Premium One Bed Flat - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Hollingbury House | Room in Three Bed Apartment | Hollingbury House - Brighton - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Iron Bridge Studios | Classic Studio – Limited View | Iron Bridge Studios - Classic Studio - Limited View - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Iron Bridge Studios | Top Floor Classic Studio | Iron Bridge Studios - Top Floor Classic Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Kendrick Hall | Classic Ensuite | Kendrick Hall - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Kendrick Hall | Classic Studio | Kendrick Hall - Classic Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Kendrick Hall | Premium Ensuite | Kendrick Hall - Premium Ensuite - 25/26 - 13/09 - 44wk 2025: False → True
+- Homes for Students | Kendrick Hall | Premium Studio | Kendrick Hall -Premium Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | King Square Studios | Extra Large Studio | King Square Studios - Extra Large Studio - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | King Square Studios | Premium Studio | King Square Studios - Premium Studio - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | King Square Studios | Studio with Bath | King Square Studios - Studio with Bath - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | Luneside | 4 Bed Standard Ensuite | Luneside - 4 Bed Standard Ensuite - 26/27 - 19/09 - 51wk 2026: False → True
+- Homes for Students | Luneside | 5 Bed Standard Ensuite | Luneside - 5 Bed Standard Ensuite - 25/26 - 28/02 - 30wk 2026: False → True
+- Homes for Students | Luneside | 5 Bed Standard Ensuite | Luneside - 5 Bed Standard Ensuite - 26/27 - 19/09 - 44wk 2026: False → True
+- Homes for Students | Luneside | 5 Bed Standard Ensuite | Luneside - 5 Bed Standard Ensuite - 26/27 - 19/09 - 51wk 2026: False → True
+- Homes for Students | Luneside | 6 Bed Standard Ensuite | Luneside - 6 Bed Standard Ensuite - 25/26 - 28/02 - 30wk 2026: False → True
+- Homes for Students | Luneside | 6 Bed Standard Ensuite | Luneside - 6 Bed Standard Ensuite - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Luneside | 6 Bed Standard Ensuite | Luneside - 6 Bed Standard Ensuite - 26/27 - 19/09 - 51wk 2026: False → True
+- Homes for Students | Luneside | Large Studio | Luneside - Large Studio - 26/27 - 19/09 - 51wk 2026: False → True
+- Homes for Students | Luneside | Premium River Studio | Luneside - Premium River Studio - 26/27 - 19/09 - 51wk 2026: False → True
+- Homes for Students | Marland House | Studio Diamond | Marland House - Studio Diamond - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Marland House | Studio Emerald | Marland House - Studio Emerald - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Marland House | Studio Penthouse | Marland House - Studio Penthouse - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Marland House | Studio Ruby | Marland House - Studio Ruby - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Marland House | Studio Ruby (single) | Marland house - Studio Ruby (single) - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Marland House | Studio Ruby Plus | Marland House - Studio Ruby Plus - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Marland House | Studio Ruby Plus | Marland House - Studio Ruby Plus - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Marland House | Studio Sapphire | Marland House - Studio Sapphire - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Marland House | Studio Sapphire Plus | Marland House - Studio Sapphire Plus - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Moulsecoomb Place | 1 Bed Apartment | Moulsecoomb Place - 26/27 - 12/09 - 41wk 2026: False → True
+- Homes for Students | Newarke Point | Classic Ensuite | Newarke Point - Classic Ensuite - 25/26 - 13/09 - 44wk 2025: False → True
+- Homes for Students | Newarke Point | Classic Studio | Newarke Point - Classic Studio - 25/26 - 28/02 - 20wk 2026: False → True
+- Homes for Students | Newarke Point | Classic Studio | Newarke Point - Classic Studio - 25/26 - 28/02 - 23wk 2026: False → True
+- Homes for Students | Newarke Point | Classic Studio | Newarke Point - Classic Studio - 25/26 - 28/02 - 28wk 2026: False → True
+- Homes for Students | Newarke Point | Premium Studio | Newarke Point - Premium Studio - 26/27 - 18/09 - 51wk 2026: False → True
+- Homes for Students | Orbital | Classic 2 Bed Apartment | Orbital - Classic 2 Bed Apartment - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Orbital | Classic Ensuite | Orbital - Classic Ensuite - 26/27 - 12/09 - 42wk 2026: False → True
+- Homes for Students | Orbital | Classic Ensuite | Orbital - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Orbital | Classic Studio | Orbital - Classic Studio - 25/26 - 31/03 - 22.4wk 2026: False → True
+- Homes for Students | Orbital | Deluxe 2 Bed Apartment | Orbital - Deluxe 2 Bed Apartment - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Orbital | Premium Ensuite | Orbital - Premium Ensuite - 26/27 - 12/09 - 42wk 2026: False → True
+- Homes for Students | Orbital | Premium Ensuite | Orbital - Premium Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Paddington Park House | Classic Plus Ensuite | Paddington Park House - Classic Plus Ensuite - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Paddington Park House | Classic Plus Ensuite | Paddington Park House - Classic Plus Ensuite - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Paddington Park House | Premium Ensuite | Paddington Park House - Premium Ensuite - 25/26 - 28/02 - 19wk 2026: False → True
+- Homes for Students | Paddington Park House | Premium Ensuite | Paddington Park House - Premium Ensuite - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | Paddington Park House | Premium Ensuite | Paddington Park House - Premium Ensuite - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Paddington Park House | Standard Ensuite | Paddington Park House - Standard Ensuite - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Paddington Park House | Standard Ensuite | Paddington Park House - Standard Ensuite - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Palamon Court | Two Bed Club Apartment | Palamon Court - Two Bed Club Apartment - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Bronze Ensuite | Plymouth Cross House - Bronze Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Classic 4 & 5 Bed Ensuite | Plymouth Cross House - Classic 4 & 5 Bed Ensuite - 25/26 - 28/02 - 14wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Classic 4 & 5 Bed Ensuite | Plymouth Cross House - Classic 4 & 5 Bed Ensuite - 25/26 - 28/02 - 20wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Classic 4 & 5 Bed Ensuite | Plymouth Cross House - Classic 4 & 5 Bed Ensuite - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Deluxe Studio | Plymouth Cross House - Deluxe Studio - 26/27 - 12/09 - 45wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Deluxe Studio | Plymouth Cross House - Deluxe Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Executive Studio | Plymouth Cross House - Executive Studio - 26/27 - 12/09 - 45wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Gold Ensuite | Plymouth Cross House - Gold Ensuite - 26/27 - 12/09 - 41wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Gold Ensuite | Plymouth Cross House - Gold Ensuite - 26/27 - 12/09 - 45wk 2026: False → True
+- Homes for Students | Plymouth Cross House | Gold Ensuite | Plymouth Cross House - Gold Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Polhill Park | Classic Ensuite | Polhill Park  - Classic Ensuite - 26/27 - 12/09 - 41wk 2026: False → True
+- Homes for Students | Polhill Park | Classic Ensuite | Polhill Park - Classic Ensuite - 25/26 - 28/02 - 27wk 2026: False → True
+- Homes for Students | Queens Gate | Studio Diamond | Queens Gate - Studio Diamond - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Queens Gate | Studio Gold | Queens Gate - Studio Gold - 25/26 - 28/02 - 19wk 2026: False → True
+- Homes for Students | Queens Gate | Studio Gold | Queens Gate - Studio Gold - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | Queens Gate | Studio Gold | Queens Gate - Studio Gold - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Queens Gate | Studio Gold | Queens Gate - Studio Gold - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Redvers Tower | 1 Bed Apartment | Redvers Tower - 1 Bed Apartment - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Redvers Tower | 2 Bed Apartment | Redvers Tower - 2 Bed Apartment - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Redvers Tower | Bronze Studio | Redvers Tower - Bronze Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Redvers Tower | Gold Studio | Redvers Tower - Gold Studio - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Redvers Tower | Silver Studio | Redvers Tower - Silver Studio - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Redvers Tower | Standard Studio | Redvers Tower - Standard Studio - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | Redvers Tower | Standard Studio | Redvers Tower - Standard Studio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | Rhodaus Court | Club Ensuite | Rhodaus Court - Club Ensuite - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Riverside | Fox Street Studio | Riverside - Fox Street Studio - 25/26 - 28/02 - 19wk 2026: False → True
+- Homes for Students | Riverside | Fox Street Studio | Riverside - Fox Street Studio - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | Riverside House | Classic Ensuite | Riverside House - Classic Ensuite - 26/27 - 05/09 - 44wk 2026: False → True
+- Homes for Students | Selly Oak Court | Deluxe Ensuite 3 Bed Cluster | Selly Oak Court - Deluxe Ensuite 3 Bed Cluster - 26/27 - 12/09 - 45wk 2026: False → True
+- Homes for Students | Selly Oak Court | Standard Ensuite 5 Bed Cluster | Selly Oak Court - Standard Ensuite 5 Bed Cluster - 25/26 - 28/02 - 24wk 2026: False → True
+- Homes for Students | Selly Oak Court | Superior Ensuite 2 Bed Cluster | Selly Oak Court - Superior Ensuite 2 Bed Cluster - 26/27 - 12/09 - 45wk 2026: False → True
+- Homes for Students | Spring Gardens | Classic Room | Spring Gardens - Classic Room - 25/26 - 28/02 - 19wk 2026: False → True
+- Homes for Students | Spring Gardens | Classic Room | Spring Gardens - Classic Room - RM request - 26/27 - 05/09 - 17wk 2026: False → True
+- Homes for Students | Spring Gardens | Classic Studio | Spring Gardens - Classic Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | Spring Gardens | Premium Flat | Spring Gardens - Premium Flat - 25/26 - 28/02 - 14wk 2026: False → True
+- Homes for Students | Spring Gardens | Premium Flat | Spring Gardens - Premium Flat - 25/26 - 28/02 - 19wk 2026: False → True
+- Homes for Students | Spring Gardens | Premium Flat | Spring Gardens - Premium Flat - 25/26 - 28/02 - 26wk 2026: False → True
+- Homes for Students | St Lawrence House | Classic Plus Studio | St Lawrence House - Classic Plus Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | St Leonard’s House | Essential Ensuite | St Leonards House - Essential Ensuite - 26/27 - 19/09 - 44wk 2026: False → True
+- Homes for Students | St Leonard’s House | Premium Ensuite | St Leonards House - Premium Ensuite - 26/27 - 19/09 - 44wk 2026: False → True
+- Homes for Students | St Leonard’s House | Premium Ensuite | St Leonards House - Premium Ensuite - 26/27 - 19/09 - 51wk 2026: False → True
+- Homes for Students | St Martins House | Classic Ensuite | St Martins House - Classic Ensuite - 25/26 - 28/02 - 21wk 2026: False → True
+- Homes for Students | St Martins House | Classic Ensuite | St Martins House - Classic Ensuite - 25/26 - 28/02 - 28wk 2026: False → True
+- Homes for Students | St Martins House | Classic Studio | St Martins House - Classic Studio - 26/27 - 18/09 - 51wk 2026: False → True
+- Homes for Students | St Martins House | Premium Ensuite | St Martins House - Premium Ensuite - 26/27 - 18/09 - 44wk 2026: False → True
+- Homes for Students | The Apollo Works | Premium Plus Studio | The Apollo Works - Premium Plus Studio - 25/26 - 06/09 - 51wk 2025: False → True
+- Homes for Students | The Apollo Works | Premium Plus Studio | The Apollo Works - Premium Plus Studio - 26/27 - 05/09 - 51wk 2026: False → True
+- Homes for Students | The Apollo Works | Standard En-Suite | The Apollo Works - Standard En-Suite - 25/26 - 03/03 - 24wk 2026: False → True
+- Homes for Students | The Apollo Works | Standard Plus En-suite | The Apollo Works - Standard Plus En-Suite - 25/26 - 06/09 - 44wk 2025: False → True
+- Homes for Students | The Bridge | Classic Ensuite | The Bridge - Classic Ensuite - 26/27 - 29/08 - 51wk 2026: False → True
+- Homes for Students | The Bridge | Classic Studio | The Bridge - Classic Studio - 26/27 - 29/08 - 51wk 2026: False → True
+- Homes for Students | The Bridge | Deluxe Studio | The Bridge - Deluxe Studio - 26/27 - 29/08 - 51wk 2026: False → True
+- Homes for Students | The Bridge | Premium Ensuite | The Bridge - Premium Ensuite - 26/27 - 29/08 - 51wk 2026: False → True
+- Homes for Students | The Bridge | Premium Studio | The Bridge - Premium Studio - 26/27 - 29/08 - 51wk 2026: False → True
+- Homes for Students | The Court Yard | Studio London | The Court Yard - Studio London - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | The Court Yard | Studio Paris | The Court Yard - Studio Paris - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | The Court Yard | Studio Rio | The Court Yard - Studio Rio - 26/27 - 12/09 - 44wk 2026: False → True
+- Homes for Students | The Court Yard | Studio Rio | The Court Yard - Studio Rio - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | The Court Yard | Studio Sydney | The Court Yard - Studio Sydney - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | The Court Yard | Studio Tokyo | The Court Yard - Studio Tokyo - 26/27 - 12/09 - 51wk 2026: False → True
+- Homes for Students | The Croft | Large Classic Ensuite | The Croft - Large Classic Ensuite - AH Request - 25/26 - 13/09 - 51wk 2025: False → True
+- Homes for Students | The Cube | 3-4 Bed Premium Ensuite | The Cube - 3/4 bed Premium Ensuite - 26/27 - 12/09 - 51wk 2026: False → True
+- … and 875 more
+
