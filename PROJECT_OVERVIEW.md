@@ -217,7 +217,9 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     history too). Room **available-contracts count** changes are instead logged on the
     **Contracts** change tab — one row per room (Change Field "Available Contracts", blank
     Academic Year / Duration) via `room_available_contracts_changes()`, sourced from the
-    rooms indexes so it doesn't fan out per contract. Room appearance/disappearance is
+    rooms indexes so it doesn't fan out per contract. It skips comparisons where the old
+    value is blank (schema-migration guard, like `units_artifact`) so renaming/adding the
+    field doesn't log a spurious `"" → N` for every room. Room appearance/disappearance is
     already covered on the Contracts tab by New Contract / Sold Out. The Contracts tab also filters
     `CONTRACT_CHANGE_FIELD_EXCLUDE = {(added), (removed)}` — legacy Change Field values from
     an older diff that the current code no longer emits, kept out so stale rows don't linger.
