@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-15 (Contracts change tab now filters legacy `(added)`/`(removed)` Change Field values via `CONTRACT_CHANGE_FIELD_EXCLUDE`; Room change tab no longer logs `quantity_available` / `(added)` / `(removed)` (history purged too); room quantity changes moved to the Contracts change tab, one row per room with blank Year/Duration via `room_quantity_changes()`; `quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
+_Last updated: 2026-06-15 (`quantity_available` replaced by `available_contracts` — the count of currently-available contracts per room (the APIs expose no stock count, only a per-contract `available` flag); change tracking + Change Field label renamed to "Available Contracts" accordingly; Contracts change tab now filters legacy `(added)`/`(removed)` Change Field values via `CONTRACT_CHANGE_FIELD_EXCLUDE`; Room change tab no longer logs `quantity_available` / `(added)` / `(removed)` (history purged too); room quantity changes moved to the Contracts change tab, one row per room with blank Year/Duration via `room_quantity_changes()`; `quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
 
 ---
 
@@ -148,14 +148,14 @@ the timestamped CSVs are committed too (they are no longer gitignored), so `outp
 accumulates the full history of raw runs alongside the two `*_latest.csv` pointers.
 
 **`rooms_<timestamp>.csv`** (and `rooms_latest.csv`) — one row per room type:
-`brand_name` · `property` · `city` · `room_type` · `quantity_available` ·
+`brand_name` · `property` · `city` · `room_type` · `available_contracts` ·
 `description` · `thumbnail_url` · `image_urls`
 
 **`contracts_<timestamp>.csv`** (and `contracts_latest.csv`) — one row per contract / pricing option:
-`brand_name` · `property` · `city` · `room_type` · `quantity_available` · `contract_title` ·
+`brand_name` · `property` · `city` · `room_type` · `available_contracts` · `contract_title` ·
 `academic_year` · `price_pw` · `currency_symbol` · `available` · `start_date` · `end_date` ·
 `contract_length_weeks` · `base_hub_url`
-(`quantity_available` is the room-level count, repeated on each of that room's contracts — placed at column E to mirror the rooms tab; it is **not** watched in the change log, since room quantity changes are already tracked on the Room Data change tab.)
+(`available_contracts` is the **count of currently-available contracts (pricing options)** for the room — `sum(is_available(c) …)` in `parse_room()` — repeated on each of that room's contract rows, at column E on both tabs. The APIs expose **no stock/units count**, only a per-contract `available` flag, so this count of options is the closest real number; it is **not** physical rooms available. Changes to it are logged on the **Contracts** change tab, not the rooms tab — see §6.)
 
 > Sense of scale (run of 2026-06-05): ~1,540 room rows and ~4,480 contract rows across
 > the 6 brands. `image_urls` is a single `|`-separated string **in the CSV** (the
@@ -211,14 +211,14 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     under one identity (e.g. Sept + Jan intakes) are paired by title, then start date,
     then order (`_match_contracts`). Unmatched new contracts log Change Type
     **"New Contract"**, vanished ones **"Sold Out"**; rooms use Added/Removed.
-  - **Room-tab suppression:** the Room change tab does **not** log `quantity_available`,
+  - **Room-tab suppression:** the Room change tab does **not** log `available_contracts`,
     `(added)`, or `(removed)` (set `ROOM_CHANGE_FIELD_EXCLUDE`, filtered in
     `update_change_tab` against **both** new and existing rows, so they're purged from
-    history too). Room **quantity** changes are instead logged on the **Contracts** change
-    tab — one row per room (Change Field "Quantity Available", blank Academic Year /
-    Duration) via `room_quantity_changes()`, sourced from the rooms indexes so it doesn't
-    fan out per contract. Room appearance/disappearance is already covered on the Contracts
-    tab by New Contract / Sold Out. The Contracts tab also filters
+    history too). Room **available-contracts count** changes are instead logged on the
+    **Contracts** change tab — one row per room (Change Field "Available Contracts", blank
+    Academic Year / Duration) via `room_available_contracts_changes()`, sourced from the
+    rooms indexes so it doesn't fan out per contract. Room appearance/disappearance is
+    already covered on the Contracts tab by New Contract / Sold Out. The Contracts tab also filters
     `CONTRACT_CHANGE_FIELD_EXCLUDE = {(added), (removed)}` — legacy Change Field values from
     an older diff that the current code no longer emits, kept out so stale rows don't linger.
   - **Brand-vanish guard:** if a whole brand is absent from the new run (probable API

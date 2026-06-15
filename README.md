@@ -25,11 +25,11 @@ Fetches room types and contracts from 6 student accommodation brand APIs and exp
 
 ### rooms_latest.csv columns
 
-`brand_name` · `property` · `city` · `room_type` · `quantity_available` · `description` · `thumbnail_url` · `image_urls`
+`brand_name` · `property` · `city` · `room_type` · `available_contracts` · `description` · `thumbnail_url` · `image_urls`
 
 ### contracts_latest.csv columns
 
-`brand_name` · `property` · `city` · `room_type` · `quantity_available` · `contract_title` · `academic_year` · `price_pw` · `currency_symbol` · `available` · `start_date` · `end_date` · `contract_length_weeks` · `base_hub_url`
+`brand_name` · `property` · `city` · `room_type` · `available_contracts` · `contract_title` · `academic_year` · `price_pw` · `currency_symbol` · `available` · `start_date` · `end_date` · `contract_length_weeks` · `base_hub_url`
 
 ---
 

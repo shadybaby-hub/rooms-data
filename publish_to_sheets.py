@@ -64,7 +64,7 @@ ROOM_KEY     = ("brand_name", "property", "room_type")
 CONTRACT_KEY = ("brand_name", "property", "city", "room_type", "academic_year",
                 "contract_length_weeks")
 ROOM_WATCH     = [
-    ("quantity_available", "Quantity Available"),
+    ("available_contracts", "Available Contracts"),
     ("description",        "Description"),
     ("thumbnail_url",      "Thumbnail URL"),
     ("image_urls",         "Image URLs"),
@@ -76,10 +76,11 @@ CONTRACT_WATCH = [
     ("end_date",   "End Date"),
 ]
 
-# Change Field values suppressed from the Room Data Changes tab. Quantity moves
-# to the Contracts change tab (see room_quantity_changes); room add/remove is
-# already represented there as New Contract / Sold Out.
-ROOM_CHANGE_FIELD_EXCLUDE = {"Quantity Available", "(removed)", "(added)"}
+# Change Field values suppressed from the Room Data Changes tab. The available-
+# contracts count moves to the Contracts change tab (see
+# room_available_contracts_changes); room add/remove is already represented
+# there as New Contract / Sold Out.
+ROOM_CHANGE_FIELD_EXCLUDE = {"Available Contracts", "(removed)", "(added)"}
 # Legacy Change Field values on the Contracts tab (from an older diff that used
 # Added/Removed before New Contract/Sold Out). Current code never emits these, so
 # filtering them just purges stale rows and stops them lingering.
@@ -157,10 +158,10 @@ def diff_rooms(old, new):
             if brand not in new_brands:
                 continue  # whole brand missing — likely a fetch failure, not a removal
             rows.append([RUN_DATE_STR, brand, prop, o.get("city", ""), rtype,
-                         "(removed)", "Removed", o.get("quantity_available", ""), ""])
+                         "(removed)", "Removed", o.get("available_contracts", ""), ""])
         elif n and not o:
             rows.append([RUN_DATE_STR, brand, prop, n.get("city", ""), rtype,
-                         "(added)", "Added", "", n.get("quantity_available", "")])
+                         "(added)", "Added", "", n.get("available_contracts", "")])
         else:
             for field, label in ROOM_WATCH:
                 ov, nv = o.get(field, ""), n.get(field, "")
@@ -232,12 +233,13 @@ def diff_contracts(old, new):
     return rows
 
 
-def room_quantity_changes(old_rooms, new_rooms):
-    """Room-level quantity_available changes, formatted for the *contracts*
-    change tab (blank Academic Year / Duration). One row per room — sourced from
-    the rooms indexes, so it doesn't fan out per contract the way CONTRACT_WATCH
-    would. Only rooms present in both runs are considered, so added/removed rooms
-    are excluded (they show on the contracts tab as New Contract / Sold Out)."""
+def room_available_contracts_changes(old_rooms, new_rooms):
+    """Room-level available_contracts (count) changes, formatted for the
+    *contracts* change tab (blank Academic Year / Duration). One row per room —
+    sourced from the rooms indexes, so it doesn't fan out per contract the way
+    CONTRACT_WATCH would. Only rooms present in both runs are considered, so
+    added/removed rooms are excluded (they show on the contracts tab as New
+    Contract / Sold Out)."""
     rows = []
     new_brands = {k[0] for k in new_rooms}
     for k in sorted(set(old_rooms) & set(new_rooms)):
@@ -245,10 +247,10 @@ def room_quantity_changes(old_rooms, new_rooms):
         if brand not in new_brands:
             continue
         o, n = old_rooms[k], new_rooms[k]
-        ov, nv = o.get("quantity_available", ""), n.get("quantity_available", "")
+        ov, nv = o.get("available_contracts", ""), n.get("available_contracts", "")
         if ov != nv:
             rows.append([RUN_DATE_STR, brand, prop, n.get("city", ""), rtype,
-                         "", "", "Quantity Available", "Changed", ov, nv])
+                         "", "", "Available Contracts", "Changed", ov, nv])
     return rows
 
 
@@ -355,10 +357,10 @@ def main():
 
     room_changes = diff_rooms(old_rooms, new_rooms) if old_rooms is not None else []
     contract_changes = diff_contracts(old_contracts, new_contracts) if old_contracts is not None else []
-    # Room quantity changes are logged on the *contracts* tab (one row per room),
-    # and suppressed from the room tab below.
+    # Room available-contracts count changes are logged on the *contracts* tab
+    # (one row per room), and suppressed from the room tab below.
     if old_rooms is not None:
-        contract_changes += room_quantity_changes(old_rooms, new_rooms)
+        contract_changes += room_available_contracts_changes(old_rooms, new_rooms)
     if old_rooms is None or old_contracts is None:
         print("  (no previous run found — change tabs pruned only, no new rows)")
 

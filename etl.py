@@ -91,14 +91,14 @@ ID_RANGE  = os.getenv("PSL_ID_RANGE", "")
 # ── Column schemas ─────────────────────────────────────────────────────────────
 ROOM_FIELDS = [
     "brand_name", "property", "city", "room_type",
-    "quantity_available",
+    "available_contracts",
     "description",
     "thumbnail_url", "image_urls",
 ]
 
 CONTRACT_FIELDS = [
     "brand_name", "property", "city", "room_type",
-    "quantity_available",
+    "available_contracts",
     "contract_title",
     "academic_year",
     "price_pw", "currency_symbol",
@@ -125,6 +125,12 @@ def safe(d, *keys, default=""):
         except (KeyError, IndexError, TypeError):
             return default
     return d if d is not None else default
+
+
+def is_available(c) -> bool:
+    """Whether a contract dict is currently available (the API's `available`
+    flag, normalised from bool / 'true' / 1 / 'yes')."""
+    return str(c.get("available", "")).strip().lower() in ("true", "1", "yes")
 
 
 def pence_to_pounds(p):
@@ -275,17 +281,19 @@ def parse_room(item: dict, brand_name: str) -> tuple[dict, list[dict]]:
         city_from_url(safe(raw_contracts, 0, "base_hub_url"))
     )
 
-    qty = acf.get("quantityAvailable", acf.get("available", ""))
+    # Count of currently-available contracts (pricing options) for this room.
+    # The API exposes no stock count, only a per-contract `available` flag.
+    avail_contracts = sum(1 for c in raw_contracts if is_available(c))
 
     room_row = {
-        "brand_name":         resolved_brand,
-        "property":           property_,
-        "city":               city,
-        "room_type":          room_type or html.unescape(acf.get("roomType", "")),
-        "quantity_available": qty,
-        "description":        desc,
-        "thumbnail_url":      thumbnail_url,
-        "image_urls":         image_urls,
+        "brand_name":          resolved_brand,
+        "property":            property_,
+        "city":                city,
+        "room_type":           room_type or html.unescape(acf.get("roomType", "")),
+        "available_contracts": avail_contracts,
+        "description":         desc,
+        "thumbnail_url":       thumbnail_url,
+        "image_urls":          image_urls,
     }
 
     contract_rows = []
@@ -302,7 +310,7 @@ def parse_room(item: dict, brand_name: str) -> tuple[dict, list[dict]]:
             "property":              property_,
             "city":                  contract_city,
             "room_type":             room_type,
-            "quantity_available":    qty,
+            "available_contracts":   avail_contracts,
             "contract_title":        c.get("title") or c.get("name", ""),
             "academic_year":         c.get("academic_year") or c.get("academicYear", ""),
             "price_pw":              price_pw,
