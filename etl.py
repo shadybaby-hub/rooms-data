@@ -98,6 +98,7 @@ ROOM_FIELDS = [
 
 CONTRACT_FIELDS = [
     "brand_name", "property", "city", "room_type",
+    "quantity_available",
     "contract_title",
     "academic_year",
     "price_pw", "currency_symbol",
@@ -274,12 +275,14 @@ def parse_room(item: dict, brand_name: str) -> tuple[dict, list[dict]]:
         city_from_url(safe(raw_contracts, 0, "base_hub_url"))
     )
 
+    qty = acf.get("quantityAvailable", acf.get("available", ""))
+
     room_row = {
         "brand_name":         resolved_brand,
         "property":           property_,
         "city":               city,
         "room_type":          room_type or html.unescape(acf.get("roomType", "")),
-        "quantity_available": acf.get("quantityAvailable", acf.get("available", "")),
+        "quantity_available": qty,
         "description":        desc,
         "thumbnail_url":      thumbnail_url,
         "image_urls":         image_urls,
@@ -299,6 +302,7 @@ def parse_room(item: dict, brand_name: str) -> tuple[dict, list[dict]]:
             "property":              property_,
             "city":                  contract_city,
             "room_type":             room_type,
+            "quantity_available":    qty,
             "contract_title":        c.get("title") or c.get("name", ""),
             "academic_year":         c.get("academic_year") or c.get("academicYear", ""),
             "price_pw":              price_pw,

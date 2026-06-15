@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-15 (`Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
+_Last updated: 2026-06-15 (`quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
 
 ---
 
@@ -152,12 +152,14 @@ accumulates the full history of raw runs alongside the two `*_latest.csv` pointe
 `description` · `thumbnail_url` · `image_urls`
 
 **`contracts_<timestamp>.csv`** (and `contracts_latest.csv`) — one row per contract / pricing option:
-`brand_name` · `property` · `city` · `room_type` · `contract_title` · `academic_year` ·
-`price_pw` · `currency_symbol` · `available` · `start_date` · `end_date` ·
+`brand_name` · `property` · `city` · `room_type` · `quantity_available` · `contract_title` ·
+`academic_year` · `price_pw` · `currency_symbol` · `available` · `start_date` · `end_date` ·
 `contract_length_weeks` · `base_hub_url`
+(`quantity_available` is the room-level count, repeated on each of that room's contracts — placed at column E to mirror the rooms tab; it is **not** watched in the change log, since room quantity changes are already tracked on the Room Data change tab.)
 
 > Sense of scale (run of 2026-06-05): ~1,540 room rows and ~4,480 contract rows across
-> the 6 brands. `image_urls` is a single `|`-separated string. `price_pw` is the price
+> the 6 brands. `image_urls` is a single `|`-separated string **in the CSV** (the
+> `Latest Room Data` Sheet tab explodes it to one row per URL — see §6). `price_pw` is the price
 > **per person per week in pounds** (`etl.pence_to_pounds` converts the API's minor-unit
 > `price`; runs between ~2026-06-08 and 2026-06-10 published it ×100 in pence — both
 > change logs carry a `units_artifact` guard so the switch doesn't log as price changes).
