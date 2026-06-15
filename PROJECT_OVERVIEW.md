@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-15 (`quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
+_Last updated: 2026-06-15 (Room change tab no longer logs `quantity_available` / `(added)` / `(removed)` (history purged too); room quantity changes moved to the Contracts change tab, one row per room with blank Year/Duration via `room_quantity_changes()`; `quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
 
 ---
 
@@ -204,13 +204,21 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     previous run's `*_latest.csv` (stashed to `/tmp/prev`) vs the new one, appends the day's
     change rows, and prunes rows older than 30 days. Columns: Run Date · Brand · Property ·
     City · Room Type · (contracts also: Academic Year · Duration) · Change Field · Change
-    Type · Old Content · New Content. Watched fields: rooms `quantity_available`,
-    `description`, `thumbnail_url`, `image_urls` (long values clipped to the ~49K cell
+    Type · Old Content · New Content. Watched fields: rooms `description`,
+    `thumbnail_url`, `image_urls` (long values clipped to the ~49K cell
     limit); contracts `price_pw`, `available`, `start_date`, `end_date`. Contract identity
     is brand + property + city + room_type + academic_year + duration; multiple contracts
     under one identity (e.g. Sept + Jan intakes) are paired by title, then start date,
     then order (`_match_contracts`). Unmatched new contracts log Change Type
-    **"New Contract"**, vanished ones **"Sold Out"**; rooms still use Added/Removed.
+    **"New Contract"**, vanished ones **"Sold Out"**; rooms use Added/Removed.
+  - **Room-tab suppression:** the Room change tab does **not** log `quantity_available`,
+    `(added)`, or `(removed)` (set `ROOM_CHANGE_FIELD_EXCLUDE`, filtered in
+    `update_change_tab` against **both** new and existing rows, so they're purged from
+    history too). Room **quantity** changes are instead logged on the **Contracts** change
+    tab — one row per room (Change Field "Quantity Available", blank Academic Year /
+    Duration) via `room_quantity_changes()`, sourced from the rooms indexes so it doesn't
+    fan out per contract. Room appearance/disappearance is already covered on the Contracts
+    tab by New Contract / Sold Out.
   - **Brand-vanish guard:** if a whole brand is absent from the new run (probable API
     timeout), its rows are NOT logged as "removed" (same guard in `make_report.py`).
   - **Reset switch:** trigger the workflow with the `reset_change_tabs` input = true (env

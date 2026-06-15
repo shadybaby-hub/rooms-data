@@ -76,6 +76,11 @@ CONTRACT_WATCH = [
     ("end_date",   "End Date"),
 ]
 
+# Change Field values suppressed from the Room Data Changes tab. Quantity moves
+# to the Contracts change tab (see room_quantity_changes); room add/remove is
+# already represented there as New Contract / Sold Out.
+ROOM_CHANGE_FIELD_EXCLUDE = {"Quantity Available", "(removed)", "(added)"}
+
 WINDOW_DAYS = 30
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
 MAX_CELL = 49000  # Sheets hard limit is 50,000 chars/cell
@@ -223,6 +228,26 @@ def diff_contracts(old, new):
     return rows
 
 
+def room_quantity_changes(old_rooms, new_rooms):
+    """Room-level quantity_available changes, formatted for the *contracts*
+    change tab (blank Academic Year / Duration). One row per room — sourced from
+    the rooms indexes, so it doesn't fan out per contract the way CONTRACT_WATCH
+    would. Only rooms present in both runs are considered, so added/removed rooms
+    are excluded (they show on the contracts tab as New Contract / Sold Out)."""
+    rows = []
+    new_brands = {k[0] for k in new_rooms}
+    for k in sorted(set(old_rooms) & set(new_rooms)):
+        brand, prop, rtype = k
+        if brand not in new_brands:
+            continue
+        o, n = old_rooms[k], new_rooms[k]
+        ov, nv = o.get("quantity_available", ""), n.get("quantity_available", "")
+        if ov != nv:
+            rows.append([RUN_DATE_STR, brand, prop, n.get("city", ""), rtype,
+                         "", "", "Quantity Available", "Changed", ov, nv])
+    return rows
+
+
 # ── Sheet writers ───────────────────────────────────────────────────────────────
 
 def _write(ws, values, ncols):
@@ -253,7 +278,7 @@ def write_latest_tab(sh, title, path, explode_field=None):
     print(f"  '{title}': {max(len(grid) - 1, 0)} rows + Run Time column")
 
 
-def update_change_tab(sh, title, header, new_rows, reset=False):
+def update_change_tab(sh, title, header, new_rows, reset=False, exclude_fields=()):
     ws = _get_or_create(sh, title, len(header))
     if reset:  # wipe the rolling log back to just the header row
         _write(ws, [header], len(header))
@@ -263,6 +288,9 @@ def update_change_tab(sh, title, header, new_rows, reset=False):
     body = existing[1:] if (existing and existing[0] == header) else \
            ([] if not existing else existing)
     cutoff = (_NOW.date() - timedelta(days=WINDOW_DAYS))
+    # Change Field column to filter on (F on rooms, H on contracts). Applies to
+    # both existing rows and new ones, so excluded fields are also purged.
+    cf_idx = header.index("Change Field") if exclude_fields else -1
 
     kept = []
     for row in body + new_rows:
@@ -270,8 +298,11 @@ def update_change_tab(sh, title, header, new_rows, reset=False):
             d = datetime.strptime(row[0], "%Y-%m-%d").date()
         except (ValueError, IndexError):
             continue  # drop malformed / stray header rows
-        if d >= cutoff:
-            kept.append(row)
+        if d < cutoff:
+            continue
+        if exclude_fields and len(row) > cf_idx and row[cf_idx] in exclude_fields:
+            continue
+        kept.append(row)
     kept.sort(key=lambda r: r[0], reverse=True)  # newest first
 
     _write(ws, [header] + kept, len(header))
@@ -320,10 +351,15 @@ def main():
 
     room_changes = diff_rooms(old_rooms, new_rooms) if old_rooms is not None else []
     contract_changes = diff_contracts(old_contracts, new_contracts) if old_contracts is not None else []
+    # Room quantity changes are logged on the *contracts* tab (one row per room),
+    # and suppressed from the room tab below.
+    if old_rooms is not None:
+        contract_changes += room_quantity_changes(old_rooms, new_rooms)
     if old_rooms is None or old_contracts is None:
         print("  (no previous run found — change tabs pruned only, no new rows)")
 
-    update_change_tab(sh, ROOM_CHANGE_TAB, ROOM_CHANGE_HEADER, room_changes)
+    update_change_tab(sh, ROOM_CHANGE_TAB, ROOM_CHANGE_HEADER, room_changes,
+                      exclude_fields=ROOM_CHANGE_FIELD_EXCLUDE)
     update_change_tab(sh, CONTRACT_CHANGE_TAB, CONTRACT_CHANGE_HEADER, contract_changes)
 
     print("Done.")
