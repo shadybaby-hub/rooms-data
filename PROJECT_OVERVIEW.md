@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-15 (doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
+_Last updated: 2026-06-15 (`Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
 
 ---
 
@@ -193,7 +193,10 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
   to the repo (as `github-actions[bot]`).
 - **Google Sheets publish:** `publish_to_sheets.py` (service account) writes four tabs:
   - `Latest Room Data` / `Latest Contracts Data` — the full current CSVs, **cleared &
-    rewritten each run**, with a `Run Time` column appended as the last column.
+    rewritten each run**, with a `Run Time` column appended as the last column. On
+    `Latest Room Data` the `image_urls` column is **exploded to one row per URL** (all
+    other columns repeated, `|` separators dropped) via `explode_on()` — display-only;
+    `rooms_latest.csv` itself stays `|`-joined so the change-log diff is unaffected.
   - `Room Data Changes Last 30 Days` / `Contracts Data Changes Last 30 Days` — a **rolling
     30-day change log kept *inside the Sheet*** (not committed to GitHub). Each run diffs the
     previous run's `*_latest.csv` (stashed to `/tmp/prev`) vs the new one, appends the day's

@@ -36,9 +36,11 @@ import sys
 from datetime import datetime, timezone, timedelta
 
 # ── Latest tabs ────────────────────────────────────────────────────────────────
+# (title, csv path, field to explode one-row-per-value — None = leave as-is).
+# "Latest Room Data" explodes image_urls so each URL gets its own row.
 LATEST_TABS = [
-    ("Latest Room Data",      "output/rooms_latest.csv"),
-    ("Latest Contracts Data", "output/contracts_latest.csv"),
+    ("Latest Room Data",      "output/rooms_latest.csv",     "image_urls"),
+    ("Latest Contracts Data", "output/contracts_latest.csv", None),
 ]
 RUN_TIME_HEADER = "Run Time"
 
@@ -111,6 +113,26 @@ def load_groups(path, key_fields):
     with open(path, newline="", encoding="utf-8") as f:
         for r in csv.DictReader(f):
             out.setdefault(tuple(r.get(k, "") for k in key_fields), []).append(r)
+    return out
+
+
+def explode_on(grid, col):
+    """Expand a `|`-joined cell into one row per value, repeating every other
+    column. Rows with 0 or 1 values pass through unchanged. The header row
+    (row 0) is never exploded. Display-only — the source CSV is untouched."""
+    if not grid:
+        return grid
+    out = [grid[0]]
+    for row in grid[1:]:
+        cell  = row[col] if col < len(row) else ""
+        parts = [p for p in cell.split("|") if p] if cell else []
+        if len(parts) <= 1:
+            out.append(row)
+            continue
+        for p in parts:
+            new = list(row)
+            new[col] = p
+            out.append(new)
     return out
 
 
@@ -218,8 +240,10 @@ def _get_or_create(sh, title, ncols):
         return sh.add_worksheet(title=title, rows=100, cols=ncols)
 
 
-def write_latest_tab(sh, title, path):
+def write_latest_tab(sh, title, path, explode_field=None):
     grid = load_grid(path)
+    if explode_field and grid and explode_field in grid[0]:
+        grid = explode_on(grid, grid[0].index(explode_field))
     if grid:  # append the Run Time column (header + one value per data row)
         grid[0] = grid[0] + [RUN_TIME_HEADER]
         for i in range(1, len(grid)):
@@ -271,9 +295,9 @@ def main():
     print(f"Publishing to spreadsheet: {sh.title}")
 
     # 1. Latest tabs (only current data + Run Time column)
-    for title, path in LATEST_TABS:
+    for title, path, explode_field in LATEST_TABS:
         if os.path.exists(path):
-            write_latest_tab(sh, title, path)
+            write_latest_tab(sh, title, path, explode_field)
         else:
             print(f"  !! {path} missing — skipping '{title}'")
 
