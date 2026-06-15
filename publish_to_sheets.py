@@ -248,6 +248,8 @@ def room_available_contracts_changes(old_rooms, new_rooms):
             continue
         o, n = old_rooms[k], new_rooms[k]
         ov, nv = o.get("available_contracts", ""), n.get("available_contracts", "")
+        if ov == "" or nv == "":
+            continue  # field absent on one side (e.g. schema migration) — not a real change
         if ov != nv:
             rows.append([RUN_DATE_STR, brand, prop, n.get("city", ""), rtype,
                          "", "", "Available Contracts", "Changed", ov, nv])
