@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
+_Last updated: 2026-06-15 (doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
 
 ---
 
@@ -21,10 +21,12 @@ the fresh CSVs back into the repo, so there is always an up-to-date snapshot of 
 availability and prices across all brands in one place. Each weekday run also writes a
 dated **change report** (snapshot + changelog) into `reports/`.
 
-It is **two Python scripts** — `etl.py` (~360 lines, the scraper) and `make_report.py`
-(the weekday diff/report generator) — with **one dependency** (`requests`; `make_report.py`
-is pure stdlib). There is no database, no web server, no framework — just "hit APIs →
-parse JSON → write CSV → diff against yesterday."
+It is **three Python scripts** — `etl.py` (~400 lines, the scraper), `make_report.py`
+(the weekday diff/report generator), and `publish_to_sheets.py` (the Google Sheets
+publisher). Dependencies: `etl.py` needs only `requests`; `make_report.py` is pure stdlib;
+`publish_to_sheets.py` adds `gspread` + `google-auth` (three packages total in
+`requirements.txt`). There is no database, no web server, no framework — just "hit APIs →
+parse JSON → write CSV → diff against yesterday → push to a Sheet."
 
 ---
 
@@ -67,7 +69,7 @@ single source of truth for which brands are scraped.**
 
 The flow is all in `etl.py`. Top to bottom:
 
-1. **Config (lines ~37–96)**
+1. **Config (lines ~46–108)**
    - `BRANDS` — the list of brands + their base URLs + which endpoints to hit.
    - Tuning constants: `PER_PAGE=100`, `SLEEP_S=0.25` (politeness delay between pages),
      `TIMEOUT=30`, `OUT_DIR="output"`.
@@ -83,16 +85,19 @@ The flow is all in `etl.py`. Top to bottom:
      default Windows console (cp1252) can't encode, which used to crash the run. The CSVs
      were always written as UTF-8; this just makes the console output safe too.
 
-2. **Helpers (lines ~98–132)**
+2. **Helpers (lines ~110–154)**
    - `strip_html()` — unescapes HTML entities and removes tags from description text.
    - `safe(d, *keys)` — safely walks nested dicts/lists without crashing on missing keys
      (returns `""` instead of throwing). Used heavily because the API JSON is messy and
      inconsistent between brands.
+   - `pence_to_pounds()` — converts the API's minor-unit `price` (pence) to £/week,
+     passing through anything that doesn't parse. This is the pence→pounds conversion
+     referenced in §5.
    - `city_from_url()` — pulls the `city` query param out of a booking URL as a fallback
      when the address record has no city.
    - `make_session()` — builds a `requests.Session` with the User-Agent and optional auth.
 
-3. **Fetchers (lines ~135–168)**
+3. **Fetchers (lines ~157–213)**
    - `fetch_all_pages()` — the normal path. Reads the WordPress pagination headers
      (`X-WP-TotalPages`, `X-WP-Total`) and loops through every page, accumulating items.
    - `fetch_by_id_range()` — the `PSL_ID_RANGE` fallback path; hits `/endpoint/<id>` for
@@ -101,7 +106,7 @@ The flow is all in `etl.py`. Top to bottom:
      `RETRY_BACKOFF`) on transient errors (timeouts, conn drops, 5xx, 429). Added because a
      single timeout used to drop a whole brand, which then showed up as mass "removed" rows.
 
-4. **The parser — `parse_room()` (lines ~173–266)** — this is the heart of the
+4. **The parser — `parse_room()` (lines ~218–313)** — this is the heart of the
    "Transform" step and the messiest part. For each raw API item it:
    - Splits the title `"Room Type, Property Name"` into `room_type` + `property`.
    - Resolves the brand name (prefers the API's own field, falls back to config).
@@ -114,7 +119,7 @@ The flow is all in `etl.py`. Top to bottom:
    - The many `or` fallbacks exist precisely because each brand's JSON is shaped slightly
      differently — that's why the code looks defensive/repetitive.
 
-5. **`main()` (lines ~271–344)**
+5. **`main()` (lines ~318–395)**
    - Makes the `output/` dir, builds a timestamp `YYYYMMDD_HHMMSS`.
    - Loops every brand → every endpoint → fetches → parses → collects all rooms and
      contracts into two big lists. Errors per brand/item are caught and logged, not fatal.

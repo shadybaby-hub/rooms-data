@@ -102,6 +102,11 @@ GitHub Actions (weekday cron, Mon–Fri 6:28pm UK)
               └── changes.md  (diff vs previous run)
                  │
                  ▼
+        publish_to_sheets.py  → Google Sheet (service account)
+              ├── Latest Room Data / Latest Contracts Data  (current data, rewritten)
+              └── Room/Contracts Data Changes Last 30 Days   (rolling change log)
+                 │
+                 ▼
         git commit & push (output/ + reports/) to repo
 ```
 
