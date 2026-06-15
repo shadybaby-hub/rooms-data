@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-15 (Room change tab no longer logs `quantity_available` / `(added)` / `(removed)` (history purged too); room quantity changes moved to the Contracts change tab, one row per room with blank Year/Duration via `room_quantity_changes()`; `quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
+_Last updated: 2026-06-15 (Contracts change tab now filters legacy `(added)`/`(removed)` Change Field values via `CONTRACT_CHANGE_FIELD_EXCLUDE`; Room change tab no longer logs `quantity_available` / `(added)` / `(removed)` (history purged too); room quantity changes moved to the Contracts change tab, one row per room with blank Year/Duration via `room_quantity_changes()`; `quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
 
 ---
 
@@ -218,7 +218,9 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     tab — one row per room (Change Field "Quantity Available", blank Academic Year /
     Duration) via `room_quantity_changes()`, sourced from the rooms indexes so it doesn't
     fan out per contract. Room appearance/disappearance is already covered on the Contracts
-    tab by New Contract / Sold Out.
+    tab by New Contract / Sold Out. The Contracts tab also filters
+    `CONTRACT_CHANGE_FIELD_EXCLUDE = {(added), (removed)}` — legacy Change Field values from
+    an older diff that the current code no longer emits, kept out so stale rows don't linger.
   - **Brand-vanish guard:** if a whole brand is absent from the new run (probable API
     timeout), its rows are NOT logged as "removed" (same guard in `make_report.py`).
   - **Reset switch:** trigger the workflow with the `reset_change_tabs` input = true (env

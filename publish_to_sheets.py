@@ -80,6 +80,10 @@ CONTRACT_WATCH = [
 # to the Contracts change tab (see room_quantity_changes); room add/remove is
 # already represented there as New Contract / Sold Out.
 ROOM_CHANGE_FIELD_EXCLUDE = {"Quantity Available", "(removed)", "(added)"}
+# Legacy Change Field values on the Contracts tab (from an older diff that used
+# Added/Removed before New Contract/Sold Out). Current code never emits these, so
+# filtering them just purges stale rows and stops them lingering.
+CONTRACT_CHANGE_FIELD_EXCLUDE = {"(added)", "(removed)"}
 
 WINDOW_DAYS = 30
 SCOPES = ["https://www.googleapis.com/auth/spreadsheets"]
@@ -360,7 +364,8 @@ def main():
 
     update_change_tab(sh, ROOM_CHANGE_TAB, ROOM_CHANGE_HEADER, room_changes,
                       exclude_fields=ROOM_CHANGE_FIELD_EXCLUDE)
-    update_change_tab(sh, CONTRACT_CHANGE_TAB, CONTRACT_CHANGE_HEADER, contract_changes)
+    update_change_tab(sh, CONTRACT_CHANGE_TAB, CONTRACT_CHANGE_HEADER, contract_changes,
+                      exclude_fields=CONTRACT_CHANGE_FIELD_EXCLUDE)
 
     print("Done.")
 
