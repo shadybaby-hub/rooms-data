@@ -1,0 +1,383 @@
+# Change report — 2026-06-24
+
+_Generated 2026-06-24 19:12 UTC_
+
+## Summary
+
+- Rooms: **+0** added, **−14** removed
+- Contracts: **+7** added, **−32** removed
+- Price changes: **299**
+- Availability changes: **0**
+
+## Price changes (299)
+
+- Essential Student Living | Brooke Hall | Large Studio | Brooke Hall - Large Studio - 26/27 - 12/09 - 51wk 2026: £299 → £309
+- Evo Student | Arcadian | Platinum Ensuite | Arcadian - Platinum Ensuite - 26/27 - 12/09 - 45wk 2026: £205 → £198
+- Evo Student | Arcadian | Platinum Ensuite | Arcadian - Platinum Ensuite - 26/27 - 12/09 - 51wk 2026: £195 → £192
+- Evo Student | Arcadian | Premium Ensuite | Arcadian - Premium Ensuite - 26/27 - 12/09 - 45wk 2026: £190 → £188
+- Evo Student | Arcadian | Premium Ensuite | Arcadian - Premium Ensuite - 26/27 - 12/09 - 51wk 2026: £185 → £182
+- Evo Student | Arcadian | Premium Plus Studio | Arcadian - Premium Plus Studio - 26/27 - 12/09 - 51wk 2026: £235 → £228
+- Evo Student | Arcadian | Premium Studio | Arcadian - Premium Studio - 26/27 - 12/09 - 45wk 2026: £229 → £219
+- Evo Student | Arcadian | Premium Studio | Arcadian - Premium Studio - 26/27 - 12/09 - 51wk 2026: £219 → £209
+- Evo Student | Centre Court | Gold Townhouse | Centre Court - Gold Townhouse - 26/27 - 12/09 - 51wk 2026: £0 → £229
+- Evo Student | Centre Court | Platinum Studio | Centre Court - Platinum Studio - 25/26 - 28/02 - 26wk 2026: £0 → £239
+- Homes for Students | 8 Roxburgh | Classic Room | 8 Roxburgh - Classic Room - 25/26 - 28/02 - 26wk 2026: £190 → £0
+- Homes for Students | ABODE | Classic Studio | Abode - Classic Studio - 25/26 - 28/02 - 22wk 2026: £0 → £260
+- Homes for Students | ABODE | Classic Studio | Abode - Classic Studio - 25/26 - 28/02 - 25wk 2026: £0 → £260
+- Homes for Students | ABODE | Deluxe Ensuite | Abode - Deluxe Ensuite - 25/26 - 28/02 - 22wk 2026: £0 → £222
+- Homes for Students | ABODE | Deluxe Ensuite | Abode - Deluxe Ensuite - 25/26 - 28/02 - 25wk 2026: £0 → £222
+- Homes for Students | Abbeygate | Bronze Studio | Abbeygate - Bronze Studio - 26/27 - 05/09 - 51wk 2026: £0 → £176
+- Homes for Students | Allen Court | Deluxe Ensuite | Allen Court - Deluxe Ensuite - 26/27 - 05/09 - 44wk 2026: £220 → £225
+- Homes for Students | Bankside Student Living | Deluxe Studio | Bankside - Deluxe Studio - 26/27 - 12/09 - 51wk 2026: £0 → £385
+- Homes for Students | Bright House | Classic Room | Bright House - Classic Room - 26/27 - 12/09 - 44wk 2026: £0 → £285
+- Homes for Students | Bright House | Classic Room | Bright House - Classic Room - 26/27 - 12/09 - 51wk 2026: £0 → £280
+- Homes for Students | Calthorpe Court | Classic Ensuite | Calthorpe Court - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £159 → £165
+- Homes for Students | Causeway View | Classic Ensuite | Causeway View - Classic Ensuite - 26/27 - 05/09 - 44wk 2026: £155 → £139
+- Homes for Students | Causeway View | Premium Studio | Causeway View - Premium Studio - 26/27 - 05/09 - 44wk 2026: £259 → £239
+- Homes for Students | Causeway View | Premium Studio | Causeway View - Premium Studio - 26/27 - 05/09 - 51wk 2026: £245 → £229
+- Homes for Students | Clarence Dock Village | Premium Ensuite | Clarence Dock Village - Premium Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £159
+- Homes for Students | College Court | Classic Ensuite | College Court - Classic Ensuite - 26/27 - 05/09 - 39wk 2026: £0 → £155
+- Homes for Students | College Court | Classic Ensuite | College Court - Classic Ensuite - 26/27 - 05/09 - 43wk 2026: £0 → £139
+- Homes for Students | College Court | Classic Ensuite | College Court - Classic Ensuite - 26/27 - 05/09 - 51wk 2026: £0 → £135
+- Homes for Students | Crown House | Classic Ensuite | Crown House Reading - Classic Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £209
+- Homes for Students | Crown House | Classic Ensuite | Crown House Reading - Classic Ensuite - 25/26 - 28/02 - 27wk 2026: £0 → £209
+- Homes for Students | Crown House | Classic Ensuite | Crown House Reading - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £205
+- Homes for Students | Crown House | Classic Ensuite | Crown House Reading - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £209
+- Homes for Students | Crown House | Classic Ensuite Plus | Crown House Reading - Classic Ensuite Plus - 26/27 - 12/09 - 51wk 2026: £0 → £245
+- Homes for Students | Crown House | Classic Studio | Crown House Reading - Classic Studio - 26/27 - 12/09 - 44wk 2026: £0 → £309
+- Homes for Students | Crown House | Classic Studio | Crown House Reading - Classic Studio - 26/27 - 12/09 - 51wk 2026: £0 → £305
+- Homes for Students | Crown House | Premium Studio | Crown House Reading - Premium Studio - 26/27 - 12/09 - 44wk 2026: £0 → £315
+- Homes for Students | Crown House | Premium Studio | Crown House Reading - Premium Studio - 26/27 - 12/09 - 51wk 2026: £0 → £325
+- Homes for Students | Cube Greenwich | Standard Studio | The Cube Greenwich - Standard Studio - 26/27 - 12/09 - 51wk 2026: £0 → £345
+- Homes for Students | Devonshire Courtyard | Classic Ensuite | Devonshire Courtyard - Classic Ensuite - 25/26 - 28/02 - 15wk 2026: £0 → £105
+- Homes for Students | Devonshire Courtyard | Classic Ensuite | Devonshire Courtyard - Classic Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £105
+- Homes for Students | Devonshire Courtyard | Classic Ensuite | Devonshire Courtyard - Classic Ensuite - 25/26 - 28/02 - 27wk 2026: £0 → £105
+- Homes for Students | Emily Davies | 1 Bed Apartment | Emily Davies - 1 Bed Apartment - 26/27 - 05/09 - 51wk 2026: £365 → £375
+- Homes for Students | Filbert Village | Premium Ensuite | Filbert Village - Premium Ensuite - 26/27 - 18/09 - 51wk 2026: £149 → £141
+- Homes for Students | Frobisher House | Premium Ensuite | Frobisher House - Premium Ensuite - 25/26 - 28/02 - 27wk 2026: £0 → £119
+- Homes for Students | Gallery Apartments | Classic Plus Studio | Gallery Apartments - Classic plus Studio - 26/27 - 05/09 - 51wk 2026: £265 → £260
+- Homes for Students | Gallery Apartments | Classic Studio | Gallery Apartments - Classic Studio - 26/27 - 05/09 - 44wk 2026: £245 → £220
+- Homes for Students | Gallery Apartments | Classic Studio | Gallery Apartments - Classic Studio - 26/27 - 05/09 - 51wk 2026: £235 → £220
+- Homes for Students | Gallery Apartments | Deluxe Studio | Gallery Apartments - Deluxe Studio - 26/27 - 05/09 - 51wk 2026: £285 → £280
+- Homes for Students | Gallery Apartments | Large Plus Studio | Gallery Apartments - Large Plus Studio - 26/27 - 05/09 - 51wk 2026: £280 → £270
+- Homes for Students | Gallery Apartments | Large Studio | Gallery Apartments - Large Studio - 26/27 - 05/09 - 44wk 2026: £285 → £240
+- Homes for Students | Gallery Apartments | Large Studio | Gallery Apartments - Large Studio - 26/27 - 05/09 - 51wk 2026: £275 → £235
+- Homes for Students | Gallery Apartments | Split Level Studio | Gallery Apartments - Split Level Studio - 26/27 - 05/09 - 51wk 2026: £310 → £300
+- Homes for Students | Gallery Apartments | Studio | Gallery Apartments - Studio - 26/27 - 05/09 - 51wk 2026: £225 → £199
+- Homes for Students | Hamwic Hall | Classic Ensuite | Hamwic Hall - Classic Ensuite - 25/26 - 28/02 - 16wk 2026: £0 → £163
+- Homes for Students | Hamwic Hall | Classic Ensuite | Hamwic Hall - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £170
+- Homes for Students | Hamwic Hall | Classic Ensuite | Hamwic Hall - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £158
+- Homes for Students | Iron Bridge Studios | Top Floor Classic Studio | Iron Bridge Studios - Top Floor Classic Studio - 26/27 - 12/09 - 51wk 2026: £0 → £220
+- Homes for Students | Luneside | 6 Bed Standard Ensuite | Luneside - 6 Bed Standard Ensuite - 25/26 - 28/02 - 30wk 2026: £0 → £135
+- Homes for Students | Luneside | 6 Bed Standard Ensuite | Luneside - 6 Bed Standard Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £149
+- Homes for Students | Luneside | 6 Bed Standard Ensuite | Luneside - 6 Bed Standard Ensuite - 26/27 - 19/09 - 51wk 2026: £0 → £139
+- Homes for Students | Paddington Park House | Classic Plus Ensuite | Paddington Park House - Classic Plus Ensuite - 26/27 - 05/09 - 44wk 2026: £0 → £145
+- Homes for Students | Paddington Park House | Classic Plus Ensuite | Paddington Park House - Classic Plus Ensuite - 26/27 - 05/09 - 51wk 2026: £0 → £129
+- Homes for Students | Paddington Park House | Premium Ensuite | Paddington Park House - Premium Ensuite - 25/26 - 28/02 - 19wk 2026: £0 → £119
+- Homes for Students | Palamon Court | Two Bed Club Apartment | Palamon Court - Two Bed Club Apartment - 26/27 - 05/09 - 44wk 2026: £0 → £215
+- Homes for Students | Plymouth Cross House | Classic 4 & 5 Bed Ensuite | Plymouth Cross House - Classic 4 & 5 Bed Ensuite - 25/26 - 28/02 - 14wk 2026: £0 → £115
+- Homes for Students | Plymouth Cross House | Classic 4 & 5 Bed Ensuite | Plymouth Cross House - Classic 4 & 5 Bed Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £115
+- Homes for Students | Plymouth Cross House | Classic 4 & 5 Bed Ensuite | Plymouth Cross House - Classic 4 & 5 Bed Ensuite - 25/26 - 28/02 - 26wk 2026: £0 → £115
+- Homes for Students | Plymouth Cross House | Classic Studio | Plymouth Cross House - Classic Studio - 26/27 - 12/09 - 41wk 2026: £210 → £195
+- Homes for Students | Plymouth Cross House | Deluxe Studio | Plymouth Cross House - Deluxe Studio - 26/27 - 12/09 - 45wk 2026: £0 → £187
+- Homes for Students | Plymouth Cross House | Deluxe Studio | Plymouth Cross House - Deluxe Studio - 26/27 - 12/09 - 51wk 2026: £0 → £185
+- Homes for Students | Plymouth Cross House | Silver Ensuite | Plymouth Cross House - Silver Ensuite - 26/27 - 12/09 - 41wk 2026: £145 → £149
+- Homes for Students | Plymouth Cross House | Silver Ensuite | Plymouth Cross House - Silver Ensuite - 26/27 - 12/09 - 51wk 2026: £130 → £129
+- Homes for Students | Polhill Park | Classic Ensuite | Polhill Park  - Classic Ensuite - 26/27 - 12/09 - 41wk 2026: £0 → £139
+- Homes for Students | Spring Gardens | Classic Room | Spring Gardens - Classic Room - 25/26 - 28/02 - 26wk 2026: £82 → £0
+- Homes for Students | St Martins House | Classic Ensuite | St Martins House - Classic Ensuite - 26/27 - 18/09 - 44wk 2026: £129 → £119
+- Homes for Students | St Martins House | Classic Ensuite | St Martins House - Classic Ensuite - 26/27 - 18/09 - 51wk 2026: £119 → £129
+- Homes for Students | The Elements | Gold Ensuite | The Elements - Gold Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £129
+- Homes for Students | The Elements | Gold Ensuite | The Elements - Gold Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £119
+- Homes for Students | The Elements | Silver Ensuite | The Elements - Silver Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £119
+- Homes for Students | The Elements | Silver Ensuite | The Elements - Silver Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £109
+- Homes for Students | The Forge | Classic Ensuite | The Forge - Classic Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £105
+- Homes for Students | The Forge | Classic Ensuite | The Forge - Classic Ensuite - 25/26 - 28/02 - 27wk 2026: £0 → £105
+- Homes for Students | The Forge | Classic Plus Ensuite | The Forge - Classic Plus Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £105
+- Homes for Students | The Forge | Classic Plus Ensuite | The Forge - Classic Plus Ensuite - 25/26 - 28/02 - 27wk 2026: £0 → £105
+- Homes for Students | The Forge | Classic Plus Ensuite | The Forge - Classic Plus Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £110
+- Homes for Students | The Forge | Classic Plus Ensuite | The Forge - Classic Plus Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £105
+- Homes for Students | The Forge | Premium Ensuite | The Forge - Premium Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £115
+- Homes for Students | The Forge | Premium Ensuite | The Forge - Premium Ensuite - 25/26 - 28/02 - 27wk 2026: £0 → £115
+- Homes for Students | The Forge | Premium Plus Ensuite | The Forge - Premium Plus Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £120
+- Homes for Students | The Forge | Premium Plus Ensuite | The Forge - Premium Plus Ensuite - 25/26 - 28/02 - 27wk 2026: £0 → £120
+- Homes for Students | The Forge | Premium Plus Ensuite | The Forge - Premium Plus Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £120
+- Homes for Students | The Forge | Premium Plus Ensuite | The Forge - Premium Plus Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £115
+- Homes for Students | The Foundry | Standard Ensuite | The Foundry - Standard En-Suite - 26/27 - 05/09 - 51wk 2026: £0 → £150
+- Homes for Students | The Foundry | Standard Ensuite | The Foundry - Standard Ensuite - 26/27 - 05/09 - 44wk 2026: £0 → £148
+- Homes for Students | The Glassworks | Standard En-Suite | The Glassworks Leicester - Standard En-Suite - 25/26 - 28/02 - 24wk 2026: £0 → £169
+- Homes for Students | The Glassworks | Standard En-Suite | The Glassworks Leicester - Standard En-Suite - 25/26 - 28/02 - 28wk 2026: £0 → £165
+- Homes for Students | The Glassworks | Standard En-Suite | The Glassworks Leicester - Standard En-suite - 26/27 - 18/09 - 44wk 2026: £0 → £180
+- Homes for Students | The Glassworks | Standard En-Suite | The Glassworks Leicester - Standard En-suite - 26/27 - 18/09 - 51wk 2026: £0 → £170
+- Homes for Students | The Green | Classic Ensuite | The Green Village - Classic Ensuite - 25/26 - 16/03 - 25wk 2026: £0 → £88
+- Homes for Students | The Green | Premium Ensuite | The Green Village - Premium Ensuite - 25/26 - 16/03 - 18wk 2026: £0 → £112
+- Homes for Students | The Green | Premium Ensuite | The Green Village - Premium Ensuite - 25/26 - 16/03 - 25wk 2026: £0 → £102
+- Homes for Students | The Paper Works | Duplex Studio | The Paper Works - Duplex Studio - 26/27 - 12/09 - 51wk 2026: £0 → £180
+- Prestige Student Living | 88 Bromsgrove House | Premium Studio | 88 Bromsgrove House - Premium Studio - 26/27 - 05/09 - 45wk 2026: £0 → £255
+- Prestige Student Living | 88 Bromsgrove House | Studio | 88 BROMSGROVE HOUSE - Studio - 26/27 - 05/09 - 45wk 2026: £0 → £245
+- Prestige Student Living | ARK Canning Town | Platinum Plus Studio | Ark Canning Town - Platinum Plus Studio - 26/27 - 12/09 - 51wk 2026: £540 → £545
+- Prestige Student Living | ARK Canning Town | Premium Plus Ensuite | Ark Canning Town - Premium Plus Ensuite - 26/27 - 12/09 - 51wk 2026: £350 → £374
+- Prestige Student Living | ARK Canning Town | Premium Studio | Ark Canning Town - Premium Studio - 26/27 - 12/09 - 44wk 2026: £0 → £495
+- Prestige Student Living | ARK Canning Town | Premium Studio | Ark Canning Town - Premium Studio - 26/27 - 12/09 - 51wk 2026: £0 → £445
+- Prestige Student Living | Bridle Works – LEFT | Studio Exec | Bridle Works - Studio Exec - 26/27 - 05/09 - 51wk 2026: £0 → £425
+- Prestige Student Living | Broadway Studios | Classic Terrace Studio | Broadway Studios - Classic Terrace Studio - 26/27 - 05/09 - 51wk 2026: £310 → £315
+- Prestige Student Living | Broadway Studios | Premium Studio Plus | Premium Studio Plus - 26/27 - 05/09 - 51wk 2026: £330 → £340
+- Prestige Student Living | Broadway Studios | Premium Terrace Studio | Broadway Studios - Premium Terrace Studios - 26/27 - 05/09 - 51wk 2026: £365 → £380
+- Prestige Student Living | Broadway Studios | Standard Studio | Broadway Studios - Standard Studio - 26/27 - 05/09 - 44wk 2026: £260 → £255
+- Prestige Student Living | Chamberlain Place | Bronze Studio | Chamberlain Place - Bronze Studio - 26/27 - 05/09 - 45wk 2026: £0 → £215
+- Prestige Student Living | Chamberlain Place | Bronze Studio | Chamberlain Place - Bronze Studio - 26/27 - 05/09 - 51wk 2026: £0 → £209
+- Prestige Student Living | Chamberlain Place | Gold Studio | Chamberlain Place - Gold Studio - 26/27 - 05/09 - 45wk 2026: £0 → £155
+- Prestige Student Living | Chamberlain Place | Gold Studio | Chamberlain Place - Gold Studio - 26/27 - 05/09 - 51wk 2026: £0 → £239
+- Prestige Student Living | Chamberlain Place | One Bed Plus Apartment | Chamberlain Place - One Bed Plus Apartment - 26/27 - 05/09 - 51wk 2026: £0 → £340
+- Prestige Student Living | Cosmos | Premium Cluster Studio | Cosmos - Premium Cluster Studio V1 - 26/27 - 05/09 - 44wk 2026: £0 → £145
+- Prestige Student Living | Crown House | Premium 1 Bedroom Apartment | Crown House - Premium 1 Bedroom Apartment - 26/27 - 12/09 - 51wk 2026: £0 → £270
+- Prestige Student Living | Crown House | Premium Superior Studio | Crown House - Premium Superior Studio - 26/27 - 12/09 - 44wk 2026: £0 → £189
+- Prestige Student Living | Crown House | Premium Superior Studio | Crown House - Premium Superior Studio - 26/27 - 12/09 - 51wk 2026: £0 → £179
+- Prestige Student Living | Crown House | Superior Studio | Crown House - Superior Studio - 26/27 - 12/09 - 44wk 2026: £0 → £180
+- Prestige Student Living | Crown House | Superior Studio | Crown House - Superior Studio - 26/27 - 12/09 - 51wk 2026: £0 → £170
+- Prestige Student Living | Crown Place | Luxury Studio | Crown Place - Luxury Studio - 26/27 - 12/09 - 46wk 2026: £0 → £234
+- Prestige Student Living | Crown Place | Luxury Studio | Crown Place - Luxury Studio - 26/27 - 12/09 - 51wk 2026: £0 → £209
+- Prestige Student Living | Crown Place | Standard Studio | Crown Place - Standard  Studio - 26/27 - 12/09 - 51wk 2026: £0 → £194
+- Prestige Student Living | Crown Place | Standard Studio | Crown Place - Standard Studio - 26/27 - 12/09 - 46wk 2026: £0 → £219
+- Prestige Student Living | Discovery Studios | Classic Plus Studio | Discovery Studios - Classic Plus Studio - 25/26 - 28/02 - 18wk 2026: £0 → £209
+- Prestige Student Living | Fabric | Classic Plus Ensuite | Fabric - Classic Plus Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £170
+- Prestige Student Living | Fabric | Premium Ensuite | Fabric - Premium Ensuite - 26/27 - 12/09 - 45wk 2026: £0 → £189
+- Prestige Student Living | Fabric | Silver Studio | Fabric - Silver Studio - 26/27 - 12/09 - 45wk 2026: £0 → £194
+- Prestige Student Living | Fabric | Silver Studio | Fabric - Silver Studio - 26/27 - 12/09 - 51wk 2026: £0 → £184
+- Prestige Student Living | Fontenoy Apartments | Deluxe Studio | Fontenoy Apartments - Deluxe Studio - 26/27 - 12/09 - 51wk 2026: £0 → £213
+- Prestige Student Living | Foundry Courtyard | Bronze Ensuite | Foundry Courtyard - Bronze Ensuite - 26/27 - 05/09 - 51wk 2026: £0 → £160
+- Prestige Student Living | Globe Works | Premium Plus Studio | Globe Works - Premium Plus Studio - 26/27 - 12/09 - 45wk 2026: £0 → £245
+- Prestige Student Living | Globe Works | Premium Plus Studio | Globe Works - Premium Plus Studio - 26/27 - 12/09 - 51wk 2026: £0 → £235
+- Prestige Student Living | Haymarket Yards | Silver Plus Studio | Haymarket Yards - Silver Plus Studio - 26/27 - 05/09 - 44wk 2026: £0 → £345
+- Prestige Student Living | Haymarket Yards | Silver Plus Studio | Haymarket Yards - Silver Plus Studio - 26/27 - 05/09 - 51wk 2026: £0 → £335
+- Prestige Student Living | Hill View Place | Premium Townhouse Ensuite | Hill View Place - Premium Townhouse Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £215
+- Prestige Student Living | Hillside House – LEFT | 3 Bed Standard Ensuite | Hillside House - 3 Bed Standard - 26/27 - 12/09 - 51wk 2026: £0 → £180
+- Prestige Student Living | Hillside House – LEFT | 3 Bed Standard Ensuite | Hillside House - 3 Bed Standard Ensuite - 25/26 - 28/02 - 21wk 2026: £0 → £155
+- Prestige Student Living | Hillside House – LEFT | 3 Bed Standard Ensuite | Hillside House - 3 Bed Standard Ensuite - 25/26 - 28/02 - 26wk 2026: £0 → £155
+- Prestige Student Living | Hillside House – LEFT | 3 Bed Standard Ensuite | Hillside House - 3 Bed Standard Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £190
+- Prestige Student Living | Hillside House – LEFT | 4 Bed Premium Ensuite | Hillside House - 4 Bed Premium Ensuite - 25/26 - 28/02 - 21wk 2026: £0 → £145
+- Prestige Student Living | Hillside House – LEFT | 4 Bed Premium Ensuite | Hillside House - 4 Bed Premium Ensuite - 25/26 - 28/02 - 26wk 2026: £0 → £145
+- Prestige Student Living | Hillside House – LEFT | 4 Bed Premium Ensuite | Hillside House - 4 Bed Premium Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £170
+- Prestige Student Living | Hillside House – LEFT | 4 Bed Standard Ensuite | Hillside House - 4 Bed Standard Ensuite - 25/26 - 28/02 - 21wk 2026: £0 → £140
+- Prestige Student Living | Hillside House – LEFT | 4 Bed Standard Ensuite | Hillside House - 4 Bed Standard Ensuite - 25/26 - 28/02 - 26wk 2026: £0 → £140
+- Prestige Student Living | Hillside House – LEFT | 4 Bed Standard Ensuite | Hillside House - 4 Bed Standard Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £165
+- Prestige Student Living | Hillside House – LEFT | Classic Studio | Hillside House - Classic Studio - 26/27 - 12/09 - 44wk 2026: £0 → £265
+- Prestige Student Living | Hillside House – LEFT | Studio Exec | Hillside House - Studio Exec - 26/27 - 12/09 - 51wk 2026: £0 → £330
+- Prestige Student Living | Holden Court | Classic Studio | Holden Court - Classic Studio - 25/26 - 28/02 - 20wk 2026: £0 → £219
+- Prestige Student Living | Holden Court | Classic Studio | Holden Court - Classic Studio - 26/27 - 12/09 - 44wk 2026: £0 → £265
+- Prestige Student Living | Holden Court | Classic Studio | Holden Court - Classic Studio - 26/27 - 12/09 - 51wk 2026: £0 → £255
+- Prestige Student Living | Hollis Wharf | Premium Plus Studio | Hollis Wharf - Premium Plus Studio - 26/27 - 05/09 - 51wk 2026: £0 → £330
+- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 25/26 - 28/02 - 15wk 2026: £0 → £209
+- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 25/26 - 28/02 - 20wk 2026: £0 → £209
+- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 25/26 - 28/02 - 25wk 2026: £0 → £209
+- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 26/27 - 12/09 - 44wk 2026: £0 → £230
+- Prestige Student Living | Innovo House | Penthouse Premium Studio | Innovo House - Penthouse Premium Studio - 26/27 - 12/09 - 51wk 2026: £0 → £225
+- Prestige Student Living | Justice Mill Studios | 1 Bed Apartment | Justice Mill Studios - 1 Bed Apartment - 26/27 - 05/09 - 44wk 2026: £0 → £208
+- Prestige Student Living | Limelight | Gold Suite | Limelight - Gold Suite - 25/26 - 28/02 - 12wk 2026: £0 → £235
+- Prestige Student Living | Limelight | Gold Suite | Limelight - Gold Suite - 25/26 - 28/02 - 22wk 2026: £0 → £235
+- Prestige Student Living | Limelight | Gold Suite | Limelight - Gold Suite - 25/26 - 28/02 - 25wk 2026: £0 → £235
+- Prestige Student Living | Limelight | Gold Suite | Limelight - Gold Suite - 26/27 - 12/09 - 44wk 2026: £0 → £320
+- Prestige Student Living | Limelight | Gold Suite | Limelight - Gold Suite - 26/27 - 12/09 - 51wk 2026: £0 → £320
+- Prestige Student Living | Limelight | Silver Club | Limelight - Silver Club - 26/27 - 05/09 - 44wk 2026: £0 → £240
+- Prestige Student Living | Limelight | Silver Club Plus | Limelight - Silver Club Plus - 26/27 - 12/09 - 44wk 2026: £0 → £235
+- Prestige Student Living | Limelight | Silver Club Plus | Limelight - Silver Club Plus - 26/27 - 12/09 - 51wk 2026: £0 → £235
+- Prestige Student Living | Marketgait Apartments | Deluxe Studio | Marketgait Apartments - Deluxe Studio - 26/27 - 29/08 - 51wk 2026: £0 → £230
+- Prestige Student Living | Marketgait Apartments | Premium Studio | Marketgait Apartments - Premium Studio - 25/26 - 28/02 - 20wk 2026: £0 → £160
+- Prestige Student Living | Marketgait Apartments | Premium Studio | Marketgait Apartments - Premium Studio - 26/27 - 29/08 - 44wk 2026: £0 → £205
+- Prestige Student Living | Marketgait Apartments | Premium Studio | Marketgait Apartments - Premium Studio - 26/27 - 29/08 - 51wk 2026: £0 → £205
+- Prestige Student Living | Marketgait Apartments | Premium Studio Plus | Marketgait Apartments - Premium Studio Plus - 26/27 - 29/08 - 51wk 2026: £210 → £0
+- Prestige Student Living | Marketgait Apartments | Studio | Marketgait Apartments - Studio V2 - 26/27 - 29/08 - 40wk 2026: £0 → £199
+- Prestige Student Living | Mayfield Residences | 3 Bed Cluster | Mayfield Residences - 3 Bed Cluster - 26/27 - 05/09 - 51wk 2026: £0 → £285
+- Prestige Student Living | McDonald Road | 3 Bed Ensuite | McDonald Road - 3 Bed Ensuite - 26/27 - 05/09 - 44wk 2026: £0 → £240
+- Prestige Student Living | McDonald Road | 3 Bed Ensuite | McDonald Road - 3 Bed Ensuite - 26/27 - 05/09 - 51wk 2026: £0 → £235
+- Prestige Student Living | Miura | Standard Studio | Miura - Standard Studio - 26/27 - 12/09 - 51wk 2026: £0 → £165
+- Prestige Student Living | Onyx | Gold Ensuite | Onyx - Gold Ensuite - 25/26 - 28/02 - 14wk 2026: £0 → £175
+- Prestige Student Living | Onyx | Gold Ensuite | Onyx - Gold Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £175
+- Prestige Student Living | Onyx | Gold Ensuite | Onyx - Gold Ensuite - 25/26 - 28/02 - 26wk 2026: £0 → £175
+- Prestige Student Living | Onyx | Gold Ensuite | Onyx - Gold Ensuite - 26/27 - 05/09 - 45wk 2026: £0 → £205
+- Prestige Student Living | Onyx | Gold Ensuite | Onyx - Gold Ensuite - 26/27 - 05/09 - 51wk 2026: £0 → £189
+- Prestige Student Living | Pershore Junction | Classic Ensuite | Pershore Junction - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £219
+- Prestige Student Living | Pershore Junction | Classic Ensuite | Pershore Junction - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £209
+- Prestige Student Living | Press House | Club Plus Studio | Press House - Club Plus Studio - 26/27 - 12/09 - 51wk 2026: £365 → £455
+- Prestige Student Living | Press House | Premium Studio | Press House - Premium Studio - 26/27 - 12/09 - 44wk 2026: £0 → £420
+- Prestige Student Living | Press House | Premium Studio | Press House - Premium Studio - 26/27 - 12/09 - 51wk 2026: £0 → £400
+- Prestige Student Living | Ravilious House | Deluxe Studio | Ravilious House - Deluxe Studio - 26/27 - 12/09 - 51wk 2026: £0 → £270
+- Prestige Student Living | Renslade House | Deluxe Studio | Renslade House - Deluxe Studio - 26/27 - 12/09 - 51wk 2026: £240 → £0
+- Prestige Student Living | Ryan Hall | Accessible Studio | Ryan Hall - Accessible Studio v1 - 25/26 - 16/03 - 12wk 2026: £0 → £224
+- Prestige Student Living | Ryan Hall | Accessible Studio | Ryan Hall - Accessible Studio v1 - 25/26 - 16/03 - 15wk 2026: £0 → £224
+- Prestige Student Living | Ryan Hall | Accessible Studio | Ryan Hall - Accessible Studio v1 - 25/26 - 16/03 - 20wk 2026: £0 → £219
+- Prestige Student Living | Ryan Hall | Accessible Studio | Ryan Hall - Accessible Studio v1 - 25/26 - 16/03 - 24wk 2026: £0 → £219
+- Prestige Student Living | Second and Third Floor, The Glassworks | Studio First | Studio First, Second & Third Floor - 26/27 - 12/09 - 51wk 2026: £0 → £175
+- Prestige Student Living | Second and Third Floor, The Glassworks | Studio Plus First | The Glassworks - Studio Plus First, Second and Third Floor - 25/26 - 28/02 - 20wk 2026: £0 → £185
+- Prestige Student Living | Second and Third Floor, The Glassworks | Studio Plus First | The Glassworks - Studio Plus First, Second and Third Floor - 25/26 - 28/02 - 27wk 2026: £0 → £185
+- Prestige Student Living | Seren | 12 Bed Cluster Ensuite | Seren - 12 Bed Cluster Ensuite V1 - 26/27 - 05/09 - 51wk 2026: £104 → £109
+- Prestige Student Living | St Gabriel’s Court | Classic Ensuite | St Gabriels Court - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £250
+- Prestige Student Living | St Gabriel’s Court | Classic Plus Studio | St Gabriels Court - Classic Plus Studio - 26/27 - 12/09 - 44wk 2026: £0 → £290
+- Prestige Student Living | St Gabriel’s Court | Classic Plus Studio | St Gabriels Court - Classic Plus Studio - 26/27 - 12/09 - 51wk 2026: £0 → £275
+- Prestige Student Living | Steelworks | Gold Ensuite | Steelworks - Gold Ensuite 1 - 26/27 - 12/09 - 44wk 2026: £0 → £145
+- Prestige Student Living | Steelworks | Gold Ensuite | Steelworks - Gold Ensuite 1 - 26/27 - 12/09 - 51wk 2026: £0 → £140
+- Prestige Student Living | Steelworks | Gold Plus Ensuite | Steelworks - Gold Plus Ensuite 2 - 26/27 - 12/09 - 44wk 2026: £0 → £160
+- Prestige Student Living | Steelworks | Silver Ensuite | Steelworks - Silver Ensuite - 25/26 - 28/02 - 26wk 2026: £0 → £110
+- Prestige Student Living | Stellaris | Classic Ensuite | STELLARIS - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £217
+- Prestige Student Living | Stellaris | Classic Ensuite | STELLARIS - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £212
+- Prestige Student Living | Stellaris | Classic Plus Ensuite | STELLARIS - Classic Plus Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £260
+- Prestige Student Living | Stellaris | Classic Plus Ensuite | STELLARIS - Classic Plus Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £217
+- Prestige Student Living | Straits Manor | Classic Ensuite | Straits Manor - Classic Ensuite - - 26/27 - 12/09 - 44wk 2026: £0 → £119
+- Prestige Student Living | Straits Manor | Classic Ensuite | Straits Manor - Classic Ensuite - 25/26 - 28/02 - 12wk 2026: £0 → £100
+- Prestige Student Living | Straits Meadow | Club Studio | Straits Meadow - Club Studio - 26/27 - 05/09 - 44wk 2026: £0 → £248
+- Prestige Student Living | Straits Meadow | Club Studio | Straits Meadow - Club Studio - 26/27 - 05/09 - 51wk 2026: £0 → £239
+- Prestige Student Living | Straits Village | Classic 2 Bed Apartment | STRAITS VILLAGE - Classic 2 Bed Apartment - 26/27 - 12/09 - 51wk 2026: £0 → £159
+- Prestige Student Living | Straits Village | Classic Ensuite | STRAITS VILLAGE - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £169
+- Prestige Student Living | Straits Village | Classic Ensuite | STRAITS VILLAGE - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £155
+- Prestige Student Living | Straits Village | Classic Ensuite | Straits Village - Classic Ensuite - 25/26 - 28/02 - 12wk 2026: £0 → £129
+- Prestige Student Living | Straits Village | Classic Ensuite | Straits Village - Classic Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £129
+- Prestige Student Living | Straits Village | Classic Ensuite | Straits Village - Classic Ensuite - 25/26 - 28/02 - 27wk 2026: £0 → £129
+- Prestige Student Living | Straits Village | Classic Plus 4 Bed Ensuite | STRAITS VILLAGE - Classic Plus 4 Bed Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £165
+- Prestige Student Living | Straits Village | Classic Plus 4 Bed Ensuite | Straits Village - Classic Plus 4 Bed Ensuite - 25/26 - 28/02 - 12wk 2026: £0 → £139
+- Prestige Student Living | Straits Village | Classic Plus 4 Bed Ensuite | Straits Village - Classic Plus 4 Bed Ensuite - 25/26 - 28/02 - 20wk 2026: £0 → £139
+- Prestige Student Living | Straits Village | Premium 2 Bed Apartment | STRAITS VILLAGE - Premium 2 Bed Apartment - 26/27 - 12/09 - 51wk 2026: £0 → £179
+- Prestige Student Living | Symons House | Classic 5 Bed Ensuite | SYMONS HOUSE - Classic 5 Bed Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £199
+- Prestige Student Living | Symons House | Classic 5 Bed Ensuite | SYMONS HOUSE - Classic 5 Bed Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £189
+- Prestige Student Living | The Aspen | 3 bedroom Standard | THE ASPEN - 3 Bedroom Standard - 26/27 - 12/09 - 51wk 2026: £199 → £179
+- Prestige Student Living | The Aspen | 4 bedroom Premium | THE ASPEN - 4 Bedroom Premium - 26/27 - 12/09 - 51wk 2026: £0 → £169
+- Prestige Student Living | The Aspen | 4 bedroom Premium | The Aspen - 4 bedroom Premium - 25/26 - 28/02 - 22wk 2026: £0 → £180
+- Prestige Student Living | The Aspen | 4 bedroom Premium | The Aspen - 4 bedroom Premium - 25/26 - 28/02 - 26wk 2026: £0 → £180
+- Prestige Student Living | The Aspen | 4 bedroom Standard | THE ASPEN - 4 Bedroom Standard - 26/27 - 12/09 - 45wk 2026: £195 → £184
+- Prestige Student Living | The Aspen | 4 bedroom Standard | The Aspen - 4 bedroom Standard - 25/26 - 28/02 - 22wk 2026: £0 → £175
+- Prestige Student Living | The Aspen | 5 bedroom Standard | THE ASPEN - 5 Bedroom Standard - 26/27 - 12/09 - 45wk 2026: £0 → £165
+- Prestige Student Living | The Aspen | 5 bedroom Standard | THE ASPEN - 5 Bedroom Standard - 26/27 - 12/09 - 51wk 2026: £0 → £153
+- Prestige Student Living | The Aspen | 5 bedroom Standard | The Aspen - 5 bedroom Standard - 25/26 - 28/02 - 22wk 2026: £0 → £175
+- Prestige Student Living | The Aspen | 5 bedroom Standard | The Aspen - 5 bedroom Standard - 25/26 - 28/02 - 26wk 2026: £0 → £175
+- Prestige Student Living | The Aspen | Deluxe Studio | THE ASPEN - Deluxe Studio - 26/27 - 12/09 - 45wk 2026: £0 → £219
+- Prestige Student Living | The Aspen | Deluxe Studio | THE ASPEN - Deluxe Studio - 26/27 - 12/09 - 51wk 2026: £0 → £205
+- Prestige Student Living | The Aspen | Deluxe Studio | The Aspen - Deluxe Studio - 25/26 - 28/02 - 22wk 2026: £0 → £200
+- Prestige Student Living | The Aspen | Deluxe Studio | The Aspen - Deluxe Studio - 25/26 - 28/02 - 26wk 2026: £0 → £200
+- Prestige Student Living | The Aspen | Executive Studio | THE ASPEN - Executive Studio - 26/27 - 12/09 - 51wk 2026: £269 → £249
+- Prestige Student Living | The Aspen | Premium Studio | THE ASPEN - Premium Studio - 26/27 - 12/09 - 45wk 2026: £249 → £235
+- Prestige Student Living | The Aspen | Premium Studio | THE ASPEN - Premium Studio - 26/27 - 12/09 - 51wk 2026: £239 → £195
+- Prestige Student Living | The Aspen | Standard Studio | THE ASPEN - Standard Studio - 26/27 - 12/09 - 51wk 2026: £235 → £185
+- Prestige Student Living | The Edge | Gold Studio | The Edge - Gold Studio - 26/27 - 12/09 - 44wk 2026: £0 → £205
+- Prestige Student Living | The Edge | Gold Studio | The Edge - Gold Studio - 26/27 - 12/09 - 51wk 2026: £0 → £199
+- Prestige Student Living | The Edge | Platinum Studio | The Edge - Platinum Studio - 26/27 - 12/09 - 44wk 2026: £0 → £200
+- Prestige Student Living | The Edge | Silver Studio | The Edge - Silver Studio - 26/27 - 12/09 - 44wk 2026: £0 → £200
+- Prestige Student Living | The Fitzalan | Premium Studio | The Fitzalan - Premium Studio - 26/27 - 12/09 - 51wk 2026: £209 → £210
+- Prestige Student Living | The Glassworks | Studio Ground Floor | Studio Ground Floor - 26/27 - 12/09 - 51wk 2026: £0 → £179
+- Prestige Student Living | The Glassworks | Studio Plus Ground Floor | The Glassworks - Studio Plus Ground Floor - 25/26 - 05/01 - 28wk 2026: £0 → £189
+- Prestige Student Living | The Keel Houses | Gold Studio | The Keel Houses - Gold Studio - 26/27 - 05/09 - 51wk 2026: £355 → £360
+- Prestige Student Living | The Keel Houses | Platinum Studio Canal View | The Keel Houses - Platinum Studio Canal View - 26/27 - 05/09 - 51wk 2026: £0 → £395
+- Prestige Student Living | The Malt Works | Premium Ensuite | The Malt Works - Premium Ensuite - 26/27 - 05/09 - 44wk 2026: £0 → £225
+- Prestige Student Living | The Pepper Mill | Premium Plus Studio Castle View | The Pepper Mill - Premium Plus Studio Castle View - 26/27 - 05/09 - 51wk 2026: £0 → £310
+- Prestige Student Living | The Place | Platinum Ensuite | The Place - Platinum Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £180
+- Prestige Student Living | The Place | Premium Ensuite | The Place - Premium Ensuite - 26/27 - 12/09 - 45wk 2026: £0 → £184
+- Prestige Student Living | The Place | Premium Ensuite | The Place - Premium Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £180
+- Prestige Student Living | The Port On The Square | Modern Standard Ensuite | The Port On The Square - Modern Standard Ensuite - 26/27 - 12/09 - 45wk 2026: £0 → £255
+- Prestige Student Living | The Port On The Square | Modern Standard Ensuite | The Port On The Square - Modern Standard Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £245
+- Prestige Student Living | The Port On The Square | Standard Ensuite | The Port on the Square - Standard Ensuite - 25/26 - 28/02 - 26wk 2026: £0 → £260
+- Prestige Student Living | The Port On The Square | Townhouse Compact Ensuite | The Port On The Square - Townhouse Compact Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £230
+- Prestige Student Living | The Sail Works | Classic Plus Studio Floor 5-7 | The Sail Works - Classic Plus Studio Floor 5-7 - 26/27 - 12/09 - 44wk 2026: £0 → £240
+- Prestige Student Living | The Sail Works | Classic Plus Studio Floor 5-7 | The Sail Works - Classic Plus Studio Floor 5-7 - 26/27 - 12/09 - 51wk 2026: £0 → £230
+- Prestige Student Living | The Valentine | Luxury Studio | The Valentine - Luxury Studio - 26/27 - 05/09 - 51wk 2026: £340 → £0
+- Prestige Student Living | The Valentine | Premium Studio | The Valentine - Premium Studio - 26/27 - 05/09 - 51wk 2026: £0 → £304
+- Prestige Student Living | Timber Yard | Bronze Studio | Timber Yard - Bronze Studio - 26/27 - 12/09 - 45wk 2026: £0 → £374
+- Prestige Student Living | Timber Yard | Bronze Studio | Timber Yard - Bronze Studio - 26/27 - 12/09 - 51wk 2026: £0 → £370
+- Prestige Student Living | Timber Yard | Classic 7-8 Bed Ensuite | Timber Yard - Classic 7/8 Bed Ensuite - 26/27 - 12/09 - 45wk 2026: £0 → £248
+- Prestige Student Living | Timber Yard | Classic 7-8 Bed Ensuite | Timber Yard - Classic 7/8 Bed Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £253
+- Prestige Student Living | Timber Yard | Classic Plus 7-8 Bed Ensuite | Classic Plus 7/8 Bed Ensuite - 26/27 - 12/09 - 45wk 2026: £0 → £258
+- Prestige Student Living | Timber Yard | Classic Plus 7-8 Bed Ensuite | Timber Yard - Classic Plus 7/8 Bed Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £247
+- Prestige Student Living | Tribeka | Deluxe Ensuite | Tribeka - Deluxe Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £204
+- Prestige Student Living | Tribeka | Deluxe Ensuite | Tribeka - Deluxe Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £189
+- Prestige Student Living | Waterloo House | Top Floor Classic Studio | Waterloo House - Top Floor Classic Studio - 25/26 - 28/02 - 20wk 2026: £0 → £150
+- Prestige Student Living | Waterloo House | Top Floor Classic Studio | Waterloo House - Top Floor Classic Studio - 26/27 - 12/09 - 51wk 2026: £0 → £275
+- Prestige Student Living | West Way Square | 2 Bed Apartment | West Way Square - 2 Bed Apartment - 25/26 - 28/02 - 19wk 2026: £0 → £499
+- Prestige Student Living | West Way Square | 2 Bed Apartment | West Way Square - 2 Bed Apartment - 26/27 - 06/09 - 51wk 2026: £0 → £570
+- Prestige Student Living | Wood Lane Studios | Standard Studio Gold | Wood Lane Studios - Standard Studio Gold - 26/27 - 26/09 - 51wk 2026: £0 → £487
+- Prestige Student Living | Wood Lane Studios | Standard Studio Silver | Wood Lane Studios - Standard Studio Silver - 26/27 - 26/09 - 51wk 2026: £0 → £457
+- Universal Student Living | Academic House | Diamond Studio | Academic House - Diamond Studio - 25/26 - 28/02 - 17wk 2026: £0 → £320
+- Universal Student Living | Academic House | Diamond Studio | Academic House - Diamond Studio - 26/27 - 12/09 - 51wk 2026: £0 → £325
+- Universal Student Living | Albert Place | Premium | Albert Place - Premium - 26/27 - 05/09 - 51wk 2026: £0 → £179
+- Universal Student Living | Albert Place | Superior | Albert Place - Superior - 26/27 - 05/09 - 51wk 2026: £0 → £185
+- Universal Student Living | Llys Y Deon | Gold Studio | Llys Y Deon - Gold Studio - 26/27 - 12/09 - 51wk 2026: £0 → £210
+- Universal Student Living | Mercury House | Classic Studio | Mercury House - Classic Studio - 26/27 - 12/09 - 44wk 2026: £0 → £215
+- Universal Student Living | Mercury House | Classic Studio | Mercury House - Classic Studio - 26/27 - 12/09 - 51wk 2026: £0 → £205
+- Universal Student Living | Red Queen | Gold Ensuite | Red Queen - Gold Ensuite - 26/27 - 12/09 - 45wk 2026: £0 → £199
+- Universal Student Living | Red Queen | Gold Ensuite | Red Queen - Gold Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £190
+- Universal Student Living | St Augustine’s House | Classic Studio with Balcony | St Augustine's House - Classic Studio with Balcony - 26/27 - 12/09 - 51wk 2026: £0 → £182
+- Universal Student Living | The Pinnacles | Premium 5 Bed Ensuite | The Pinnacles - Premium 5 Bed Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £105
+- Universal Student Living | The Pinnacles | Premium 5 Bed Ensuite | The Pinnacles - Premium 5 Bed Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £99
+- Universal Student Living | The Pinnacles | Premium Plus 5 Bed Ensuite | The Pinnacles - Premium Plus 5 Bed Ensuite - 26/27 - 12/09 - 44wk 2026: £0 → £110
+- Universal Student Living | The Pinnacles | Premium Plus 5 Bed Ensuite | The Pinnacles - Premium Plus 5 Bed Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £105
+- Universal Student Living | The Rise | Premium Studio | The Rise - Premium Studio - 26/27 - 12/09 - 44wk 2026: £0 → £164
+- Universal Student Living | The Rise | Premium Studio | The Rise - Premium Studio - 26/27 - 12/09 - 51wk 2026: £0 → £154
+- Urban Student Life | Leighton Hall | Ensuite | Leighton Hall - Ensuite - 25/26 - 16/01 - 26wk 2026: £0 → £95
+- Urban Student Life | Leighton Hall | Ensuite | Leighton Hall - Ensuite - 25/26 - 17/01 - 20wk 2026: £0 → £95
+
+## Contracts added (7)
+
+- Evo Student | Arcadian | Premium Plus Studio | Arcadian - Premium Plus Studio - 26/27 - 12/09 - 45wk 2026
+- Homes for Students | Gallery Apartments | Deluxe Plus Studio | Gallery Apartments - Deluxe Plus Studio - 25/26 - 28/02 - 13wk 2026
+- Homes for Students | Gallery Apartments | Deluxe Plus Studio | Gallery Apartments - Deluxe Plus Studio - 25/26 - 28/02 - 23wk 2026
+- Homes for Students | Gallery Apartments | Studio | Gallery Apartments - Studio - 26/27 - 05/09 - 44wk 2026
+- Prestige Student Living | Hillside House – LEFT | Studio Premium | Hillside House - Studio Standard - 26/27 - 12/09 - 44wk 2026
+- Prestige Student Living | The Terry Frost Building | Deluxe Ensuite | The Terry Frost Building - Deluxe Ensuite - 26/27 - 14/09 - 51.86wk - Leeds Conservatoire 2026 - 2027
+- Urban Student Life | Leighton Hall | Ensuite | GB - DT - 90 - 25/26 - 28/10 - 44wk GB request 2025 - 2026
+
+## Contracts removed (32)
+
+- Homes for Students | Brayford Quay | Studio | Brayford Quay - Studio - 26/27 - 19/09 - 50wk Brayford 2026
+- Homes for Students | Foundry Court | Platinum Ensuite | Foundry Court - Platinum Ensuite - 25/26 - 28/02 - 13wk 2026
+- Homes for Students | Foundry Court | Platinum Ensuite | Foundry Court - Platinum Ensuite - 25/26 - 28/02 - 26wk 2026
+- Homes for Students | Foundry Court | Platinum Ensuite | Foundry Court - Platinum Ensuite - 26/27 - 02/09 - 44wk 2026
+- Homes for Students | Foundry Court | Platinum Ensuite | Foundry Court - Platinum Ensuite - 26/27 - 02/09 - 51wk 2026
+- Homes for Students | Foundry Court | Premium Ensuite | Foundry Court - Premium Ensuite - 25/26 - 28/02 - 13wk 2026
+- Homes for Students | Foundry Court | Premium Ensuite | Foundry Court - Premium Ensuite - 25/26 - 28/02 - 26wk 2026
+- Homes for Students | Foundry Court | Premium Ensuite | Foundry Court - Premium Ensuite - 26/27 - 02/09 - 39wk 2026
+- Homes for Students | Foundry Court | Premium Ensuite | Foundry Court - Premium Ensuite - 26/27 - 02/09 - 44wk 2026
+- Homes for Students | Foundry Court | Premium Ensuite | Foundry Court - Premium Ensuite - 26/27 - 02/09 - 51wk 2026
+- Homes for Students | The Metalworks | Bronze Studio | The Metalworks - Bronze Studio - 26/27 - 19/09 - 51wk 2026
+- Homes for Students | Trinity Student Village | Deluxe Double Ensuite | Trinity Student Village - Deluxe Double Ensuite - 26/27 - 02/09 - 44wk 2026
+- Homes for Students | Trinity Student Village | Platinum Ensuite | Trinity Student Village - Platinum Ensuite - 26/27 - 02/09 - 44wk 2026
+- Homes for Students | Trinity Student Village | Platinum Ensuite | Trinity Student Village - Platinum Ensuite - 26/27 - 02/09 - 51wk 2026
+- Homes for Students | Trinity Student Village | Premium Ensuite | Trinity Student Village - Premium Ensuite - 26/27 - 02/09 - 44wk 2026
+- Homes for Students | Trinity Student Village | Premium Ensuite | Trinity Student Village - Premium Ensuite - 26/27 - 02/09 - 51wk 2026
+- Prestige Student Living | 800 Bristol Road | Classic Studio Plus | 800 Bristol Road - Classic Studio Plus - 26/27 - 05/09 - 45wk 2026
+- Prestige Student Living | Broadway Studios | Classic Studio Plus | Broadway Studios - Classic Studio Plus - 26/27 - 05/09 - 44wk 2026
+- Prestige Student Living | Broadway Studios | Deluxe Studio | Broadway Studios - 26/27 - 05/09 - 51wk 2026
+- Prestige Student Living | Broadway Studios | Deluxe Studio Plus | Broadway Studios - Deluxe Studio Plus - 26/27 - 05/09 - 51wk 2026
+- Prestige Student Living | Broadway Studios | Deluxe Terraced Studio | Broadway Studios - Deluxe Terraced Studio - 26/27 - 05/09 - 51wk 2026
+- Prestige Student Living | Fontenoy Apartments | Deluxe Studio | Fontenoy Apartments - Deluxe Studio - 26/27 - 12/09 - 44wk 2026
+- Prestige Student Living | Hillside House – LEFT | Classic Studio | Hillside House - Classic Studio - 26/27 - 12/09 - 51wk 2026
+- Prestige Student Living | Justice Mill Studios | 1 Bed Apartment | Justice Mill Studios - 1 Bed Apartment - 26/27 - 05/09 - 51wk 2026
+- Prestige Student Living | Limelight | Silver Club | Limelight - Silver Club - 26/27 - 05/09 - 51wk 2026
+- Prestige Student Living | St Gabriel’s Court | Classic Ensuite | St Gabriel Court - Classic Ensuite - 26/27 - 12/09 - 44wk 2026
+- Prestige Student Living | The Port On The Square | Saver Ensuite | The Port On The Square - Saver Ensuite - 26/27 - 12/09 - 51wk 2026
+- Prestige Student Living | The Valentine | 2 Bed Studio | The Valentine - 2 Bed Studio - 26/27 - 05/09 - 39wk 2026
+- Prestige Student Living | West Gate | Deluxe Terraced Studio | West Gate - Deluxe Terraced Studio - 26/27 - 12/09 - 44wk 2026
+- Prestige Student Living | West Gate | Deluxe Terraced Studio | West Gate - Deluxe Terraced Studio - 26/27 - 12/09 - 51wk 2026
+- Prestige Student Living | Willen House | Bronze Studio | Willen House - Bronze Studio - 26/27 - 12/09 - 38wk 2026
+- Universal Student Living | Llys Y Deon | Silver Studio | Llys Y Deon - Silver Studio - 26/27 - 12/09 - 51wk 2026
+
+## Rooms added (0)
+
+_None_
+
+## Rooms removed (14)
+
+- Homes for Students | Brayford Quay | Studio
+- Homes for Students | Foundry Court | Platinum Ensuite
+- Homes for Students | Foundry Court | Premium Ensuite
+- Homes for Students | The Metalworks | Bronze Studio
+- Homes for Students | Trinity Student Village | Deluxe Double Ensuite
+- Homes for Students | Trinity Student Village | Platinum Ensuite
+- Homes for Students | Trinity Student Village | Premium Ensuite
+- Prestige Student Living | Broadway Studios | Deluxe Studio
+- Prestige Student Living | Broadway Studios | Deluxe Studio Plus
+- Prestige Student Living | Broadway Studios | Deluxe Terraced Studio
+- Prestige Student Living | The Port On The Square | Saver Ensuite
+- Prestige Student Living | West Gate | Deluxe Terraced Studio
+- Prestige Student Living | Willen House | Bronze Studio
+- Universal Student Living | Llys Y Deon | Silver Studio
+
+## Availability changes (0)
+
+_None_
+
