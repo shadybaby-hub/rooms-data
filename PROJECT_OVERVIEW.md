@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-06-15 (documented that room-level `acf.available` is an unreliable source artifact — only correctly synced some days, e.g. accurate 2026-06-12 but uniform `False` most days; derive availability from `available_contracts > 0`; `quantity_available` replaced by `available_contracts` — the count of currently-available contracts per room (the APIs expose no stock count, only a per-contract `available` flag); change tracking + Change Field label renamed to "Available Contracts" accordingly; Contracts change tab now filters legacy `(added)`/`(removed)` Change Field values via `CONTRACT_CHANGE_FIELD_EXCLUDE`; Room change tab no longer logs `quantity_available` / `(added)` / `(removed)` (history purged too); room quantity changes moved to the Contracts change tab, one row per room with blank Year/Duration via `room_quantity_changes()`; `quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
+_Last updated: 2026-07-01 (**contracts_cache schema overhaul** — the basepms API changed fundamentally: contract/pricing data now comes as a flat per-instalment array at `acf.contracts_cache`. The contracts CSV now carries the 12 instalment fields verbatim — `instalment_id`, `name`, `academic_year`, `price`, `available`, `start_date`, `end_date`, `contract_length`, `weeks_remaining`, `base_hub_url`, `updated_at`, `pricing_updated_at` — plus context columns `brand_name`/`property`/`city`/`room_type`/`available_contracts`/`run_time`. `price` is still converted pence→£/week; `available` is normalised to `true`/`false`. Dropped columns: `contract_title` (→ `name`), `price_pw` (→ `price`), `contract_length_weeks` (→ `contract_length`), `currency_symbol` (removed — all brands are £). `make_report.py` now keys contracts on the stable unique `instalment_id` (was the composite title key) and diffs the `price` field, rendering each contract by its descriptive `name`. `publish_to_sheets.py` matches contracts within a group by `instalment_id` first (then `name`, then `start_date`) and reads the `price`/`contract_length` columns. Rooms schema unchanged. **Transition note:** the first run after this change shows one-off churn — the previous `contracts_latest.csv` lacks `instalment_id`, so every contract reads as "new" until the second run.). Earlier — 2026-06-15 (documented that room-level `acf.available` is an unreliable source artifact — only correctly synced some days, e.g. accurate 2026-06-12 but uniform `False` most days; derive availability from `available_contracts > 0`; `quantity_available` replaced by `available_contracts` — the count of currently-available contracts per room (the APIs expose no stock count, only a per-contract `available` flag); change tracking + Change Field label renamed to "Available Contracts" accordingly; Contracts change tab now filters legacy `(added)`/`(removed)` Change Field values via `CONTRACT_CHANGE_FIELD_EXCLUDE`; Room change tab no longer logs `quantity_available` / `(added)` / `(removed)` (history purged too); room quantity changes moved to the Contracts change tab, one row per room with blank Year/Duration via `room_quantity_changes()`; `quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
 
 ---
 
@@ -112,10 +112,14 @@ The flow is all in `etl.py`. Top to bottom:
    - Resolves the brand name (prefers the API's own field, falls back to config).
    - Cleans the description (HTML stripped).
    - Pulls thumbnail + a `|`-joined list of image URLs.
-   - Extracts the contracts array (tries several differently-named fields because brands
-     differ — `contracts`, `contracts_cache`, `prices`, etc.).
-   - Works out currency symbol and city with multiple fallbacks.
-   - Returns **one room row** plus **a list of contract rows** (one per pricing option).
+   - Extracts the contracts array — now the flat per-instalment array at
+     `acf.contracts_cache` (the legacy `acf.contracts` path is kept only as a fallback for
+     any brand that hasn't migrated). Each entry already has the 12 fields; they are copied
+     verbatim except `price` (pence→£/week via `pence_to_pounds`) and `available`
+     (normalised to `true`/`false`), plus the run's `run_time` and room-level context.
+   - Works out city with fallbacks (address → first contract's `base_hub_url`). Currency is
+     no longer emitted (all brands are £).
+   - Returns **one room row** plus **a list of contract rows** (one per instalment).
    - The many `or` fallbacks exist precisely because each brand's JSON is shaped slightly
      differently — that's why the code looks defensive/repetitive.
 
@@ -151,20 +155,23 @@ accumulates the full history of raw runs alongside the two `*_latest.csv` pointe
 `brand_name` · `property` · `city` · `room_type` · `available_contracts` ·
 `description` · `thumbnail_url` · `image_urls`
 
-**`contracts_<timestamp>.csv`** (and `contracts_latest.csv`) — one row per contract / pricing option:
-`brand_name` · `property` · `city` · `room_type` · `available_contracts` · `contract_title` ·
-`academic_year` · `price_pw` · `currency_symbol` · `available` · `start_date` · `end_date` ·
-`contract_length_weeks` · `base_hub_url`
+**`contracts_<timestamp>.csv`** (and `contracts_latest.csv`) — one row per contract / instalment.
+Context columns first, then the 12 fields pulled verbatim from each `acf.contracts_cache` entry:
+`brand_name` · `property` · `city` · `room_type` · `available_contracts` · `run_time` ·
+`instalment_id` · `name` · `academic_year` · `price` · `available` · `start_date` · `end_date` ·
+`contract_length` · `weeks_remaining` · `base_hub_url` · `updated_at` · `pricing_updated_at`
+(`price` is £/week — the API's minor-unit value ÷100. `available` is `true`/`false`.
+`run_time` is the run's UTC timestamp, stamped on every contract row.)
 (`available_contracts` is the **count of currently-available contracts (pricing options)** for the room — `sum(is_available(c) …)` in `parse_room()` — repeated on each of that room's contract rows, at column E on both tabs. The APIs expose **no stock/units count**, only a per-contract `available` flag, so this count of options is the closest real number; it is **not** physical rooms available. Changes to it are logged on the **Contracts** change tab, not the rooms tab — see §6.)
 
 > ⚠️ **Do not use the room-level `acf.available` field.** It is an **unreliable source-side artifact**: the basepms→WordPress sync only populates it correctly on some days. On 2026-06-12 it was 99.6% accurate (1,219 `True` rooms had available contracts, 369 `False` rooms had none) — but on 06-09/10/11 and 06-15 it returned a uniform `False` for *every* room despite contracts being available, and on 06-08 a uniform `True`. The old `quantity_available` column fell through to this field, which is why it was meaningless. The reliable signal is the **per-contract** `available` flag — derive room availability as `available_contracts > 0`, never from `acf.available`.
 
 > Sense of scale (run of 2026-06-05): ~1,540 room rows and ~4,480 contract rows across
 > the 6 brands. `image_urls` is a single `|`-separated string **in the CSV** (the
-> `Latest Room Data` Sheet tab explodes it to one row per URL — see §6). `price_pw` is the price
+> `Latest Room Data` Sheet tab explodes it to one row per URL — see §6). `price` is the price
 > **per person per week in pounds** (`etl.pence_to_pounds` converts the API's minor-unit
-> `price`; runs between ~2026-06-08 and 2026-06-10 published it ×100 in pence — both
-> change logs carry a `units_artifact` guard so the switch doesn't log as price changes).
+> value; a legacy `units_artifact` guard survives in both change logs to absorb the old
+> ~2026-06-08→10 pence/pounds switch, though it rarely fires now).
 
 ### The `reports/` folder (weekday change reports)
 
@@ -175,8 +182,9 @@ Each weekday run produces `reports/<YYYY-MM-DD>/` containing:
   rooms added/removed, and availability changes.
 
 This is produced by `make_report.py` (see §4), not `etl.py`. Row identity for the diff:
-rooms are keyed on `(brand_name, property, room_type)`; contracts on
-`(brand_name, property, room_type, contract_title)` — change those keys in `make_report.py`
+rooms are keyed on `(brand_name, property, room_type)`; contracts on the stable unique
+`instalment_id` alone (contracts are rendered by their descriptive `name`, and the
+brand-vanish guard reads `brand_name` from the row) — change those keys in `make_report.py`
 if you change what counts as "the same" row.
 
 ---
@@ -208,9 +216,10 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     City · Room Type · (contracts also: Academic Year · Duration) · Change Field · Change
     Type · Old Content · New Content. Watched fields: rooms `description`,
     `thumbnail_url`, `image_urls` (long values clipped to the ~49K cell
-    limit); contracts `price_pw`, `available`, `start_date`, `end_date`. Contract identity
-    is brand + property + city + room_type + academic_year + duration; multiple contracts
-    under one identity (e.g. Sept + Jan intakes) are paired by title, then start date,
+    limit); contracts `price`, `available`, `start_date`, `end_date`. Contract identity
+    is brand + property + city + room_type + academic_year + `contract_length`; multiple
+    contracts under one identity (e.g. Sept + Jan intakes) are paired by the stable
+    `instalment_id` first, then `name`, then start date,
     then order (`_match_contracts`). Unmatched new contracts log Change Type
     **"New Contract"**, vanished ones **"Sold Out"**; rooms use Added/Removed.
   - **Room-tab suppression:** the Room change tab does **not** log `available_contracts`,
