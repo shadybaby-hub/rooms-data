@@ -28,8 +28,11 @@ import sys
 from datetime import datetime, timezone
 
 # Row identity keys — what makes "the same" room / contract across runs.
+# Contracts are now keyed on the API's stable, unique `instalment_id` (the new
+# system exposes one per contracts_cache entry); brand/property/name are pulled
+# from the row for display and the fetch-failure guard.
 ROOM_KEY     = ("brand_name", "property", "room_type")
-CONTRACT_KEY = ("brand_name", "property", "room_type", "contract_title")
+CONTRACT_KEY = ("instalment_id",)
 
 # Cap per-section bullets so a huge churn day doesn't produce a giant file.
 MAX_ROWS = 300
@@ -51,6 +54,19 @@ def index(rows, key_fields):
 
 def label(key):
     return " | ".join(p for p in key if p)
+
+
+def contract_label(row):
+    """Human-readable identity for a contract row. Contracts are keyed internally
+    on instalment_id (not meaningful on its own), so reports render the API's
+    descriptive `name`, prefixed with the brand."""
+    name  = row.get("name", "")
+    brand = row.get("brand_name", "")
+    if name:
+        return f"{brand} — {name}" if brand else name
+    return " | ".join(p for p in (
+        brand, row.get("property", ""), row.get("room_type", ""),
+        row.get("instalment_id", "")) if p)
 
 
 def units_artifact(ov, nv):
@@ -106,24 +122,28 @@ def main():
     # certainly a fetch failure (API timeout) rather than real removals, so we
     # don't report those rows as "removed".
     new_room_brands     = {k[0] for k in new_rooms}
-    new_contract_brands = {k[0] for k in new_contracts}
+    new_contract_brands = {r.get("brand_name", "") for r in new_contracts.values()}
 
     rooms_added     = sorted(k for k in new_rooms     if k not in old_rooms)
     rooms_removed   = sorted(k for k in old_rooms
                             if k not in new_rooms and k[0] in new_room_brands)
     contracts_added = sorted(k for k in new_contracts if k not in old_contracts)
-    contracts_removed = sorted(k for k in old_contracts
-                              if k not in new_contracts and k[0] in new_contract_brands)
+    contracts_removed = sorted(
+        k for k in old_contracts
+        if k not in new_contracts
+        and old_contracts[k].get("brand_name", "") in new_contract_brands
+    )
 
     price_changes, avail_changes = [], []
     for k in sorted(new_contracts):
         if k in old_contracts:
             o, n = old_contracts[k], new_contracts[k]
-            op, np_ = o.get("price_pw", ""), n.get("price_pw", "")
+            op, np_ = o.get("price", ""), n.get("price", "")
             if op != np_ and not units_artifact(op, np_):
-                price_changes.append((k, op, np_, n.get("currency_symbol", "")))
+                price_changes.append((contract_label(n), op, np_))
             if o.get("available", "") != n.get("available", ""):
-                avail_changes.append((k, o.get("available", ""), n.get("available", "")))
+                avail_changes.append((contract_label(n),
+                                      o.get("available", ""), n.get("available", "")))
 
     # 3. Write changelog
     lines = [
@@ -153,13 +173,15 @@ def main():
             "",
         ]
         section(lines, "Price changes", price_changes,
-                lambda t: f"{label(t[0])}: {t[3]}{t[1]} → {t[3]}{t[2]}")
-        section(lines, "Contracts added", contracts_added, label)
-        section(lines, "Contracts removed", contracts_removed, label)
+                lambda t: f"{t[0]}: £{t[1]} → £{t[2]}")
+        section(lines, "Contracts added", contracts_added,
+                lambda k: contract_label(new_contracts[k]))
+        section(lines, "Contracts removed", contracts_removed,
+                lambda k: contract_label(old_contracts[k]))
         section(lines, "Rooms added", rooms_added, label)
         section(lines, "Rooms removed", rooms_removed, label)
         section(lines, "Availability changes", avail_changes,
-                lambda t: f"{label(t[0])}: {t[1]} → {t[2]}")
+                lambda t: f"{t[0]}: {t[1]} → {t[2]}")
 
     with open(os.path.join(out_dir, "changes.md"), "w", encoding="utf-8") as f:
         f.write("\n".join(lines) + "\n")

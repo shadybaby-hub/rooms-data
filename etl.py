@@ -30,7 +30,7 @@ import os
 import re
 import sys
 import time
-from datetime import datetime
+from datetime import datetime, timezone
 from urllib.parse import urlparse, parse_qs
 
 import requests
@@ -96,16 +96,24 @@ ROOM_FIELDS = [
     "thumbnail_url", "image_urls",
 ]
 
+# Context columns (identifying / run metadata) followed by the 12 fields pulled
+# verbatim from each acf.contracts_cache entry. `price` is the only transformed
+# field — the API's minor-unit value is converted to £/week (see pence_to_pounds).
 CONTRACT_FIELDS = [
     "brand_name", "property", "city", "room_type",
     "available_contracts",
-    "contract_title",
+    "run_time",
+    "instalment_id",
+    "name",
     "academic_year",
-    "price_pw", "currency_symbol",
+    "price",
     "available",
     "start_date", "end_date",
-    "contract_length_weeks",
+    "contract_length",
+    "weeks_remaining",
     "base_hub_url",
+    "updated_at",
+    "pricing_updated_at",
 ]
 
 # ── Helpers ────────────────────────────────────────────────────────────────────
@@ -222,7 +230,7 @@ def fetch_by_id_range(session, endpoint_url, id_start, id_end):
 
 # ── Parser ─────────────────────────────────────────────────────────────────────
 
-def parse_room(item: dict, brand_name: str) -> tuple[dict, list[dict]]:
+def parse_room(item: dict, brand_name: str, run_time: str) -> tuple[dict, list[dict]]:
     acf   = item.get("acf") or {}
     addr  = acf.get("propertyAddress") or {}
     media = acf.get("media") or {}
@@ -261,18 +269,12 @@ def parse_room(item: dict, brand_name: str) -> tuple[dict, list[dict]]:
         if isinstance(img, dict) and img.get("url")
     )
 
-    # Contracts
+    # Contracts — the fundamentally-changed system exposes a flat per-instalment
+    # array at acf.contracts_cache. Keep the legacy `contracts` path as a fallback
+    # for any brand that hasn't migrated yet.
     raw_contracts = (
         [c.get("contract", c) for c in (acf.get("contracts") or [])] or
         acf.get("contracts_cache") or []
-    )
-
-    # Currency
-    pc  = acf.get("pricing_cache") or {}
-    sym = (
-        pc.get("currency_symbol") or
-        safe(item, "property", "acf", "locationCurrency") or
-        "£"
     )
 
     # City — address first, fall back to first contract URL
@@ -298,28 +300,30 @@ def parse_room(item: dict, brand_name: str) -> tuple[dict, list[dict]]:
 
     contract_rows = []
     for c in raw_contracts:
-        prices    = c.get("prices") or [{}]
-        raw_price = c.get("price")  # minor units; pricePerPersonPerWeek is already £
-        price_pw  = pence_to_pounds(raw_price) if raw_price else \
-                    safe(prices, 0, "pricePerPersonPerWeek")
-        hub_url  = c.get("base_hub_url", "")
+        hub_url       = c.get("base_hub_url", "")
         contract_city = city or city_from_url(hub_url)
 
         contract_rows.append({
-            "brand_name":            resolved_brand,
-            "property":              property_,
-            "city":                  contract_city,
-            "room_type":             room_type,
-            "available_contracts":   avail_contracts,
-            "contract_title":        c.get("title") or c.get("name", ""),
-            "academic_year":         c.get("academic_year") or c.get("academicYear", ""),
-            "price_pw":              price_pw,
-            "currency_symbol":       sym,
-            "available":             c.get("available", ""),
-            "start_date":            c.get("start_date") or c.get("startDate", ""),
-            "end_date":              c.get("end_date") or c.get("endDate", ""),
-            "contract_length_weeks": c.get("contract_length") or c.get("minContractDays", ""),
-            "base_hub_url":          hub_url,
+            # context / run metadata
+            "brand_name":          resolved_brand,
+            "property":            property_,
+            "city":                contract_city,
+            "room_type":           room_type,
+            "available_contracts": avail_contracts,
+            "run_time":            run_time,
+            # the 12 fields, verbatim from the contracts_cache entry
+            "instalment_id":       c.get("instalment_id", ""),
+            "name":                c.get("name", ""),
+            "academic_year":       c.get("academic_year", ""),
+            "price":               pence_to_pounds(c.get("price")),  # minor units → £/week
+            "available":           str(is_available(c)).lower(),
+            "start_date":          c.get("start_date", ""),
+            "end_date":            c.get("end_date", ""),
+            "contract_length":     c.get("contract_length", ""),
+            "weeks_remaining":     c.get("weeks_remaining", ""),
+            "base_hub_url":        hub_url,
+            "updated_at":          c.get("updated_at", ""),
+            "pricing_updated_at":  c.get("pricing_updated_at", ""),
         })
 
     return room_row, contract_rows
@@ -329,7 +333,9 @@ def parse_room(item: dict, brand_name: str) -> tuple[dict, list[dict]]:
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    ts            = datetime.now().strftime("%Y%m%d_%H%M%S")
+    now           = datetime.now(timezone.utc)
+    ts            = now.strftime("%Y%m%d_%H%M%S")
+    run_time      = now.strftime("%Y-%m-%dT%H:%M:%SZ")  # stamped on every contract row
     rooms_csv     = os.path.join(OUT_DIR, f"rooms_{ts}.csv")
     contracts_csv = os.path.join(OUT_DIR, f"contracts_{ts}.csv")
 
@@ -365,7 +371,7 @@ def main():
 
             for item in items:
                 try:
-                    rr, crs = parse_room(item, brand_name)
+                    rr, crs = parse_room(item, brand_name, run_time)
                     all_rooms.append(rr)
                     all_contracts.extend(crs)
                 except Exception as e:

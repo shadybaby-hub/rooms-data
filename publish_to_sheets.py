@@ -62,7 +62,7 @@ ROOM_KEY     = ("brand_name", "property", "room_type")
 # Contracts are grouped (not uniquely keyed) — the same room/year/duration can
 # offer several contracts (e.g. Sept + Jan intakes), matched up in diff_contracts.
 CONTRACT_KEY = ("brand_name", "property", "city", "room_type", "academic_year",
-                "contract_length_weeks")
+                "contract_length")
 ROOM_WATCH     = [
     ("available_contracts", "Available Contracts"),
     ("description",        "Description"),
@@ -70,7 +70,7 @@ ROOM_WATCH     = [
     ("image_urls",         "Image URLs"),
 ]
 CONTRACT_WATCH = [
-    ("price_pw",   "Price (pw)"),
+    ("price",      "Price (pw)"),
     ("available",  "Available"),
     ("start_date", "Start Date"),
     ("end_date",   "End Date"),
@@ -183,11 +183,15 @@ def _units_artifact(ov, nv):
 
 
 def _match_contracts(olds, news):
-    """Pair up old/new contracts within one identity group: by contract_title
-    first, then start_date, then whatever is left in stable order. Returns
-    (pairs, unmatched_old, unmatched_new)."""
+    """Pair up old/new contracts within one identity group: by the stable
+    instalment_id first, then name, then start_date, then whatever is left in
+    stable order. Returns (pairs, unmatched_old, unmatched_new).
+
+    instalment_id makes the first pass exact — the name/start_date passes only
+    matter for the rare row that lacks an id or whose id changed."""
     pairs, olds, news = [], list(olds), list(news)
-    for keyf in (lambda r: r.get("contract_title", ""),
+    for keyf in (lambda r: r.get("instalment_id", ""),
+                 lambda r: r.get("name", ""),
                  lambda r: r.get("start_date", "")):
         lookup = {}
         for o in olds:
@@ -201,7 +205,7 @@ def _match_contracts(olds, news):
                 remaining.append(n)
         olds = [o for lst in lookup.values() for o in lst]
         news = remaining
-    order = lambda r: (r.get("start_date", ""), r.get("contract_title", ""))
+    order = lambda r: (r.get("start_date", ""), r.get("name", ""))
     olds.sort(key=order)
     news.sort(key=order)
     while olds and news:
@@ -218,15 +222,15 @@ def diff_contracts(old, new):
         if brand in new_brands:  # else whole brand missing — likely a fetch failure
             for o in gone:
                 rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
-                             "(sold out)", "Sold Out", o.get("price_pw", ""), ""])
+                             "(sold out)", "Sold Out", o.get("price", ""), ""])
         for n in added:
             rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
-                         "(new contract)", "New Contract", "", n.get("price_pw", "")])
+                         "(new contract)", "New Contract", "", n.get("price", "")])
         for o, n in pairs:
             for field, label in CONTRACT_WATCH:
                 ov, nv = o.get(field, ""), n.get(field, "")
                 if ov != nv:
-                    if field == "price_pw" and _units_artifact(ov, nv):
+                    if field == "price" and _units_artifact(ov, nv):
                         continue
                     rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
                                  label, "Changed", ov, nv])
