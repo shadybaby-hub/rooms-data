@@ -313,6 +313,39 @@ def fetch_all_pages(session, endpoint_url, label):
     return items
 
 
+def _norm_slug(s: str) -> str:
+    """Normalise a slug for cross-endpoint matching: lowercase, strip everything
+    but a-z0-9. basepms-rooms and the `rooms` post type slugify titles slightly
+    differently (e.g. 'classic-ensuite' vs 'classic-en-suite'), and this collapses
+    those to the same key ('classicensuite')."""
+    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+
+
+def _is_room_post(d) -> bool:
+    """True only for an actual `rooms` REST item. When a slug doesn't resolve, the
+    /room/<slug>/ redirect falls back to the /wp-json/ API index (no `id`), which
+    we must NOT treat as room detail (it would blank quantity_available yet still
+    set a misleading enquire_status)."""
+    return isinstance(d, dict) and isinstance(d.get("id"), int) and "acf" in d
+
+
+def room_slug_map(session, host):
+    """{normalised_slug: real rooms-post slug} for a brand, from its room sitemap.
+    Lets us map a basepms-rooms slug to the (differently-slugified) `rooms` post
+    slug so the /room/<slug>/ redirect lands on the right item. Empty if the
+    sitemap can't be read (callers then fall back to the basepms slug as-is)."""
+    index = _fetch_text(session, f"https://{host}/sitemap_index.xml")
+    subs = re.findall(r"<loc>([^<]*/room-sitemap\d*\.xml)</loc>", index)
+    if not subs:  # unpaginated / no index — try the single default file
+        subs = [f"https://{host}/room-sitemap.xml"]
+    out = {}
+    for sub in subs:
+        xml = _fetch_text(session, sub)
+        for slug in re.findall(r"/room/([^/<]+)/?</loc>", xml):
+            out[_norm_slug(slug)] = slug
+    return out
+
+
 def fetch_room_detail(session, host, slug):
     """Fetch a room's `rooms`-endpoint JSON via the `/room/<slug>/` frontend URL,
     which 301-redirects to `/wp-json/wp/v2/rooms/<id>`. The `rooms` collection
@@ -321,37 +354,66 @@ def fetch_room_detail(session, host, slug):
 
     Primary path is python-requests. Some brands' frontend sits behind a
     Cloudflare challenge that blocks requests (by TLS fingerprint) but not curl,
-    so on a non-JSON/error response we retry once with curl. Any failure returns
-    {} so the room still emits from its basepms-rooms data (graceful degrade)."""
+    so on a non-JSON/error response we retry once with curl. Returns {} unless the
+    response is a real room post (see _is_room_post), so an unresolved slug — or a
+    fetch failure — degrades gracefully to the basepms-rooms data."""
     if not slug:
         return {}
     url = f"https://{host}/room/{slug}/"
     try:
         r = get_with_retry(session, url)
         if "application/json" in r.headers.get("content-type", ""):
-            return r.json()
-        # else: likely a Cloudflare interstitial (HTML 200) — fall through to curl
+            d = r.json()
+            if _is_room_post(d):
+                return d
+        # else: likely a Cloudflare interstitial (HTML) — fall through to curl
     except (requests.RequestException, ValueError):
         pass
-    return _curl_json(url)
+    d = _curl_json(url)
+    return d if _is_room_post(d) else {}
 
 
-def _curl_json(url):
-    """Fetch `url` (following redirects) with curl and parse JSON. curl clears the
-    Cloudflare TLS-fingerprint challenge that blocks python-requests on some
-    brands. Returns {} if curl is unavailable or the response isn't JSON."""
+def _curl_get(url):
+    """Return the response body bytes for `url` via curl (following redirects), or
+    None. curl clears the Cloudflare TLS-fingerprint challenge that blocks
+    python-requests on some brands."""
     if not CURL_BIN:
-        return {}
+        return None
     try:
         p = subprocess.run(
             [CURL_BIN, "-sL", "-A", BROWSER_UA, "--max-time", str(TIMEOUT), url],
             capture_output=True, timeout=TIMEOUT + 10,
         )
         if p.returncode == 0 and p.stdout:
-            return json.loads(p.stdout.decode("utf-8", "replace"))
-    except (subprocess.SubprocessError, ValueError, OSError):
+            return p.stdout
+    except (subprocess.SubprocessError, OSError):
         pass
-    return {}
+    return None
+
+
+def _curl_json(url):
+    """curl-fetch `url` and parse JSON, or {} on any failure."""
+    body = _curl_get(url)
+    if not body:
+        return {}
+    try:
+        return json.loads(body.decode("utf-8", "replace"))
+    except ValueError:
+        return {}
+
+
+def _fetch_text(session, url):
+    """GET text (e.g. sitemap XML): python-requests first, curl fallback for
+    brands whose frontend is behind the Cloudflare challenge. "" on failure."""
+    try:
+        r = get_with_retry(session, url)
+        body = r.text
+        if body.lstrip().startswith("<"):
+            return body
+    except (requests.RequestException, ValueError):
+        pass
+    body = _curl_get(url)
+    return body.decode("utf-8", "replace") if body else ""
 
 
 def fetch_by_id_range(session, endpoint_url, id_start, id_end):
@@ -532,6 +594,11 @@ def main():
         host       = urlparse(base_url).netloc
         print(f"\n━━ {brand_name}")
 
+        # Map basepms slugs → real `rooms` post slugs (they slugify titles
+        # differently, e.g. ensuite vs en-suite). Built once per brand.
+        slug_map = room_slug_map(session, host)
+        print(f"  slug map: {len(slug_map)} rooms-post slugs")
+
         for ep in brand_cfg["endpoints"]:
             endpoint_url = f"{base_url}/{ep}"
             print(f"  → {endpoint_url}")
@@ -554,8 +621,11 @@ def main():
             detail_ok = 0
             for item in items:
                 try:
-                    slug   = item.get("slug", "")
-                    detail = fetch_room_detail(session, host, slug)
+                    slug = item.get("slug", "")
+                    # Resolve to the real rooms-post slug; fall back to the
+                    # basepms slug if the sitemap had no match.
+                    real_slug = slug_map.get(_norm_slug(slug), slug)
+                    detail = fetch_room_detail(session, host, real_slug)
                     if detail:
                         detail_ok += 1
                     if slug:
