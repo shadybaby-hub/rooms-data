@@ -65,16 +65,28 @@ CONTRACT_KEY = ("brand_name", "property", "city", "room_type", "academic_year",
                 "contract_length")
 ROOM_WATCH     = [
     ("available_contracts", "Available Contracts"),
+    ("quantity_available", "Quantity Available"),
+    ("enquire_status",     "Enquire Status"),
+    ("amenities",          "Amenities"),
     ("description",        "Description"),
     ("thumbnail_url",      "Thumbnail URL"),
     ("image_urls",         "Image URLs"),
 ]
 CONTRACT_WATCH = [
-    ("price",      "Price (pw)"),
-    ("available",  "Available"),
-    ("start_date", "Start Date"),
-    ("end_date",   "End Date"),
+    ("price",          "Price (pw)"),
+    ("available",      "Available"),
+    ("bookable",       "Bookable"),
+    ("enquire_status", "Enquire Status"),
+    ("start_date",     "Start Date"),
+    ("end_date",       "End Date"),
 ]
+
+# Fields added in the `rooms`-endpoint enrichment. On the first run after that
+# change the previous *_latest.csv has no such column, so a blank→value diff
+# would log a spurious "Changed" for every row. Suppress the change when the OLD
+# value is blank for these fields only (legacy text fields like Description keep
+# logging ""→x, which is a genuine "gained a value" event there).
+SKIP_BLANK_OLD = {"quantity_available", "enquire_status", "amenities", "bookable"}
 
 # Change Field values suppressed from the Room Data Changes tab. The available-
 # contracts count moves to the Contracts change tab (see
@@ -166,6 +178,8 @@ def diff_rooms(old, new):
             for field, label in ROOM_WATCH:
                 ov, nv = o.get(field, ""), n.get(field, "")
                 if ov != nv:
+                    if field in SKIP_BLANK_OLD and ov == "":
+                        continue  # schema-migration blank — not a real change
                     rows.append([RUN_DATE_STR, brand, prop, n.get("city", ""), rtype,
                                  label, "Changed", _clip(ov), _clip(nv)])
     return rows
@@ -232,6 +246,8 @@ def diff_contracts(old, new):
                 if ov != nv:
                     if field == "price" and _units_artifact(ov, nv):
                         continue
+                    if field in SKIP_BLANK_OLD and ov == "":
+                        continue  # schema-migration blank — not a real change
                     rows.append([RUN_DATE_STR, brand, prop, city, rtype, ay, dur,
                                  label, "Changed", ov, nv])
     return rows

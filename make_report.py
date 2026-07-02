@@ -134,7 +134,7 @@ def main():
         and old_contracts[k].get("brand_name", "") in new_contract_brands
     )
 
-    price_changes, avail_changes = [], []
+    price_changes, avail_changes, bookable_changes = [], [], []
     for k in sorted(new_contracts):
         if k in old_contracts:
             o, n = old_contracts[k], new_contracts[k]
@@ -144,6 +144,25 @@ def main():
             if o.get("available", "") != n.get("available", ""):
                 avail_changes.append((contract_label(n),
                                       o.get("available", ""), n.get("available", "")))
+            # `bookable` = matched in the `rooms` endpoint (actually bookable).
+            # Skip when the old value is blank (schema-migration guard — the field
+            # didn't exist in the previous run, so "" → x isn't a real change).
+            ob, nb = o.get("bookable", ""), n.get("bookable", "")
+            if ob != nb and ob != "":
+                bookable_changes.append((contract_label(n), ob, nb))
+
+    # Room-level field changes (only rooms present in both runs). The blank-old
+    # guard again suppresses first-run schema-migration churn.
+    room_avail_changes, amenity_changes, enquire_changes = [], [], []
+    for k in sorted(new_rooms):
+        if k in old_rooms:
+            o, n = old_rooms[k], new_rooms[k]
+            for field, bucket in (("quantity_available", room_avail_changes),
+                                  ("amenities",          amenity_changes),
+                                  ("enquire_status",     enquire_changes)):
+                ov, nv = o.get(field, ""), n.get(field, "")
+                if ov != nv and ov != "":
+                    bucket.append((label(k), ov, nv))
 
     # 3. Write changelog
     lines = [
@@ -169,18 +188,30 @@ def main():
             f"- Contracts: **+{len(contracts_added)}** added, "
             f"**−{len(contracts_removed)}** removed",
             f"- Price changes: **{len(price_changes)}**",
-            f"- Availability changes: **{len(avail_changes)}**",
+            f"- Room availability changes: **{len(room_avail_changes)}**",
+            f"- Bookable changes: **{len(bookable_changes)}**",
+            f"- Contract available-flag changes: **{len(avail_changes)}**",
+            f"- Amenity changes: **{len(amenity_changes)}**",
+            f"- Enquire-status changes: **{len(enquire_changes)}**",
             "",
         ]
         section(lines, "Price changes", price_changes,
                 lambda t: f"{t[0]}: £{t[1]} → £{t[2]}")
+        section(lines, "Room availability changes", room_avail_changes,
+                lambda t: f"{t[0]}: {t[1]} → {t[2]}")
+        section(lines, "Bookable changes", bookable_changes,
+                lambda t: f"{t[0]}: {t[1]} → {t[2]}")
         section(lines, "Contracts added", contracts_added,
                 lambda k: contract_label(new_contracts[k]))
         section(lines, "Contracts removed", contracts_removed,
                 lambda k: contract_label(old_contracts[k]))
         section(lines, "Rooms added", rooms_added, label)
         section(lines, "Rooms removed", rooms_removed, label)
-        section(lines, "Availability changes", avail_changes,
+        section(lines, "Contract available-flag changes", avail_changes,
+                lambda t: f"{t[0]}: {t[1]} → {t[2]}")
+        section(lines, "Amenity changes", amenity_changes,
+                lambda t: f"{t[0]}: {t[1]} → {t[2]}")
+        section(lines, "Enquire-status changes", enquire_changes,
                 lambda t: f"{t[0]}: {t[1]} → {t[2]}")
 
     with open(os.path.join(out_dir, "changes.md"), "w", encoding="utf-8") as f:
