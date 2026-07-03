@@ -312,12 +312,32 @@ def fetch_all_pages(session, endpoint_url, label):
     return items
 
 
+# Spelled-out numbers → digits, for slug normalisation. The two endpoints disagree
+# not only on punctuation but on whether a number is a digit or a word ('1-bed' vs
+# 'one-bed', 'fourth-floor' vs '4th-floor'), so we canonicalise both sides. Ordinals
+# map to the digit-ordinal form ('fourth'→'4th'), which stays distinct from the
+# cardinal ('four'→'4') so the two never collide. Mapped as whole tokens only (see
+# _norm_slug) — never as substrings — so 'twodio', 'mezzanine' etc. stay intact.
+NUMBER_WORDS = {
+    # cardinals
+    "one": "1", "two": "2", "three": "3", "four": "4", "five": "5", "six": "6",
+    "seven": "7", "eight": "8", "nine": "9", "ten": "10", "eleven": "11",
+    "twelve": "12",
+    # ordinals
+    "first": "1st", "second": "2nd", "third": "3rd", "fourth": "4th",
+    "fifth": "5th", "sixth": "6th", "seventh": "7th", "eighth": "8th",
+    "ninth": "9th", "tenth": "10th", "eleventh": "11th", "twelfth": "12th",
+}
+
+
 def _norm_slug(s: str) -> str:
-    """Normalise a slug for cross-endpoint matching: lowercase, strip everything
-    but a-z0-9. basepms-rooms and the `rooms` post type slugify titles slightly
-    differently (e.g. 'classic-ensuite' vs 'classic-en-suite'), and this collapses
-    those to the same key ('classicensuite')."""
-    return re.sub(r"[^a-z0-9]", "", (s or "").lower())
+    """Normalise a slug for cross-endpoint matching: lowercase, map spelled-out
+    numbers to digits (whole tokens only), then strip everything but a-z0-9.
+    basepms-rooms and the `rooms` post type slugify titles slightly differently —
+    in punctuation ('classic-ensuite' vs 'classic-en-suite') and in digit-vs-word
+    counts ('one-bed' vs '1-bed') — and this collapses both to the same key."""
+    toks = re.split(r"[^a-z0-9]+", (s or "").lower())
+    return "".join(NUMBER_WORDS.get(t, t) for t in toks if t)
 
 
 def _is_room_post(d) -> bool:
