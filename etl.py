@@ -117,7 +117,6 @@ ROOM_FIELDS = [
     "brand_name", "property", "city", "room_type",
     "available_contracts",   # legacy derived count (contracts_cache) — retire later
     "quantity_available",    # real room availability from the `rooms` endpoint
-    "enquire_status",        # "Book Now" / "Enquire", derived from bookNowURL
     "description",
     "thumbnail_url", "image_urls",
     "amenities",             # `|`-joined amenity post_titles from the `rooms` endpoint
@@ -126,7 +125,7 @@ ROOM_FIELDS = [
 # Context columns (identifying / run metadata) followed by the 12 fields pulled
 # verbatim from each acf.contracts_cache entry. `price` is the only transformed
 # field — the API's minor-unit value is converted to £/week (see pence_to_pounds).
-# `bookable` / `enquire_status` come from matching each cache contract to the
+# `bookable` / `Contact Form URL` come from matching each cache contract to the
 # `rooms` endpoint's contracts (the source of truth for what's actually bookable).
 CONTRACT_FIELDS = [
     "brand_name", "property", "city", "room_type",
@@ -139,7 +138,7 @@ CONTRACT_FIELDS = [
     "price",
     "available",             # contracts_cache `available` flag (unreliable)
     "bookable",              # matched in the `rooms` endpoint = actually bookable
-    "enquire_status",        # "Book Now" / "Enquire" for this contract
+    "Contact Form URL",      # bookNowURL for this contract, or "-" if none
     "start_date", "end_date",
     "contract_length",
     "weeks_remaining",
@@ -453,11 +452,6 @@ def parse_room(item: dict, brand_name: str, run_time: str,
     quantity_available = detail_acf.get("quantityAvailable", "") if has_detail else ""
     amenities    = amenity_titles(detail) if has_detail else ""
     bookable_map = rooms_endpoint_contracts(detail) if has_detail else {}
-    # Room-level enquire status: bookable with a book link → "Book Now", else "Enquire".
-    if has_detail:
-        room_enquire = "Book Now" if any(bookable_map.values()) else "Enquire"
-    else:
-        room_enquire = ""
 
     # Title → room_type + property  ("Room Type, Property Name")
     title     = html.unescape(safe(item, "title", "rendered"))
@@ -517,7 +511,6 @@ def parse_room(item: dict, brand_name: str, run_time: str,
         "room_type":           room_type or html.unescape(acf.get("roomType", "")),
         "available_contracts": avail_contracts,
         "quantity_available":  quantity_available,
-        "enquire_status":      room_enquire,
         "description":         desc,
         "thumbnail_url":       thumbnail_url,
         "image_urls":          image_urls,
@@ -534,8 +527,9 @@ def parse_room(item: dict, brand_name: str, run_time: str,
         if has_detail:
             book_url = bookable_map.get(_cache_contract_key(c))
             bookable = book_url is not None
-            bookable_str  = str(bookable).lower()
-            contract_enquire = ("Book Now" if book_url else "Enquire") if bookable else "Enquire"
+            bookable_str  = "Enabled" if bookable else "Disabled"
+            # Booking link: the bookNowURL when there is one, else "-".
+            contract_enquire = book_url if book_url else "-"
         else:
             bookable_str  = ""   # unknown — detail fetch failed
             contract_enquire = ""
@@ -556,7 +550,7 @@ def parse_room(item: dict, brand_name: str, run_time: str,
             "price":               pence_to_pounds(c.get("price")),  # minor units → £/week
             "available":           str(is_available(c)).lower(),
             "bookable":            bookable_str,
-            "enquire_status":      contract_enquire,
+            "Contact Form URL":    contract_enquire,
             "start_date":          c.get("start_date", ""),
             "end_date":            c.get("end_date", ""),
             "contract_length":     c.get("contract_length", ""),

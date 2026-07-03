@@ -38,11 +38,21 @@ CONTRACT_KEY = ("instalment_id",)
 MAX_ROWS = 300
 
 
+# Legacy `bookable` values (true/false) → current Enabled/Disabled labels, so
+# relabelling the field doesn't log a spurious "Bookable" change for every
+# contract on the first run after the switch. Blank stays blank.
+_BOOKABLE_LEGACY = {"true": "Enabled", "false": "Disabled"}
+
+
 def load(path):
     if not path or not os.path.exists(path):
         return None  # None == "no previous data" (distinct from empty file)
     with open(path, newline="", encoding="utf-8") as f:
-        return list(csv.DictReader(f))
+        rows = list(csv.DictReader(f))
+    for r in rows:
+        if "bookable" in r:
+            r["bookable"] = _BOOKABLE_LEGACY.get(r["bookable"], r["bookable"])
+    return rows
 
 
 def index(rows, key_fields):
@@ -153,13 +163,12 @@ def main():
 
     # Room-level field changes (only rooms present in both runs). The blank-old
     # guard again suppresses first-run schema-migration churn.
-    room_avail_changes, amenity_changes, enquire_changes = [], [], []
+    room_avail_changes, amenity_changes = [], []
     for k in sorted(new_rooms):
         if k in old_rooms:
             o, n = old_rooms[k], new_rooms[k]
             for field, bucket in (("quantity_available", room_avail_changes),
-                                  ("amenities",          amenity_changes),
-                                  ("enquire_status",     enquire_changes)):
+                                  ("amenities",          amenity_changes)):
                 ov, nv = o.get(field, ""), n.get(field, "")
                 if ov != nv and ov != "":
                     bucket.append((label(k), ov, nv))
@@ -192,7 +201,6 @@ def main():
             f"- Bookable changes: **{len(bookable_changes)}**",
             f"- Contract available-flag changes: **{len(avail_changes)}**",
             f"- Amenity changes: **{len(amenity_changes)}**",
-            f"- Enquire-status changes: **{len(enquire_changes)}**",
             "",
         ]
         section(lines, "Price changes", price_changes,
@@ -210,8 +218,6 @@ def main():
         section(lines, "Contract available-flag changes", avail_changes,
                 lambda t: f"{t[0]}: {t[1]} → {t[2]}")
         section(lines, "Amenity changes", amenity_changes,
-                lambda t: f"{t[0]}: {t[1]} → {t[2]}")
-        section(lines, "Enquire-status changes", enquire_changes,
                 lambda t: f"{t[0]}: {t[1]} → {t[2]}")
 
     with open(os.path.join(out_dir, "changes.md"), "w", encoding="utf-8") as f:

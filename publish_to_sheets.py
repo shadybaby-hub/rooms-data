@@ -66,7 +66,6 @@ CONTRACT_KEY = ("brand_name", "property", "city", "room_type", "academic_year",
 ROOM_WATCH     = [
     ("available_contracts", "Available Contracts"),
     ("quantity_available", "Quantity Available"),
-    ("enquire_status",     "Enquire Status"),
     ("amenities",          "Amenities"),
     ("description",        "Description"),
     ("thumbnail_url",      "Thumbnail URL"),
@@ -75,8 +74,8 @@ ROOM_WATCH     = [
 CONTRACT_WATCH = [
     ("price",          "Price (pw)"),
     ("available",      "Available"),
-    ("bookable",       "Bookable"),
-    ("enquire_status", "Enquire Status"),
+    ("bookable",          "Bookable"),
+    ("Contact Form URL",  "Contact Form URL"),
     ("start_date",     "Start Date"),
     ("end_date",       "End Date"),
 ]
@@ -86,7 +85,7 @@ CONTRACT_WATCH = [
 # would log a spurious "Changed" for every row. Suppress the change when the OLD
 # value is blank for these fields only (legacy text fields like Description keep
 # logging ""→x, which is a genuine "gained a value" event there).
-SKIP_BLANK_OLD = {"quantity_available", "enquire_status", "amenities", "bookable"}
+SKIP_BLANK_OLD = {"quantity_available", "Contact Form URL", "amenities", "bookable"}
 
 # Change Field values suppressed from the Room Data Changes tab. The available-
 # contracts count moves to the Contracts change tab (see
@@ -127,6 +126,19 @@ def load_index(path, key_fields):
         return {tuple(r.get(k, "") for k in key_fields): r for r in csv.DictReader(f)}
 
 
+# Legacy `bookable` values (true/false) → current Enabled/Disabled labels. Applied
+# when loading CSVs so relabelling the field doesn't log a spurious "Bookable"
+# change for every contract on the first run after the switch. Blank stays blank;
+# already-mapped values pass through untouched.
+_BOOKABLE_LEGACY = {"true": "Enabled", "false": "Disabled"}
+
+
+def _normalise_bookable(row):
+    if "bookable" in row:
+        row["bookable"] = _BOOKABLE_LEGACY.get(row["bookable"], row["bookable"])
+    return row
+
+
 def load_groups(path, key_fields):
     """CSV as {key_tuple: [row_dicts]}, or None if the file is absent."""
     if not path or not os.path.exists(path):
@@ -134,6 +146,7 @@ def load_groups(path, key_fields):
     out = {}
     with open(path, newline="", encoding="utf-8") as f:
         for r in csv.DictReader(f):
+            _normalise_bookable(r)
             out.setdefault(tuple(r.get(k, "") for k in key_fields), []).append(r)
     return out
 
