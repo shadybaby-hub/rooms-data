@@ -6,7 +6,7 @@
 > If this file ever disagrees with the code, the code is right and this file is stale.
 > See the [Maintenance checklist](#maintenance-checklist) at the bottom.
 
-_Last updated: 2026-07-01 (**contracts_cache schema overhaul** — the basepms API changed fundamentally: contract/pricing data now comes as a flat per-instalment array at `acf.contracts_cache`. The contracts CSV now carries the 12 instalment fields verbatim — `instalment_id`, `name`, `academic_year`, `price`, `available`, `start_date`, `end_date`, `contract_length`, `weeks_remaining`, `base_hub_url`, `updated_at`, `pricing_updated_at` — plus context columns `brand_name`/`property`/`city`/`room_type`/`available_contracts`/`run_time`. `price` is still converted pence→£/week; `available` is normalised to `true`/`false`. Dropped columns: `contract_title` (→ `name`), `price_pw` (→ `price`), `contract_length_weeks` (→ `contract_length`), `currency_symbol` (removed — all brands are £). `make_report.py` now keys contracts on the stable unique `instalment_id` (was the composite title key) and diffs the `price` field, rendering each contract by its descriptive `name`. `publish_to_sheets.py` matches contracts within a group by `instalment_id` first (then `name`, then `start_date`) and reads the `price`/`contract_length` columns. Rooms schema unchanged. **Transition note:** the first run after this change shows one-off churn — the previous `contracts_latest.csv` lacks `instalment_id`, so every contract reads as "new" until the second run.). Earlier — 2026-06-15 (documented that room-level `acf.available` is an unreliable source artifact — only correctly synced some days, e.g. accurate 2026-06-12 but uniform `False` most days; derive availability from `available_contracts > 0`; `quantity_available` replaced by `available_contracts` — the count of currently-available contracts per room (the APIs expose no stock count, only a per-contract `available` flag); change tracking + Change Field label renamed to "Available Contracts" accordingly; Contracts change tab now filters legacy `(added)`/`(removed)` Change Field values via `CONTRACT_CHANGE_FIELD_EXCLUDE`; Room change tab no longer logs `quantity_available` / `(added)` / `(removed)` (history purged too); room quantity changes moved to the Contracts change tab, one row per room with blank Year/Duration via `room_quantity_changes()`; `quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
+_Last updated: 2026-07-03 (**slug matching: number-word normalisation** — `_norm_slug` now maps spelled-out numbers to digits as **whole tokens** before stripping punctuation, so the two endpoints' digit-vs-word drift no longer defeats the match: cardinals `one`→`1` … `twelve`→`12`, and ordinals `first`→`1st` … `twelfth`→`12th` (ordinals map to the digit-*ordinal* form so `four`→`4` stays distinct from `fourth`→`4th` — no collision). Token-only mapping leaves embedded look-alikes intact (`twodio`, `mezzanine`, `printworks`). Validated by a dry-run against the live sitemaps + basepms lists across all 6 brands: **+4 rooms recovered, 0 ambiguous keys, 0 regressions** — e.g. `1-bed-apartment-26-great-george-street` ↔ `one-bed-apartment-26-great-george-street`, `2-bed-apartment-greenmarket-studios` ↔ `two-bed-apartment-greenmarket-studios`. Low yield but zero measured risk.). Earlier — 2026-07-03 (**availability column rework** — the rooms tab drops `enquire_status` (the room-level `Book Now`/`Enquire` field is removed). On the contracts tab, `bookable` now emits **`Enabled`/`Disabled`** (was `true`/`false`), and the per-contract `enquire_status` column is **renamed `Contact Form URL`**, now holding the matched contract's `bookNowURL` — or `-` when there is none (blank if the detail fetch failed). Both diff paths normalise legacy `bookable` `true`/`false`→`Enabled`/`Disabled` on read (`_normalise_bookable` in `publish_to_sheets.py`, inline in `make_report.py`) so the relabel logs no spurious change rows; the `enquire_status`→`Contact Form URL` rename is likewise churn-free because the old column reads blank under the new key and is caught by `SKIP_BLANK_OLD`. `make_report.py` drops its now-dead room-level enquire-status change section.). Earlier — 2026-07-02 (**real availability from the `rooms` endpoint** — room availability was previously *derived* from `contracts_cache` (`available_contracts` = count of contracts flagged available), which only reflects contracts that have been *created*, not what is actually bookable. `etl.py` now enriches every room from a **second endpoint, `rooms`** (the camelCase-shaped WordPress route, distinct from `basepms-rooms`), joined by the **`slug`**. The `rooms` collection can't be listed (`X-WP-Total: 0`) and its post ids differ from basepms-rooms, so each room is fetched individually via the `https://<host>/room/<slug>/` frontend URL, which 301-redirects to `/wp-json/wp/v2/rooms/<id>`. **The two systems slugify titles differently** (basepms `classic-ensuite-…` vs the `rooms` post `classic-en-suite-…`), so `main()` first builds a `room_slug_map()` per brand from the brand's **room sitemap** (`/room-sitemap.xml`, via `sitemap_index.xml`; curl fallback for WAF'd brands) and resolves each basepms slug to the real `rooms`-post slug on a **normalised** key (`_norm_slug` = lowercase, map spelled-out numbers to digits as whole tokens (`one`→`1`, `fourth`→`4th`), strip non-alphanumerics, so `ensuite`==`en-suite` and `one-bed`==`1-bed`). `fetch_room_detail` also validates the response is a real room post (`_is_room_post` — an `int` `id`): an unresolved slug's redirect falls back to the `/wp-json/` API index, which must NOT be treated as room detail (it would blank `quantity_available` yet stamp a misleading `enquire_status`). Rooms that exist in basepms-rooms but have **no published `rooms` post** (absent from the sitemap) legitimately get blank new columns — there is no availability to pull, and the blanks stay honest rather than being mis-attributed. A **browser User-Agent is now required** (the frontend route sits behind a WAF), and a **`curl` subprocess fallback** (`fetch_room_detail` → `_curl_json`) handles brands whose frontend is behind a Cloudflare TLS-fingerprint challenge that blocks python-requests but not curl (e.g. Homes for Students). New room columns: `quantity_available` (real availability from `acf.quantityAvailable`), `enquire_status` (`Book Now`/`Enquire`, from the contract `bookNowURL`), `amenities` (`|`-joined `acf.amenities[].amenity.post_title`). New contract columns: `bookable` (the cache contract matches a live `rooms` contract → actually bookable) and `enquire_status`, plus `quantity_available` repeated per row. **`bookable` match rule:** a `contracts_cache` entry matches a `rooms` contract on `start_date`==`startDate`, `end_date`==`endDate`, `contract_length`×7==`minContractDays` (weeks→days), and `price`(pence→£)==`pricePerPersonPerWeek` — the `rooms` endpoint is the source of truth for what's bookable. `available_contracts` and the per-contract `available` flag are kept for now but are **legacy/derived — to be retired** once `quantity_available`/`bookable` are trusted. `make_report.py` gained Room-availability / Bookable / Amenity / Enquire-status change sections; `publish_to_sheets.py` watches the new fields on both change tabs. Both diff paths carry a **blank-old-value guard** (`SKIP_BLANK_OLD` in publish; `ov != ""` in make_report) so the first run after this change does **not** flood with `"" → value` churn for the new columns. **First full-run stats (2026-07-02, 1,604 rooms / 3,583 contracts, with the slug-resolution fix):** `quantity_available` populated on 1,387 rooms (217 blank); `enquire_status` = 1,330 `Enquire` / 57 `Book Now` / 217 blank; `bookable` = 1,852 `true` / 1,220 `false` / 511 blank — i.e. **1,220 contracts were flagged `available` in contracts_cache but are not actually bookable** (the overstatement this change fixes). The 217 blank rooms (Prestige 131, HFS 71, Universal 9, Urban 6) are rooms present in basepms-rooms but with **no matching `rooms` post** — a different room-type/property name (e.g. `Classic Studio Plus` vs `Classic Studio`, `…flora-building-hoxton` vs `…flora-building`) or a whole property absent from the `rooms` sitemap (e.g. Silk Mill Left). These are left blank on purpose (honest "no data") rather than fuzzy-matched, which would mis-attribute another room's availability. Earlier — 2026-07-01 (**contracts_cache schema overhaul** — the basepms API changed fundamentally: contract/pricing data now comes as a flat per-instalment array at `acf.contracts_cache`. The contracts CSV now carries the 12 instalment fields verbatim — `instalment_id`, `name`, `academic_year`, `price`, `available`, `start_date`, `end_date`, `contract_length`, `weeks_remaining`, `base_hub_url`, `updated_at`, `pricing_updated_at` — plus context columns `brand_name`/`property`/`city`/`room_type`/`available_contracts`/`run_time`. `price` is still converted pence→£/week; `available` is normalised to `true`/`false`. Dropped columns: `contract_title` (→ `name`), `price_pw` (→ `price`), `contract_length_weeks` (→ `contract_length`), `currency_symbol` (removed — all brands are £). `make_report.py` now keys contracts on the stable unique `instalment_id` (was the composite title key) and diffs the `price` field, rendering each contract by its descriptive `name`. `publish_to_sheets.py` matches contracts within a group by `instalment_id` first (then `name`, then `start_date`) and reads the `price`/`contract_length` columns. Rooms schema unchanged. **Transition note:** the first run after this change shows one-off churn — the previous `contracts_latest.csv` lacks `instalment_id`, so every contract reads as "new" until the second run.). Earlier — 2026-06-15 (documented that room-level `acf.available` is an unreliable source artifact — only correctly synced some days, e.g. accurate 2026-06-12 but uniform `False` most days; derive availability from `available_contracts > 0`; `quantity_available` replaced by `available_contracts` — the count of currently-available contracts per room (the APIs expose no stock count, only a per-contract `available` flag); change tracking + Change Field label renamed to "Available Contracts" accordingly; Contracts change tab now filters legacy `(added)`/`(removed)` Change Field values via `CONTRACT_CHANGE_FIELD_EXCLUDE`; Room change tab no longer logs `quantity_available` / `(added)` / `(removed)` (history purged too); room quantity changes moved to the Contracts change tab, one row per room with blank Year/Duration via `room_quantity_changes()`; `quantity_available` added to the contracts schema at column E — room-level count repeated per contract, not change-watched; `Latest Room Data` tab now explodes `image_urls` to one row per URL via `explode_on()` — display-only, CSV unchanged; doc-consistency pass: §1 now says three scripts incl. `publish_to_sheets.py` and lists all deps; §4 line ranges refreshed and `pence_to_pounds` added to the helpers list). Earlier — 2026-06-10 (folder renamed `ROOMS data` → `rooms-data`; VS .sln/.pyproj renamed to match; post-rename round trip verified; Google Sheet renamed to `rooms-data`; room change tab now also watches `description` / `thumbnail_url` / `image_urls`; contract changes re-keyed to property/city/room/year/duration with start/end dates watched and New Contract / Sold Out change types; `price_pw` converted pence → pounds at the ETL with units-switch guards in both change logs)_
 
 ---
 
@@ -79,6 +79,10 @@ The flow is all in `etl.py`. Top to bottom:
      - `PSL_ID_RANGE` → e.g. `"60000-70000"`. If set, the script switches from
        "list every page" mode to "probe each individual ID one by one" mode. Rarely
        needed; it's a fallback for when the list endpoint misbehaves.
+   - `BROWSER_UA` — a Chrome User-Agent string sent on **every** request. Required:
+     the `/room/<slug>/` frontend route (used to reach the `rooms` endpoint) rejects
+     non-browser agents. `CURL_BIN` — `shutil.which("curl")`, used only as a fallback
+     for brands behind a Cloudflare challenge (see `fetch_room_detail`).
    - `ROOM_FIELDS` and `CONTRACT_FIELDS` — define the exact CSV columns and their order.
    - Right after the imports, the script calls `sys.stdout/stderr.reconfigure(encoding="utf-8")`.
      This is a **Windows fix**: the progress prints use box-drawing chars (`━`) that the
@@ -97,7 +101,7 @@ The flow is all in `etl.py`. Top to bottom:
      when the address record has no city.
    - `make_session()` — builds a `requests.Session` with the User-Agent and optional auth.
 
-3. **Fetchers (lines ~157–213)**
+3. **Fetchers**
    - `fetch_all_pages()` — the normal path. Reads the WordPress pagination headers
      (`X-WP-TotalPages`, `X-WP-Total`) and loops through every page, accumulating items.
    - `fetch_by_id_range()` — the `PSL_ID_RANGE` fallback path; hits `/endpoint/<id>` for
@@ -105,28 +109,55 @@ The flow is all in `etl.py`. Top to bottom:
    - `get_with_retry()` — wraps every page GET with retry/backoff (`MAX_RETRIES`,
      `RETRY_BACKOFF`) on transient errors (timeouts, conn drops, 5xx, 429). Added because a
      single timeout used to drop a whole brand, which then showed up as mass "removed" rows.
+   - `fetch_room_detail(session, host, slug)` — **NEW.** Fetches a room's `rooms`-endpoint
+     JSON (real availability / amenities / bookable contracts) via `https://<host>/room/<slug>/`,
+     which 301-redirects to `/wp-json/wp/v2/rooms/<id>`. This slug+redirect is the only way in:
+     the `rooms` collection can't be listed (`X-WP-Total: 0`, `?slug=`/`?include=`/search all
+     return nothing) and its ids differ from basepms-rooms. Tries python-requests first; on a
+     non-JSON/error response (a Cloudflare interstitial) it falls back to `_curl_json()` — a
+     `curl -sL` subprocess that clears the TLS-fingerprint challenge blocking requests on some
+     brands (Homes for Students). Returns `{}` unless the payload is a real room post
+     (`_is_room_post` — guards against the `/wp-json/` API-index fallback for unresolved slugs),
+     so a miss degrades gracefully (new columns left **blank**, not 0/false).
+   - `room_slug_map(session, host)` — **NEW.** `{normalised_slug: real rooms-post slug}` built
+     from the brand's room sitemap (see the join note in §5). Bridges the basepms↔rooms slug
+     formatting difference so `fetch_room_detail` targets the right slug. `_fetch_text()` /
+     `_curl_get()` are the sitemap fetch helpers (requests + curl fallback).
 
-4. **The parser — `parse_room()` (lines ~218–313)** — this is the heart of the
-   "Transform" step and the messiest part. For each raw API item it:
+4. **The parser — `parse_room(item, brand_name, run_time, detail)`** — this is the heart of
+   the "Transform" step and the messiest part. It takes the basepms-rooms `item` **plus** the
+   matched `rooms`-endpoint `detail` dict (from `fetch_room_detail`; `{}` if unavailable). It:
    - Splits the title `"Room Type, Property Name"` into `room_type` + `property`.
    - Resolves the brand name (prefers the API's own field, falls back to config).
    - Cleans the description (HTML stripped).
    - Pulls thumbnail + a `|`-joined list of image URLs.
-   - Extracts the contracts array — now the flat per-instalment array at
-     `acf.contracts_cache` (the legacy `acf.contracts` path is kept only as a fallback for
-     any brand that hasn't migrated). Each entry already has the 12 fields; they are copied
-     verbatim except `price` (pence→£/week via `pence_to_pounds`) and `available`
-     (normalised to `true`/`false`), plus the run's `run_time` and room-level context.
+   - **From the `rooms` `detail`:** `quantity_available` (`acf.quantityAvailable`), `amenities`
+     (`amenity_titles()` — `|`-joined `acf.amenities[].amenity.post_title`), and the set of
+     genuinely-bookable contracts (`rooms_endpoint_contracts()`, keyed on
+     start/end/`minContractDays`/£-price → `bookNowURL`). When `detail` is
+     `{}` these are all left **blank** (fetch failed — don't assert "sold out").
+   - Extracts the contracts array — the flat per-instalment array at `acf.contracts_cache`
+     (the legacy `acf.contracts` path is kept only as a fallback for any brand that hasn't
+     migrated). Each entry is copied verbatim except `price` (pence→£/week via
+     `pence_to_pounds`) and `available` (normalised to `true`/`false`), plus `run_time`,
+     room-level context, and the derived **`bookable`** (`_cache_contract_key()` matches the
+     entry against the `rooms` bookable set — weeks×7 vs `minContractDays`, pence→£ vs
+     `pricePerPersonPerWeek`; emitted as `Enabled`/`Disabled`) and per-contract
+     **`Contact Form URL`** (the matched contract's `bookNowURL`, or `-` when there is none).
    - Works out city with fallbacks (address → first contract's `base_hub_url`). Currency is
      no longer emitted (all brands are £).
    - Returns **one room row** plus **a list of contract rows** (one per instalment).
    - The many `or` fallbacks exist precisely because each brand's JSON is shaped slightly
      differently — that's why the code looks defensive/repetitive.
 
-5. **`main()` (lines ~318–395)**
+5. **`main()`**
    - Makes the `output/` dir, builds a timestamp `YYYYMMDD_HHMMSS`.
-   - Loops every brand → every endpoint → fetches → parses → collects all rooms and
-     contracts into two big lists. Errors per brand/item are caught and logged, not fatal.
+   - For each brand: builds the `room_slug_map()` once, then loops every endpoint → fetches
+     the list → **for each item, resolves its slug via the map and fetches its `rooms` detail**
+     (`fetch_room_detail`, throttled by `SLEEP_S`; ~one extra GET per room, so a full run adds
+     ~1,500 requests) → parses → collects all rooms and contracts into two big lists. Prints the
+     slug-map size and an `enriched: N/total` count per brand. Errors per brand/item are caught
+     and logged, not fatal.
    - **Sorts both lists A–Z by `(property, room_type)`.**
    - Writes `output/rooms_<timestamp>.csv` and `output/contracts_<timestamp>.csv`
      using `csv.DictWriter` (with `extrasaction="ignore"` so extra dict keys don't break).
@@ -153,18 +184,47 @@ accumulates the full history of raw runs alongside the two `*_latest.csv` pointe
 
 **`rooms_<timestamp>.csv`** (and `rooms_latest.csv`) — one row per room type:
 `brand_name` · `property` · `city` · `room_type` · `available_contracts` ·
-`description` · `thumbnail_url` · `image_urls`
+`quantity_available` · `description` · `thumbnail_url` · `image_urls` ·
+`amenities`
 
 **`contracts_<timestamp>.csv`** (and `contracts_latest.csv`) — one row per contract / instalment.
-Context columns first, then the 12 fields pulled verbatim from each `acf.contracts_cache` entry:
-`brand_name` · `property` · `city` · `room_type` · `available_contracts` · `run_time` ·
-`instalment_id` · `name` · `academic_year` · `price` · `available` · `start_date` · `end_date` ·
-`contract_length` · `weeks_remaining` · `base_hub_url` · `updated_at` · `pricing_updated_at`
-(`price` is £/week — the API's minor-unit value ÷100. `available` is `true`/`false`.
-`run_time` is the run's UTC timestamp, stamped on every contract row.)
-(`available_contracts` is the **count of currently-available contracts (pricing options)** for the room — `sum(is_available(c) …)` in `parse_room()` — repeated on each of that room's contract rows, at column E on both tabs. The APIs expose **no stock/units count**, only a per-contract `available` flag, so this count of options is the closest real number; it is **not** physical rooms available. Changes to it are logged on the **Contracts** change tab, not the rooms tab — see §6.)
+Context columns first, then the fields pulled from each `acf.contracts_cache` entry (with
+`bookable`/`Contact Form URL` derived from the `rooms` endpoint):
+`brand_name` · `property` · `city` · `room_type` · `available_contracts` · `quantity_available` ·
+`run_time` · `instalment_id` · `name` · `academic_year` · `price` · `available` · `bookable` ·
+`Contact Form URL` · `start_date` · `end_date` · `contract_length` · `weeks_remaining` ·
+`base_hub_url` · `updated_at` · `pricing_updated_at`
+(`price` is £/week — the API's minor-unit value ÷100. `available` is the contracts_cache
+`true`/`false` flag; **`bookable`** is `Enabled`/`Disabled` from matching the `rooms` endpoint — the
+real "can you book this" signal. `Contact Form URL` is the matched contract's `bookNowURL`, or `-`
+when there is none (blank if the detail fetch failed).
+`quantity_available` (real room availability from the `rooms` endpoint's `quantityAvailable`) is
+repeated per contract row, like `available_contracts`. `run_time` is the run's UTC timestamp,
+stamped on every contract row.)
 
-> ⚠️ **Do not use the room-level `acf.available` field.** It is an **unreliable source-side artifact**: the basepms→WordPress sync only populates it correctly on some days. On 2026-06-12 it was 99.6% accurate (1,219 `True` rooms had available contracts, 369 `False` rooms had none) — but on 06-09/10/11 and 06-15 it returned a uniform `False` for *every* room despite contracts being available, and on 06-08 a uniform `True`. The old `quantity_available` column fell through to this field, which is why it was meaningless. The reliable signal is the **per-contract** `available` flag — derive room availability as `available_contracts > 0`, never from `acf.available`.
+> **Real vs derived availability.** `quantity_available` / `bookable` come from the **`rooms`
+> endpoint** and are the trustworthy signals. `available_contracts` (count of contracts_cache
+> entries flagged available) and the per-contract `available` flag are **legacy/derived** —
+> contracts_cache lists every contract *ever created*, not what's bookable, so they overstate
+> availability (e.g. a room showing `available_contracts=4` but only `1` `bookable`). They are
+> kept during the transition and **slated for retirement** once the new fields are trusted.
+(`available_contracts` is the **legacy** count of contracts_cache entries flagged available —
+`sum(is_available(c) …)` in `parse_room()` — repeated on each of that room's contract rows, at
+column E on both tabs. It counts *created* contracts, not bookable ones, so it overstates
+availability. Changes to it are logged on the **Contracts** change tab, not the rooms tab —
+see §6. **Prefer `quantity_available`** (the real count from the `rooms` endpoint) going forward.)
+
+> ⚠️ **Two things NOT to trust for availability.** (1) The **basepms-rooms** room-level
+> `acf.available` field — an unreliable source-side artifact (the basepms→WordPress sync only
+> populated it correctly some days: 99.6% accurate on 2026-06-12, but uniform `False` for every
+> room on 06-09/10/11/15 and uniform `True` on 06-08). (2) **`available_contracts`** / the
+> per-contract **`available`** flag — derived from `contracts_cache`, which lists every contract
+> ever *created*, so it overstates what's bookable.
+> ✅ **The reliable source is the `rooms` endpoint** (a *different* route from basepms-rooms,
+> joined by `slug`): `acf.quantityAvailable` → the `quantity_available` column (real room
+> availability), and its `acf.contracts` array → the `bookable` flag (a contract is bookable
+> only if it matches a live `rooms` contract). Note `rooms`-endpoint `acf.available` is *also*
+> unreliable — availability comes from `quantityAvailable`, not `available`.
 
 > Sense of scale (run of 2026-06-05): ~1,540 room rows and ~4,480 contract rows across
 > the 6 brands. `image_urls` is a single `|`-separated string **in the CSV** (the
@@ -178,8 +238,11 @@ Context columns first, then the 12 fields pulled verbatim from each `acf.contrac
 Each weekday run produces `reports/<YYYY-MM-DD>/` containing:
 - **`rooms.csv` / `contracts.csv`** — a dated snapshot copy of that day's data.
 - **`changes.md`** — a human-readable changelog vs the **previous run's** `*_latest.csv`:
-  a summary plus sections for price changes (`£old → £new`), contracts added/removed,
-  rooms added/removed, and availability changes.
+  a summary plus sections for price changes (`£old → £new`), **room availability changes**
+  (`quantity_available`), **bookable changes** (contract `bookable`), contracts added/removed,
+  rooms added/removed, **contract available-flag changes**, and **amenity changes**.
+  The new-field sections carry a blank-old guard (`ov != ""`) so
+  the first run after the `rooms`-endpoint change doesn't emit `"" → value` churn.
 
 This is produced by `make_report.py` (see §4), not `etl.py`. Row identity for the diff:
 rooms are keyed on `(brand_name, property, room_type)`; contracts on the stable unique
@@ -214,9 +277,14 @@ Workflow file: `.github/workflows/run_etl.yml`, named **"Room Database ETL"**.
     previous run's `*_latest.csv` (stashed to `/tmp/prev`) vs the new one, appends the day's
     change rows, and prunes rows older than 30 days. Columns: Run Date · Brand · Property ·
     City · Room Type · (contracts also: Academic Year · Duration) · Change Field · Change
-    Type · Old Content · New Content. Watched fields: rooms `description`,
-    `thumbnail_url`, `image_urls` (long values clipped to the ~49K cell
-    limit); contracts `price`, `available`, `start_date`, `end_date`. Contract identity
+    Type · Old Content · New Content. Watched fields (`ROOM_WATCH` / `CONTRACT_WATCH`): rooms
+    `quantity_available`, `amenities`, `description`, `thumbnail_url`,
+    `image_urls` (long values clipped to the ~49K cell limit); contracts `price`, `available`,
+    `bookable`, `Contact Form URL`, `start_date`, `end_date`. The four `rooms`-endpoint fields
+    (`SKIP_BLANK_OLD = {quantity_available, Contact Form URL, amenities, bookable}`) skip a
+    change when the **old** value is blank, so the first run after the change doesn't log a
+    spurious `"" → value` for every row (legacy text fields like Description still log gained
+    values). Contract identity
     is brand + property + city + room_type + academic_year + `contract_length`; multiple
     contracts under one identity (e.g. Sept + Jan intakes) are paired by the stable
     `instalment_id` first, then `name`, then start date,
@@ -315,6 +383,11 @@ python make_report.py 2026-06-08 `
 - **Change the schedule** → edit the `cron` line in `.github/workflows/run_etl.yml`.
 - **A brand's data looks wrong/empty** → its JSON shape probably differs; look at the
   fallback `or` chains in `parse_room()` and add the new field name there.
+- **A brand's `quantity_available` / `bookable` / `amenities` are all blank** → its `rooms`
+  detail fetch is failing. Check `fetch_room_detail`: (a) the `/room/<slug>/` route may have
+  changed, (b) a WAF/Cloudflare challenge may be blocking python-requests — confirm `CURL_BIN`
+  is found and that `curl -sL -A "<BROWSER_UA>" https://<host>/room/<slug>/` still returns JSON.
+  The `main()` log line `room detail enriched: N/total` shows the per-brand success count.
 - **Be gentler / faster on the APIs** → adjust `SLEEP_S` and `PER_PAGE` constants.
 - **Clear bad rows from the Sheet change tabs** → run the workflow with the
   `reset_change_tabs` input ticked (wipes both change tabs to headers).
