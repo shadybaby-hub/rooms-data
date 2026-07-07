@@ -23,3 +23,6 @@ _bf/
 
 # Local generated price comparison reports
 price_comparison_*.csv
+
+# Scratch PR description for pasting into GitHub — never committed
+PR_DESCRIPTION.md

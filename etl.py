@@ -147,7 +147,27 @@ CONTRACT_FIELDS = [
     "pricing_updated_at",
 ]
 
+# Row-identity keys for carry-forward — MUST match make_report.py's ROOM_KEY /
+# CONTRACT_KEY so a carried-over value lines up with the same row across runs.
+CARRY_ROOM_KEY     = ("brand_name", "property", "room_type")
+CARRY_CONTRACT_KEY = ("instalment_id",)
+
 # ── Helpers ────────────────────────────────────────────────────────────────────
+
+
+def _load_prev_index(path, key_fields):
+    """Load a previous *_latest.csv into {key_tuple: row} for carry-forward.
+
+    Returns {} when the file is absent or unreadable (e.g. the very first run),
+    so callers degrade to "no carry-forward" rather than crashing."""
+    if not path or not os.path.exists(path):
+        return {}
+    try:
+        with open(path, newline="", encoding="utf-8") as f:
+            rows = list(csv.DictReader(f))
+    except OSError:
+        return {}
+    return {tuple(str(r.get(k, "")) for k in key_fields): r for r in rows}
 
 def strip_html(text: str) -> str:
     text  = html.unescape(text or "")
@@ -456,7 +476,9 @@ def fetch_by_id_range(session, endpoint_url, id_start, id_end):
 # ── Parser ─────────────────────────────────────────────────────────────────────
 
 def parse_room(item: dict, brand_name: str, run_time: str,
-               detail: dict | None = None) -> tuple[dict, list[dict]]:
+               detail: dict | None = None,
+               prev_rooms_idx: dict | None = None,
+               prev_contracts_idx: dict | None = None) -> tuple[dict, list[dict]]:
     acf   = item.get("acf") or {}
     addr  = acf.get("propertyAddress") or {}
     media = acf.get("media") or {}
@@ -486,6 +508,22 @@ def parse_room(item: dict, brand_name: str, run_time: str,
         safe(item, "property", "acf", "locationBrand", "name") or
         brand_name
     )
+
+    # Carry-forward on enrichment failure. When the `rooms`-endpoint detail fetch
+    # failed (has_detail False) the enrichment-only fields would blank out. A brand
+    # behind Cloudflare can fail *mid-run*, blanking hundreds of rooms that were
+    # fine hours earlier (the 2026-07-06 Homes for Students wipeout). Rather than
+    # emit blanks — which read as "sold out" downstream and flood the change report
+    # — reuse the values from the previous run's *_latest.csv when we have them.
+    # Only triggers on a total detail failure, so a *successful* fetch that
+    # legitimately returns an empty value still writes through as blank.
+    if not has_detail and prev_rooms_idx:
+        prev_room = prev_rooms_idx.get((resolved_brand, property_, room_type))
+        if prev_room:
+            prev_qty = str(prev_room.get("quantity_available", "")).strip()
+            if prev_qty:
+                quantity_available = prev_qty       # also flows to contract rows
+            amenities = amenities or prev_room.get("amenities", "")
 
     # Description
     desc = (
@@ -551,8 +589,17 @@ def parse_room(item: dict, brand_name: str, run_time: str,
             # Booking link: the bookNowURL when there is one, else "-".
             contract_enquire = book_url if book_url else "-"
         else:
+            # Detail fetch failed — carry forward the previous run's bookable /
+            # booking link for this contract (keyed on the stable instalment_id)
+            # instead of blanking. Falls back to blank if we have no prior row.
             bookable_str  = ""   # unknown — detail fetch failed
             contract_enquire = ""
+            iid = str(c.get("instalment_id", "")).strip()
+            if iid and prev_contracts_idx:
+                pc = prev_contracts_idx.get((iid,))
+                if pc:
+                    bookable_str     = pc.get("bookable", "")
+                    contract_enquire = pc.get("Contact Form URL", "")
 
         contract_rows.append({
             # context / run metadata
@@ -595,6 +642,22 @@ def main():
 
     session = make_session()
     all_rooms, all_contracts = [], []
+    carried_rooms = 0   # rooms whose enrichment failed but were backfilled from prev
+
+    # Previous run's latest CSVs, for carry-forward on enrichment failure. At ETL
+    # time output/*_latest.csv still holds the prior run (promote runs afterwards).
+    # Overridable via PREV_ROOMS / PREV_CONTRACTS; absent on the first run → {}.
+    prev_rooms_idx = _load_prev_index(
+        os.getenv("PREV_ROOMS", os.path.join(OUT_DIR, "rooms_latest.csv")),
+        CARRY_ROOM_KEY,
+    )
+    prev_contracts_idx = _load_prev_index(
+        os.getenv("PREV_CONTRACTS", os.path.join(OUT_DIR, "contracts_latest.csv")),
+        CARRY_CONTRACT_KEY,
+    )
+    if prev_rooms_idx or prev_contracts_idx:
+        print(f"carry-forward: loaded {len(prev_rooms_idx)} prev rooms, "
+              f"{len(prev_contracts_idx)} prev contracts")
 
     id_start = id_end = None
     if ID_RANGE:
@@ -644,7 +707,11 @@ def main():
                         detail_ok += 1
                     if slug:
                         time.sleep(SLEEP_S)
-                    rr, crs = parse_room(item, brand_name, run_time, detail)
+                    rr, crs = parse_room(item, brand_name, run_time, detail,
+                                         prev_rooms_idx, prev_contracts_idx)
+                    # detail failed but qty present ⇒ value was carried forward
+                    if not detail and str(rr.get("quantity_available", "")).strip():
+                        carried_rooms += 1
                     all_rooms.append(rr)
                     all_contracts.extend(crs)
                 except Exception as e:
@@ -676,6 +743,7 @@ def main():
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
   Brands          : {len(brands)}
   Room types      : {len(all_rooms)}
+  Carried forward : {carried_rooms} (enrichment failed, reused prev value)
   Contracts       : {len(all_contracts)}
   Properties      : {len(properties)}
   Cities          : {len(cities)}
