@@ -55,6 +55,10 @@ jobs:
       - name: Run ETL
         env:
           PSL_API_TOKEN: ${{ secrets.PSL_API_TOKEN }}
+          # Optional residential/mobile proxy to egress from a non-datacenter IP,
+          # bypassing the Cloudflare IP block on the enrichment fetches (and some
+          # brands' REST lists). No-op when the secret is unset — direct connection.
+          ETL_PROXY: ${{ secrets.ETL_PROXY }}
         run: python etl.py
 
       # ── 5. Rename outputs to fixed filenames (no timestamp) ──────
