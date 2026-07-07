@@ -42,6 +42,7 @@ import shutil
 import subprocess
 import sys
 import time
+from collections import defaultdict
 from datetime import datetime, timezone
 from urllib.parse import urlparse, parse_qs
 
@@ -168,6 +169,19 @@ def _load_prev_index(path, key_fields):
     except OSError:
         return {}
     return {tuple(str(r.get(k, "")) for k in key_fields): r for r in rows}
+
+
+def _brand_blank_ratios(rows):
+    """Per-brand (resolved `brand_name`) quantity_available blank ratio for a set
+    of room rows: {brand: (ratio, blanks, total)}. Feeds the run-health guard —
+    a brand whose real availability has collapsed reads as ~100% blank."""
+    tot, blank = defaultdict(int), defaultdict(int)
+    for r in rows:
+        b = r.get("brand_name", "")
+        tot[b] += 1
+        if not str(r.get("quantity_available", "")).strip():
+            blank[b] += 1
+    return {b: (blank[b] / tot[b], blank[b], tot[b]) for b in tot}
 
 def strip_html(text: str) -> str:
     text  = html.unescape(text or "")
@@ -750,6 +764,61 @@ def main():
   Rooms CSV       : {rooms_csv}
   Contracts CSV   : {contracts_csv}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━""")
+
+    # ── Run-health / block detection ────────────────────────────────────────
+    # A Cloudflare IP-block on a brand's frontend (the 2026-07 Homes for Students
+    # outage: GitHub-runner Azure IPs get challenged) collapses enrichment to 0/N,
+    # or 403s a whole brand off its list endpoint. carry-forward masks a
+    # *transient* blip when the prior run was good; this guard is the backstop for
+    # when it can't. It FAILS the run (default) so the degraded data is NOT
+    # promoted/published/committed and the last-good *_latest.csv stays the
+    # baseline — otherwise a mostly-blank run poisons carry-forward's baseline.
+    #
+    # It trips only on a *new* problem — a brand lost vs the previous run, or a
+    # fresh blank-out carry-forward couldn't cover — so a steady-state already-blank
+    # brand does NOT perma-fail the pipeline. Tunables (env):
+    #   ETL_ON_DEGRADED         fail|warn  (default fail)
+    #   ETL_BLANK_FAIL_RATIO    float      (default 0.90)
+    #   ETL_BLANK_REGRESS_DELTA float      (default 0.50)
+    mode          = os.getenv("ETL_ON_DEGRADED", "fail").lower()
+    fail_ratio    = float(os.getenv("ETL_BLANK_FAIL_RATIO", "0.90"))
+    regress_delta = float(os.getenv("ETL_BLANK_REGRESS_DELTA", "0.50"))
+
+    cur  = _brand_blank_ratios(all_rooms)
+    prev = _brand_blank_ratios(prev_rooms_idx.values())
+
+    print("\n  Run health — quantity_available blank ratio (this run vs previous):")
+    for b in sorted(set(cur) | set(prev)):
+        cr, pr = cur.get(b), prev.get(b)
+        cs = f"{cr[0]:>4.0%} ({cr[1]}/{cr[2]})" if cr else "absent"
+        ps = f"{pr[0]:.0%}" if pr else "—"
+        print(f"    {b:28} now {cs:>16}   was {ps}")
+
+    degraded = []
+    for b in prev:                                   # a brand we HAD but lost
+        if b not in cur:
+            degraded.append(f"{b}: present last run, absent now — list endpoint "
+                            f"failed (likely 403 / IP block); committing would drop it")
+    for b, (ratio, blanks, n) in cur.items():        # a fresh availability collapse
+        pratio = prev.get(b, (0.0, 0, 0))[0]
+        if ratio >= fail_ratio and (ratio - pratio) >= regress_delta:
+            degraded.append(f"{b}: {blanks}/{n} rooms ({ratio:.0%}) missing "
+                            f"quantity_available, up from {pratio:.0%} last run — "
+                            f"enrichment blocked and carry-forward could not cover")
+
+    if degraded:
+        print("\n  ⚠️  RUN DEGRADED — block/enrichment failure detected:")
+        for d in degraded:
+            print(f"     • {d}")
+        if mode == "fail":
+            print("\n  Failing the run (ETL_ON_DEGRADED=fail) so the degraded data is NOT "
+                  "promoted/published/committed; the last-good baseline stands.")
+            print("  Re-run (a fresh runner IP often clears it) or set ETL_ON_DEGRADED=warn "
+                  "to commit anyway.")
+            sys.exit(1)
+        print("\n  ETL_ON_DEGRADED=warn — continuing despite degradation.")
+    else:
+        print("\n  Run health: OK — no new brand loss or availability collapse.")
 
 
 if __name__ == "__main__":
