@@ -101,6 +101,15 @@ RETRY_BACKOFF = 3.0   # seconds, multiplied by the attempt number
 API_TOKEN = os.getenv("PSL_API_TOKEN", "")
 ID_RANGE  = os.getenv("PSL_ID_RANGE", "")
 
+# Optional egress proxy for ALL brand requests (both the requests session and the
+# curl fallback). The enrichment fetches (sitemap + /room/<slug>/) and some brands'
+# REST list endpoints are blocked by Cloudflare from GitHub-runner datacenter IPs
+# (see the 2026-07 Homes for Students outage) — an IP-reputation block the curl
+# TLS-fingerprint fallback can't clear. Point this at a residential/mobile proxy
+# (e.g. "http://user:pass@host:port") to egress from a non-datacenter IP. Unset =
+# direct connection (unchanged behaviour).
+PROXY = os.getenv("ETL_PROXY", "")
+
 # Browser UA used for every request. REQUIRED: the `/room/<slug>/` frontend route
 # (which redirects to the `rooms` REST JSON we enrich from) sits behind a WAF that
 # rejects non-browser agents. The basepms-rooms API accepts it too.
@@ -302,6 +311,8 @@ def make_session() -> requests.Session:
     if API_TOKEN:
         headers["Authorization"] = API_TOKEN
     s.headers.update(headers)
+    if PROXY:
+        s.proxies.update({"http": PROXY, "https": PROXY})
     return s
 
 
@@ -432,10 +443,13 @@ def _curl_get(url):
     python-requests on some brands."""
     if not CURL_BIN:
         return None
+    args = [CURL_BIN, "-sL", "-A", BROWSER_UA, "--max-time", str(TIMEOUT)]
+    if PROXY:
+        args += ["-x", PROXY]
+    args.append(url)
     try:
         p = subprocess.run(
-            [CURL_BIN, "-sL", "-A", BROWSER_UA, "--max-time", str(TIMEOUT), url],
-            capture_output=True, timeout=TIMEOUT + 10,
+            args, capture_output=True, timeout=TIMEOUT + 10,
         )
         if p.returncode == 0 and p.stdout:
             return p.stdout
