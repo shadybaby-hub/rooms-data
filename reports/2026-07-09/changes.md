@@ -1,134 +1,125 @@
 # Change report — 2026-07-09
 
-_Generated 2026-07-09 09:23 UTC_
+_Generated 2026-07-09 19:32 UTC_
 
 ## Summary
 
-- Rooms: **+3** added, **−0** removed
-- Contracts: **+4** added, **−1** removed
-- Price changes: **28**
-- Room availability changes: **16**
-- Bookable changes: **19**
-- Contract available-flag changes: **22**
+- Rooms: **+2** added, **−1** removed
+- Contracts: **+5** added, **−0** removed
+- Price changes: **29**
+- Room availability changes: **8**
+- Bookable changes: **14**
+- Contract available-flag changes: **25**
 - Amenity changes: **0**
 
-## Price changes (28)
+## Price changes (29)
 
-- Homes for Students — Barker House - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: £149 → £0
-- Prestige Student Living — The Place - Premium Ensuite - 26/27 - 12/09 - 51wk 2026: £180 → £0
-- Prestige Student Living — The Priory - Classic Studio - 26/27 - 05/09 - 51wk 2026: £229 → £239
-- Prestige Student Living — The Propeller Quarter - Classic 4 Bed Ensuite - 26/27 - 12/09 - 51wk 2026: £175 → £180
-- Prestige Student Living — The Quarter House - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £268 → £278
-- Prestige Student Living — The Quarter House - Bronze Studio - 26/27 - 12/09 - 44wk 2026: £360 → £0
-- Prestige Student Living — City Wharf - Classic Studio - 26/27 - 05/09 - 44wk 2026: £265 → £0
-- Prestige Student Living — Broadway Studios - Standard Studio - 26/27 - 05/09 - 51wk 2026: £225 → £255
-- Prestige Student Living — Broadway Studios - Standard Studio - 26/27 - 05/09 - 44wk 2026: £235 → £255
-- Homes for Students — Calthorpe Court - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: £169 → £165
-- Homes for Students — Paddington Park House - Classic Plus Ensuite - 26/27 - 05/09 - 51wk 2026: £129 → £135
-- Homes for Students — Polhill Park - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £129
-- Homes for Students — Urban Student Village - Classic Studio - 26/27 - 12/09 - 51wk 2026: £140 → £165
-- Homes for Students — Green Wood Court - Studio - 51wk - 26/27 - 12/09 - 51wk 2026: £255 → £0
-- Prestige Student Living — Hollis Wharf - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £260 → £270
-- Prestige Student Living — Marketgait Apartments - Classic Ensuite - 26/27 - 29/08 - 51wk 2026: £165 → £0
-- Prestige Student Living — Crown Place - Luxury Ensuite Plus - 26/27 - 12/09 - 51wk 2026: £205 → £0
-- Homes for Students — 8 Roxburgh - Classic Room - 26/27 - 05/09 - 44wk 2026: £160 → £165
-- Homes for Students — Polhill Park - Premium Ensuite - 26/27 - 12/09 - 41wk 2026: £146 → £159
-- Homes for Students — Polhill Park - Premium Plus Ensuite - 26/27 - 12/09 - 41wk 2026: £161 → £169
-- Prestige Student Living — Seren - 12 Bed Cluster Ensuite V1 - 26/27 - 05/09 - 51wk 2026: £109 → £0
-- Prestige Student Living — Wick Park- Superior Plus Ensuite - 26/27 - 12/09 - 51wk 2026: £405 → £399
-- Prestige Student Living — Willen House - Platinum Studio - 26/27 - 12/09 - 44wk 2026: £589 → £659
-- Prestige Student Living — The Quarter House - Silver Studio - 26/27 - 12/09 - 44wk 2026: £0 → £380
-- Prestige Student Living — Howard Gardens - Standard Ensuite - 26/27 - 05/09 - 44wk 2026: £175 → £0
-- Prestige Student Living — Straits Place - Large Premium Studio - 26/27 - 05/09 - 51wk 2026: £380 → £0
-- Prestige Student Living — Dean Street Works - 6 Bed En-Suite v1 - 26/27 - 12/09 - 45wk 2026: £256 → £0
-- Prestige Student Living — Straits Place - Classic Studio - 26/27 - 05/09 - 39wk 2026: £365 → £0
+- Prestige Student Living — Saltwater Place - 4 Bed Premium Ensuite - 26/27 - 12/09 - 51wk 2026: £135 → £129
+- Prestige Student Living — Saltwater Place - 4 Bed Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £129 → £125
+- Prestige Student Living — Saltwater Place - 4 Bed Classic Ensuite - 26/27 - 12/09 - 44wk 2026: £140 → £139
+- Prestige Student Living — SALTWATER PLACE - Premium Studio - 26/27 - 12/09 - 51wk 2026: £209 → £0
+- Prestige Student Living — Saltwater Place - 6 Bed Premium Ensuite - 26/27 - 12/09 - 51wk 2026: £135 → £129
+- Prestige Student Living — Saltwater Place - 6 Bed Premium Ensuite - 26/27 - 12/09 - 44wk 2026: £145 → £139
+- Prestige Student Living — Saltwater Place - 5 Bed Premium Ensuite - 26/27 - 12/09 - 51wk 2026: £137 → £135
+- Prestige Student Living — STRAITS MANOR - Premium Studio - 26/27 - 12/09 - 44wk 2026: £195 → £199
+- Prestige Student Living — The Quarter House - Bronze Plus Studio - 26/27 - 12/09 - 44wk 2026: £370 → £0
+- Prestige Student Living — The Quarter House - Premium Plus Ensuite - 26/27 - 12/09 - 44wk 2026: £309 → £0
+- Prestige Student Living — The Fitzalan - Classic Studio - 26/27 - 12/09 - 51wk 2026: £0 → £195
+- Homes for Students — The Tannery - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £129 → £135
+- Homes for Students — The Tannery - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: £139 → £159
+- Prestige Student Living — The Valentine - 4 Bed Ensuite - 26/27 - 05/09 - 51wk 2026: £0 → £285
+- Evo Student — Centre Court - Platinum Ensuite - 26/27 - 12/09 - 51wk 2026: £0 → £199
+- Prestige Student Living — Willen House - Gold Studio - 26/27 - 12/09 - 51wk 2026: £549 → £584
+- Prestige Student Living — Grosvenor House - Classic Studio Plus - 26/27 - 12/09 - 51wk 2026: £695 → £0
+- Homes for Students — Hamwic Hall - Classic Plus Ensuite - 26/27 - 12/09 - 51wk 2026: £147 → £166
+- Homes for Students — Marland House - Studio Sapphire - 26/27 - 12/09 - 51wk 2026: £275 → £280
+- Homes for Students — Marland House - Studio Emerald - 26/27 - 12/09 - 51wk 2026: £295 → £0
+- Homes for Students — Marland House - Studio Ruby Plus - 26/27 - 12/09 - 51wk 2026: £0 → £255
+- Homes for Students — Marland house - Studio Ruby (single) - 26/27 - 12/09 - 51wk 2026: £235 → £240
+- Prestige Student Living — Ark Canning Town - Premium Ensuite - 26/27 - 12/09 - 51wk 2026: £299 → £309
+- Homes for Students — Devonshire Courtyard - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: £95 → £105
+- Prestige Student Living — Cosmos - Premium One Bed Apartment V1 - 26/27 - 05/09 - 51wk 2026: £0 → £190
+- Homes for Students — The Court Yard - Studio Rio - 26/27 - 12/09 - 51wk 2026: £215 → £230
+- Homes for Students — The Court Yard - Studio Paris - 26/27 - 12/09 - 51wk 2026: £245 → £250
+- Homes for Students — The Court Yard - Studio London - 26/27 - 12/09 - 51wk 2026: £240 → £245
+- Prestige Student Living — Waterloo House - Classic Plus Studio - 26/27 - 12/09 - 45wk 2026: £0 → £255
 
-## Room availability changes (16)
+## Room availability changes (8)
 
-- Prestige Student Living | 800 Bristol Road | Classic Studio Plus: 1 → 0
-- Prestige Student Living | Broadway Studios | Classic Terrace Studio: 10 → 1
-- Prestige Student Living | Broadway Studios | Premium Studio: 10 → 1
-- Prestige Student Living | Broadway Studios | Premium Terrace Studio: 10 → 1
-- Prestige Student Living | Broadway Studios | Ultimate Studio: 10 → 1
-- Prestige Student Living | Crown Place | Luxury Ensuite Plus: 1 → 0
-- Prestige Student Living | Hill View Place | Premium Ensuite: 10 → 1
-- Prestige Student Living | Icon House | Bronze Studio: 1 → 0
-- Prestige Student Living | Icon House | Silver Plus Studio: 10 → 1
-- Prestige Student Living | Icon House | Silver Studio: 10 → 1
-- Prestige Student Living | Marketgait Apartments | Classic Ensuite: 10 → 0
-- Prestige Student Living | Steelworks | Bronze Ensuite: 10 → 1
-- Prestige Student Living | The Pepper Mill | Standard Studio: 0 → 10
-- Prestige Student Living | Venue Studios | Silver Studio: 10 → 0
-- Prestige Student Living | West Gate | Classic Studio: 10 → 0
-- Prestige Student Living | West Gate | Deluxe Studio: 10 → 0
+- Prestige Student Living | Cosmos | 10 Bed Ensuite: 0 → 10
+- Prestige Student Living | Cosmos | Deluxe Cluster Studio: 0 → 10
+- Prestige Student Living | Crown Place | Luxury Ensuite: 10 → 1
+- Prestige Student Living | Crown Place | Standard Ensuite: 0 → 1
+- Prestige Student Living | Crown Place | Superior Ensuite: 1 → 0
+- Prestige Student Living | Crown Place | Superior Studio: 0 → 1
+- Prestige Student Living | Press House | Club Studio: 1 → 0
+- Prestige Student Living | Press House | Essential Ensuite: 0 → 10
 
-## Bookable changes (19)
+## Bookable changes (14)
 
-- Prestige Student Living — The Place - Premium Ensuite - 26/27 - 12/09 - 51wk 2026: Enabled → Disabled
-- Prestige Student Living — The Quarter House - Bronze Studio - 26/27 - 12/09 - 44wk 2026: Enabled → Disabled
-- Prestige Student Living — City Wharf - Classic Studio - 26/27 - 05/09 - 44wk 2026: Enabled → Disabled
-- Prestige Student Living — Broadway Studios - Standard Studio - 26/27 - 05/09 - 51wk 2026: Enabled → Disabled
-- Prestige Student Living — West Gate - Deluxe Studio - 26/27 - 12/09 - 44wk 2026: Enabled → Disabled
-- Prestige Student Living — West Gate - Classic Studio - 26/27 - 12/09 - 51wk 2026: Enabled → Disabled
-- Prestige Student Living — Howard Gardens - Classic Ensuite - 26/27 - 05/09 - 51wk 2026: Disabled → Enabled
-- Prestige Student Living — Howard Gardens - Classic Ensuite - 26/27 - 05/09 - 44wk 2026: Disabled → Enabled
-- Prestige Student Living — Howard Gardens - Classic Plus Ensuite - 26/27 - 05/09 - 51wk 2026: Disabled → Enabled
-- Prestige Student Living — Marketgait Apartments - Classic Ensuite - 26/27 - 29/08 - 51wk 2026: Enabled → Disabled
-- Prestige Student Living — Headrow Court - Premium Plus Studio - 26/27 - 12/09 - 51wk 2026: Enabled → Disabled
-- Prestige Student Living — Crown Place - Luxury Ensuite Plus - 26/27 - 12/09 - 51wk 2026: Enabled → Disabled
-- Prestige Student Living — Icon House - Bronze Studio - 25/26 - 09/03 - 24wk 2026: Enabled → Disabled
-- Prestige Student Living — Seren - 12 Bed Cluster Ensuite V1 - 26/27 - 05/09 - 51wk 2026: Enabled → Disabled
-- Prestige Student Living — Wick Park- Superior Plus Ensuite - 26/27 - 12/09 - 51wk 2026: Disabled → Enabled
-- Prestige Student Living — Broadway Studios - Standard Studio - 26/27 - 05/09 - 40wk 2026: Enabled → Disabled
-- Prestige Student Living — Straits Place - Large Premium Studio - 26/27 - 05/09 - 51wk 2026: Enabled → Disabled
-- Prestige Student Living — Dean Street Works - 6 Bed En-Suite v1 - 26/27 - 12/09 - 45wk 2026: Enabled → Disabled
-- Prestige Student Living — Straits Place - Classic Studio - 26/27 - 05/09 - 39wk 2026: Enabled → Disabled
+- Prestige Student Living — SALTWATER PLACE - Premium Studio - 26/27 - 12/09 - 51wk 2026: Enabled → Disabled
+- Prestige Student Living — Saltwater Place - 6 Bed Premium Ensuite - 26/27 - 12/09 - 44wk 2026: Disabled → Enabled
+- Prestige Student Living — Scholars View - Bronze Studio - 26/27 - 12/09 - 51wk 2026: Enabled → Disabled
+- Prestige Student Living — The Quarter House - Bronze Plus Studio - 26/27 - 12/09 - 44wk 2026: Enabled → Disabled
+- Prestige Student Living — The Quarter House - Premium Plus Ensuite - 26/27 - 12/09 - 44wk 2026: Enabled → Disabled
+- Prestige Student Living — The Fitzalan - Classic Studio - 26/27 - 12/09 - 51wk 2026: Disabled → Enabled
+- Evo Student — Centre Court - Platinum Ensuite - 26/27 - 12/09 - 51wk 2026: Disabled → Enabled
+- Prestige Student Living — Howard Gardens - Deluxe Ensuite - 44wk - 26/27 - 05/09 - 44wk 2026: Disabled → Enabled
+- Prestige Student Living — Grosvenor House - Classic Studio Plus - 26/27 - 12/09 - 51wk 2026: Enabled → Disabled
+- Prestige Student Living — St Vincent Studios - Premium Studio - 26/27 - 05/09 - 44wk 2026: Enabled → Disabled
+- Prestige Student Living — Press House - Club Studio - 25/26 - 25/05 - 8wk 2026: Enabled → Disabled
+- Prestige Student Living — Press House - Club Studio - 25/26 - 25/05 - 13wk 2026: Enabled → Disabled
+- Prestige Student Living — Straits Place - Large Premium Studio - 25/26 - 01/06 - 4wk 2026: Enabled → Disabled
+- Prestige Student Living — Scholars View - Bronze Studio v1 - 26/27 - 10/08 - 51wk 2026: Enabled → Disabled
 
-## Contracts added (4)
+## Contracts added (5)
 
-- Prestige Student Living — The Malt Works - Accessible Studio - 26/27 - 15/09 - 49.57wk 2026 - 2027
-- Prestige Student Living — Press House - Luxury Studio River View - 26/27 - 12/09 - 51wk 2026
-- Prestige Student Living — Broadway Studios - Studio - 26/27 - 05/09 - 51wk 2026
-- Prestige Student Living — Broadway Studios - Studio - 26/27 - 05/09 - 44wk 2026
+- Prestige Student Living — The Electric Press - Silver Ensuite - 25/26 - 28/02 - 20wk 2026
+- Prestige Student Living — The Electric Press - Silver Ensuite - 25/26 - 28/02 - 27wk 2026
+- Prestige Student Living — St Gabriels Court - Classic Studio - 25/26 - 28/02 - 30wk 2026
+- Prestige Student Living — Electric Press - Silver Ensuite - 26/27 - 12/09 - 17wk 2026
+- Prestige Student Living — Electric Press - Silver Ensuite - 26/27 - 16/01 - 33wk 2027
 
-## Contracts removed (1)
-
-- Prestige Student Living — Press House - Luxury Studio Dual Occupancy - 26/27 - 01/05 - 52wk 2026 - 2027
-
-## Rooms added (3)
-
-- Prestige Student Living | Broadway Studios | Studio
-- Prestige Student Living | Press House | Luxury Studio River View
-- Prestige Student Living | The Malt Works | Accessible Studio
-
-## Rooms removed (0)
+## Contracts removed (0)
 
 _None_
 
-## Contract available-flag changes (22)
+## Rooms added (2)
 
-- Homes for Students — Barker House - Classic Ensuite - 26/27 - 12/09 - 44wk 2026: true → false
-- Prestige Student Living — The Quarter House - Bronze Studio - 26/27 - 12/09 - 44wk 2026: true → false
-- Prestige Student Living — City Wharf - Classic Studio - 26/27 - 05/09 - 44wk 2026: true → false
-- Prestige Student Living — Sheares Hall - Premium Corner Studio - 26/27 - 12/09 - 51wk 2026: true → false
-- Homes for Students — Polhill Park - Classic Ensuite - 26/27 - 12/09 - 51wk 2026: false → true
-- Prestige Student Living — Ash Grove Court - Club Studio - 26/27 - 12/09 - 51wk 2026: true → false
-- Homes for Students — Green Wood Court - Studio - 51wk - 26/27 - 12/09 - 51wk 2026: true → false
-- Prestige Student Living — Haymarket Yards - Bronze Studio - 26/27 - 05/09 - 44wk 2026: false → true
-- Prestige Student Living — Marketgait Apartments - Classic Ensuite - 26/27 - 29/08 - 51wk 2026: true → false
-- Prestige Student Living — Headrow Court - Classic Studio - 26/27 - 12/09 - 45wk 2026: false → true
-- Homes for Students — Marland house - Studio Ruby (single) - 26/27 - 12/09 - 51wk 2026: true → false
-- Prestige Student Living — Discovery Studios - Classic Plus Studio - 25/26 - 28/02 - 26wk 2026: true → false
-- Prestige Student Living — Discovery Studios - Classic Plus Studio - 26/27 - 29/08 - 51wk 2026: true → false
-- Prestige Student Living — Crown Place - Luxury Ensuite Plus - 26/27 - 12/09 - 51wk 2026: true → false
-- Homes for Students — Orbital - Classic Studio - 26/27 - 12/09 - 51wk 2026: false → true
-- Prestige Student Living — Seren - 12 Bed Cluster Ensuite V1 - 26/27 - 05/09 - 51wk 2026: true → false
-- Prestige Student Living — The Quarter House - Silver Studio - 26/27 - 12/09 - 44wk 2026: false → true
-- Prestige Student Living — Howard Gardens - Standard Ensuite - 26/27 - 05/09 - 44wk 2026: true → false
-- Prestige Student Living — Straits Place - Large Premium Studio - 26/27 - 05/09 - 51wk 2026: true → false
-- Prestige Student Living — Dean Street Works - 6 Bed En-Suite v1 - 26/27 - 12/09 - 45wk 2026: true → false
-- Prestige Student Living — Straits Place - Classic Studio - 26/27 - 05/09 - 39wk 2026: true → false
-- Prestige Student Living — Foundry Courtyard - Bronze Plus Ensuite SEM1 v1 - 26/27 - 05/09 - 17wk 2026: true → false
+- Homes for Students | Currus Court | Elite Ensuite
+- Prestige Student Living | The Aspen | Classic Studio
+
+## Rooms removed (1)
+
+- Homes for Students | Currus Court | Elite
+
+## Contract available-flag changes (25)
+
+- Prestige Student Living — Straits Garden - Executive Studio - 26/27 - 12/09 - 51wk 2026: true → false
+- Prestige Student Living — SALTWATER PLACE - Premium Studio - 26/27 - 12/09 - 51wk 2026: true → false
+- Prestige Student Living — The Quarter House - Bronze Plus Studio - 26/27 - 12/09 - 44wk 2026: true → false
+- Prestige Student Living — The Quarter House - Premium Plus Ensuite - 26/27 - 12/09 - 44wk 2026: true → false
+- Prestige Student Living — The Fitzalan - Classic Studio - 26/27 - 12/09 - 51wk 2026: false → true
+- Prestige Student Living — 33 Parkside - Classic 2 Bed Apartment - 26/27 - 05/09 - 51wk 2026: false → true
+- Prestige Student Living — The Valentine - 4 Bed Ensuite - 26/27 - 05/09 - 51wk 2026: false → true
+- Evo Student — Centre Court - Platinum Ensuite - 26/27 - 12/09 - 51wk 2026: false → true
+- Prestige Student Living — THE ASPEN - 5 Bedroom Standard - 26/27 - 12/09 - 51wk 2026: false → true
+- Prestige Student Living — THE ASPEN - 5 Bedroom Standard - 26/27 - 12/09 - 45wk 2026: false → true
+- Prestige Student Living — Grosvenor House - Classic Studio - 26/27 - 12/09 - 51wk 2026: false → true
+- Homes for Students — Luneside - 5 Bed Standard Ensuite - 25/26 - 28/02 - 30wk 2026: false → true
+- Homes for Students — Luneside - 5 Bed Standard Ensuite - 26/27 - 19/09 - 51wk 2026: false → true
+- Homes for Students — Marland House - Studio Emerald - 26/27 - 12/09 - 51wk 2026: true → false
+- Homes for Students — Marland House - Studio Ruby Plus - 26/27 - 12/09 - 51wk 2026: false → true
+- Prestige Student Living — Discovery Studios - Deluxe Plus Studio - 26/27 - 29/08 - 51wk 2026: true → false
+- Homes for Students — Crown House Reading - One Bed Flat - 26/27 - 12/09 - 51wk 2026: false → true
+- Prestige Student Living — Eden Square - Platinum Studio - 26/27 - 05/09 - 51wk 2026: true → false
+- Prestige Student Living — Cosmos - Premium One Bed Apartment V1 - 26/27 - 05/09 - 51wk 2026: false → true
+- Homes for Students — The Court Yard - Studio London - 26/27 - 12/09 - 51wk 2026: false → true
+- Homes for Students — The Cube - 3/4 bed Standard Ensuite - 26/27 - 12/09 - 51wk 2026: false → true
+- Homes for Students — The Cube - 5/6 bed Standard Ensuite - 26/27 - 12/09 - 51wk 2026: false → true
+- Prestige Student Living — Waterloo House - Classic Plus Studio - 26/27 - 12/09 - 45wk 2026: false → true
+- Prestige Student Living — The Terry Frost Building - Deluxe Ensuite - 26/27 - 14/09 - 51.86wk - Leeds Conservatoire 2026 - 2027: false → true
+- Prestige Student Living — Clyde Court - Classic Plus Studio - 26/27 - 05/09 - 17wk 2026: false → true
 
 ## Amenity changes (0)
 
