@@ -747,6 +747,26 @@ def main():
             if items:
                 print(f"    room detail enriched: {detail_ok}/{len(items)}")
 
+    # ── Vanished-brand carry-forward ────────────────────────────────────────
+    # A whole brand can 403 off its list endpoint under a Cloudflare IP block
+    # (the 2026-07 GitHub-runner blocks dropped Essential/Universal/Urban). The
+    # per-room carry-forward above can't help — the brand produced NO rows to
+    # enrich. Rather than let it vanish from *_latest.csv (data loss, and a hard
+    # fail from the run-health guard), restore the brand's entire previous-run
+    # rows from the prev indexes. The data is stale — its rows keep their original
+    # run_time, which doubles as an age marker — but the brand is never dropped.
+    cur_brands   = {r["brand_name"] for r in all_rooms}
+    prev_brands  = {r.get("brand_name", "") for r in prev_rooms_idx.values()}
+    restored_brands = []
+    for b in sorted(bb for bb in prev_brands - cur_brands if bb):
+        rooms_b     = [r for r in prev_rooms_idx.values()     if r.get("brand_name") == b]
+        contracts_b = [r for r in prev_contracts_idx.values() if r.get("brand_name") == b]
+        all_rooms.extend(rooms_b)
+        all_contracts.extend(contracts_b)
+        restored_brands.append((b, len(rooms_b), len(contracts_b)))
+        print(f"  vanished-brand carry-forward: restored {b} "
+              f"({len(rooms_b)} rooms, {len(contracts_b)} contracts) from previous run")
+
     # Sort A-Z by property then room_type
     all_rooms.sort(key=lambda r: (r["property"].lower(), r["room_type"].lower()))
     all_contracts.sort(key=lambda r: (r["property"].lower(), r["room_type"].lower()))
@@ -772,6 +792,7 @@ def main():
   Brands          : {len(brands)}
   Room types      : {len(all_rooms)}
   Carried forward : {carried_rooms} (enrichment failed, reused prev value)
+  Restored brands : {len(restored_brands)} ({', '.join(b for b, _, _ in restored_brands) or 'none'})
   Contracts       : {len(all_contracts)}
   Properties      : {len(properties)}
   Cities          : {len(cities)}
