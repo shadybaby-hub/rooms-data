@@ -15,8 +15,13 @@ venv/
 # Google service-account key — NEVER commit (repo is public)
 rooms-data-*.json
 *service-account*.json
+service_account.json
 gcp-*.json
 *.iam.gs*.txt
+
+# Property-sync: intermediary reader cache & generated report
+properties_cache.json
+rooms_discrepancy_report.csv
 
 # Local backfill scratch
 _bf/

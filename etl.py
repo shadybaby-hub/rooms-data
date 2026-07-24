@@ -800,6 +800,17 @@ def main():
   Contracts CSV   : {contracts_csv}
 ━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━""")
 
+    # Cross-check fetched properties against The Hive master list (via the
+    # separation-layer sheet) and write rooms_discrepancy_report.csv. Non-fatal:
+    # a reporting hiccup (e.g. master unreadable without auth) must never fail the
+    # ETL, so this is wrapped and runs before the run-health guard below.
+    try:
+        from rooms_discrepancy_report import generate
+        print("=" * 70)
+        generate(rooms_csv=rooms_csv)
+    except Exception as exc:
+        print(f"\n(master discrepancy report skipped: {exc})", file=sys.stderr)
+
     # ── Run-health / block detection ────────────────────────────────────────
     # A Cloudflare IP-block on a brand's frontend (the 2026-07 Homes for Students
     # outage: GitHub-runner Azure IPs get challenged) collapses enrichment to 0/N,
